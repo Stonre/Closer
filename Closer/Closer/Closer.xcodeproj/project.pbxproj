@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E24EDE91E15B4F700A4FFDD /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EDE81E15B4F700A4FFDD /* Reward.swift */; };
+		3E24EDEB1E15B83400A4FFDD /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EDEA1E15B83400A4FFDD /* AchievementReward.swift */; };
+		3E24EDED1E15BE7200A4FFDD /* RecommenderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EDEC1E15BE7200A4FFDD /* RecommenderContext.swift */; };
 		3EAFC34A1E14FFB100F9B35C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAFC3491E14FFB100F9B35C /* AppDelegate.swift */; };
 		3EAFC34C1E14FFB100F9B35C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAFC34B1E14FFB100F9B35C /* ViewController.swift */; };
 		3EAFC34F1E14FFB100F9B35C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EAFC34D1E14FFB100F9B35C /* Main.storyboard */; };
@@ -16,9 +19,13 @@
 		3EAFC35F1E15001300F9B35C /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAFC35C1E15001300F9B35C /* DiscoverViewController.swift */; };
 		3EAFC3601E15001300F9B35C /* CircleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAFC35D1E15001300F9B35C /* CircleViewController.swift */; };
 		3EAFC3631E15002000F9B35C /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EAFC3611E15002000F9B35C /* Discover.storyboard */; };
+		3EAFC3671E15067B00F9B35C /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAFC3661E15067B00F9B35C /* Recommender.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E24EDE81E15B4F700A4FFDD /* Reward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		3E24EDEA1E15B83400A4FFDD /* AchievementReward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AchievementReward.swift; sourceTree = "<group>"; };
+		3E24EDEC1E15BE7200A4FFDD /* RecommenderContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommenderContext.swift; sourceTree = "<group>"; };
 		3EAFC3461E14FFB100F9B35C /* Closer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Closer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EAFC3491E14FFB100F9B35C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3EAFC34B1E14FFB100F9B35C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +37,7 @@
 		3EAFC35C1E15001300F9B35C /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		3EAFC35D1E15001300F9B35C /* CircleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleViewController.swift; sourceTree = "<group>"; };
 		3EAFC3621E15002000F9B35C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Discover.storyboard; sourceTree = "<group>"; };
+		3EAFC3661E15067B00F9B35C /* Recommender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E24EDE51E15B4D200A4FFDD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3EAFC3661E15067B00F9B35C /* Recommender.swift */,
+				3E24EDEC1E15BE7200A4FFDD /* RecommenderContext.swift */,
+				3E24EDE81E15B4F700A4FFDD /* Reward.swift */,
+				3E24EDEA1E15B83400A4FFDD /* AchievementReward.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		3EAFC33D1E14FFB100F9B35C = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +81,7 @@
 		3EAFC3481E14FFB100F9B35C /* Closer */ = {
 			isa = PBXGroup;
 			children = (
+				3E24EDE51E15B4D200A4FFDD /* Models */,
 				3EAFC3491E14FFB100F9B35C /* AppDelegate.swift */,
 				3EAFC34B1E14FFB100F9B35C /* ViewController.swift */,
 				3EAFC3651E15006000F9B35C /* Login */,
@@ -165,9 +185,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E24EDEB1E15B83400A4FFDD /* AchievementReward.swift in Sources */,
+				3E24EDED1E15BE7200A4FFDD /* RecommenderContext.swift in Sources */,
+				3EAFC3671E15067B00F9B35C /* Recommender.swift in Sources */,
 				3EAFC35E1E15001300F9B35C /* LoginViewController.swift in Sources */,
 				3EAFC35F1E15001300F9B35C /* DiscoverViewController.swift in Sources */,
 				3EAFC3601E15001300F9B35C /* CircleViewController.swift in Sources */,
+				3E24EDE91E15B4F700A4FFDD /* Reward.swift in Sources */,
 				3EAFC34C1E14FFB100F9B35C /* ViewController.swift in Sources */,
 				3EAFC34A1E14FFB100F9B35C /* AppDelegate.swift in Sources */,
 			);
@@ -339,6 +363,7 @@
 				3EAFC35A1E14FFB100F9B35C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

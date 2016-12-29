@@ -22,21 +22,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjw-jw-5U0">
-                                <rect key="frame" x="123" y="258" width="129" height="151"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="129" id="P77-x3-FCA"/>
-                                </constraints>
+                                <rect key="frame" x="138.5" y="303.5" width="98" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="touchLogin:" destination="crJ-wI-HgQ" eventType="touchUpInside" id="bqO-Wa-G65"/>
+                                    <action selector="touchLogin:" destination="crJ-wI-HgQ" eventType="touchUpInside" id="jOq-z2-EEC"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Bjw-jw-5U0" firstAttribute="centerY" secondItem="5BG-iG-muI" secondAttribute="centerY" id="5Mt-fP-uUJ"/>
-                            <constraint firstItem="Bjw-jw-5U0" firstAttribute="top" secondItem="5fU-CL-Kv7" secondAttribute="bottom" constant="238" id="HHc-Us-kfE"/>
                             <constraint firstItem="Bjw-jw-5U0" firstAttribute="centerX" secondItem="5BG-iG-muI" secondAttribute="centerX" id="VCl-qf-xRp"/>
                         </constraints>
                     </view>

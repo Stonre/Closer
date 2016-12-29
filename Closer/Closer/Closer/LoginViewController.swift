@@ -21,15 +21,12 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func touchLogin(sender: UIButton) {
+    @IBAction func touchLogin(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Discover", bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as UIViewController?
-        
-        if let ctrl = controller {
-            self.present(ctrl, animated: true, completion: nil)
+        if let controller = storyboard.instantiateInitialViewController() as UIViewController? {
+            self.present(controller, animated: true, completion: nil)
         }
     }
-
     /*
     // MARK: - Navigation
 
