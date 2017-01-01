@@ -9,8 +9,21 @@
 import Foundation
 
 class Searcher {
-    /// function to search for activities by keywords through querying remote server
+    /**
+     function to search for activities by keywords through querying remote server
+     
+     - Parameters:
+        - keyword: the keyword users input in the search bar
+     - Returns: a list of activities related to the keyword
+    */
     static func remoteActivitySearchByKeywords(keyword: String) -> [GeneralActivity] {}
-    /// function to search for messages that match keywords through querying local core data
+    
+    /**
+     function to search for messages that match keywords through querying local core data
+     
+     - Parameters:
+        - keyword: the keyword users input in the search bar
+     - Returns: a list of messages that contains the keyword
+    */
     static func localChatSearchByKeywords(keyword: String) -> [Message] {}
 }

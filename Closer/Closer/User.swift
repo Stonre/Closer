@@ -13,9 +13,7 @@ enum Gender: String {
     case Female
 }
 
-/**
-    This is the enum type of thirdparty link that a user may link his Closer account to
- */
+///This is the enum type of thirdparty link that a user may link his Closer account to
 enum ThirdPartyLink {
     case Weibo
     case WeChat
@@ -27,9 +25,7 @@ struct PhoneNumber {
     var number: Int
 }
 
-/**
-    Abstruction of general User interface
- */
+///Abstruction of general User interface
 protocol User {
     var userName: String { get set }
     var userId: UInt64 { get set }
@@ -37,27 +33,21 @@ protocol User {
     var background: NSData? { get set }
 }
 
-/**
-    Abstraction of personal user interface
- */
+///Abstraction of personal user interface
 protocol PersonalUser: User {
     var gender: Gender { get set }
     var age: Int { get set }
 }
 
-/**
-    Abstraction of business user interface
- */
+///Abstraction of business user interface
 protocol BusinessUser: User {
     var businessName: String { get set }
     var phoneNumber: PhoneNumber? { get set }
     var credit: Int { get set }
 }
 
-/**
-    View-only Class for personal user
-    This class is mainly used for storing the non-private information of a personal user
- */
+///View-only Class for personal user.
+///This class is mainly used for storing the non-private information of a personal user
 class PersonalUserForView: PersonalUser {
     var userName: String
     var userId: UInt64
@@ -67,16 +57,16 @@ class PersonalUserForView: PersonalUser {
     var age: Int
     
     /**
-        Dictionary for storing the activities a personal user attended or is attending
-        Key: activityId: UInt64
-        Value: activity: GeneralActivity
+     Dictionary for storing the activities a personal user attended or is attending
+     - Key(activityId): UInt64
+     - Value(activity): GeneralActivity
      */
     private var activitiesParticipatedIn: Dictionary<UInt64, GeneralActivity> = [UInt64:GeneralActivity]()
     
     /**
-        Dictionary for storing the activities a personal user released
-        Key: activityId: UInt64
-        Value: activity: GeneralActivity
+     - Dictionary for storing the activities a personal user released
+     - Key(activityId): UInt64
+     - Value(activity): GeneralActivity
      */
     private var activitiesReleased: Dictionary<UInt64, GeneralActivity> = [UInt64:GeneralActivity]()
     
@@ -95,10 +85,8 @@ class PersonalUserForView: PersonalUser {
     
 }
 
-/**
-    Administration Class for personal user
-    This class contains all the information of a personal user including private information and non-private information
- */
+///Administration Class for personal user.
+///This class contains all the information of a personal user including private information and non-private information
 class PersonalUserAdmin: PersonalUser {
     var userName: String
     var userId: UInt64
@@ -111,65 +99,65 @@ class PersonalUserAdmin: PersonalUser {
     private var ThirdPartyLinks: [ThirdPartyLink]?
     
     /**
-        Dictionary for storing the friends of a user
-        Key: userId: UInt64
-        Value: user: PersonalUserForView
+     Dictionary for storing the friends of a user
+     - Key(userId): UInt64
+     - Value(user): PersonalUserForView
      */
     private var friends: Dictionary<UInt64, PersonalUserForView> = [UInt64:PersonalUserForView]()
     
     /**
-        Dictionary for storing the degrees of friendship for each friend
-        Key: userId: UInt64
-        Value: user: Int
+     Dictionary for storing the degrees of friendship for each friend
+     - Key(userId): UInt64
+     - Value(user): Int
      */
     private var degreeOfFriendship: Dictionary<UInt64, Int> = [UInt64:Int]()
     
     /**
-        Dictionary for storing the contacts of a user
-        Key: userId: UInt64
-        Value: user: PersonalUserForView
+     Dictionary for storing the contacts of a user
+     - Key(userId): UInt64
+     - Value(user): PersonalUserForView
      */
     private var contacts: Dictionary<UInt64, PersonalUserForView> = [UInt64:PersonalUserForView]()
     
     /**
-        Dictionary for storing the degrees of contactship of for each contact
-        Key: userId: UInt64
-        Value: user: Int
+     Dictionary for storing the degrees of contactship of for each contact
+     - Key(userId): UInt64
+     - Value(user): Int
      */
     private var degreeOfContactship: Dictionary<UInt64, Int> = [UInt64:Int]()
     
     /**
-        Dictionary for storing the saved business user of a user
-        Key: userId: UInt64
-        Value: user: BusinessUserForView
+     Dictionary for storing the saved business user of a user
+     - Key(userId): UInt64
+     - Value(user): BusinessUserForView
      */
     private var savedBusinessUsers: Dictionary<UInt64, BusinessUserForView> = [UInt64:BusinessUserForView]()
     
     /**
-        Dictionary for storing the evaluations for each business user a user saved
-        Key: userId: UInt64
-        Value: user: Int
+     Dictionary for storing the evaluations for each business user a user saved
+     - Key(userId): UInt64
+     - Value(user): Int
      */
     private var evaluationOfSavedBusinessUsers: Dictionary<UInt64, Int> = [UInt64:Int]()
     
     /**
-        Dictionary for storing the activities a personal user attended or is attending
-        Key: activityId: UInt64
-        Value: activity: GeneralActivity
+     Dictionary for storing the activities a personal user attended or is attending
+     - Key: activityId: UInt64
+     - Value: activity: GeneralActivity
      */
     private var activitiesParticipatedIn: Dictionary<UInt64, GeneralActivity> = [UInt64:GeneralActivity]()
     
     /**
-        Dictionary for storing the activities a personal user released
-        Key: activityId: UInt64
-        Value: activity: GeneralActivity
+     Dictionary for storing the activities a personal user released
+     - Key: activityId: UInt64
+     - Value: activity: GeneralActivity
      */
     private var activitiesReleased: Dictionary<UInt64, GeneralActivity> = [UInt64:GeneralActivity]()
     
     /**
-        Dictionary for storing the awards a user gets
-        Key: userId: UInt64
-        Value: user: Award
+     Dictionary for storing the awards a user gets
+     - Key: userId: UInt64
+     - Value: user: Award
      */
     private var awards: Dictionary<UInt64, Award> = [UInt64:Award]()
     
@@ -181,17 +169,17 @@ class PersonalUserAdmin: PersonalUser {
     }
     
     /**
-        function to change the virtual money a user has
-        parameter: 
-            money: Int amount of money that makes changes to total virtual money
+     function to change the virtual money a user has
+     - Parameters:
+        - money: Int amount of money that makes changes to total virtual money
      */
     func changeVirtualMoneyBy(money: Int) {}
     
     /**
      function to set the phone number of a user
-     parameter:
-        region: Int
-        number: Int
+     - Parameters:
+        - region: the region code of the phone number
+        - number: the main part of the phone number
      */
     func setPhoneNumber(region: Int, number: Int) {}
     
@@ -232,33 +220,32 @@ class PersonalUserAdmin: PersonalUser {
     func deleteAward(awardId: UInt64) {}
     
     /**
-        function to update the degree of friendship based on friend user id and the evaluation of him
-        parameter:
-            userId: UInt64
-            evaluation: Int
+     function to update the degree of friendship based on friend user id and the evaluation of him
+     - Parameters:
+        - userId: UInt64
+        - evaluation: Int
      */
     func updateDegreeOfFriendship(userId: UInt64, evaluation: Int) {}
     
     /**
      function to update the degree of contactship based on contact user id and the evaluation of him
-     parameter:
-        userId: UInt64
-        evaluation: Int
+     - Parameter:
+        - userId: UInt64
+        - evaluation: Int
      */
     func updateDegreeOfContactship(userId: UInt64, evaluation: Int) {}
     
     /**
-     function to update the evaluation of a saved business user     parameter:
-        userId: UInt64
-        evaluation: Int
+     function to update the evaluation of a saved business user    
+     - Parameters:
+        - userId: UInt64
+        - evaluation: Int
      */
     func updateEvaluationOfSavedBusinessUser(userId: UInt64, evaluation: Int) {}
 }
 
-/**
-    View-only Class for business user
-    This class is mainly used for storing the non-private information of a business user
- */
+///View-only Class for business user.
+///This class is mainly used for storing the non-private information of a business user
 struct BusinessUserForView: BusinessUser {
     var userName: String
     var userId: UInt64
@@ -276,11 +263,10 @@ struct BusinessUserForView: BusinessUser {
     }
     
     /**
-        function to get the activity this business user released based on the activity id
-        parameter:
-            activityId: UInt64
-        return:
-            activity: GeneralActivity
+     function to get the activity this business user released based on the activity id
+     - Parameters:
+        - activityId: UInt64
+     - Returns: a activity released by the business user
      */
     func getActivityReleased(activityId: UInt64) -> GeneralActivity {}
 }

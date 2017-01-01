@@ -10,7 +10,12 @@ import Foundation
 import CoreLocation
 
 /**
-    enum type to define the authority of an activity
+ enum type to define the authority of an activity
+ - FriendsAndContacts: only friends and contacts can see the activity
+ - OnlyFriends: only friends can see the activity
+ - OnlyContacts: only contacts can see the activity
+ - OnlyAssignedFriendsOrContacts: only those friends or contacts that are assigned to finish the activity can see the activity
+ - Public: everyone can see the activity
 */
 enum Authority {
     case FriendsAndContacts
@@ -20,9 +25,7 @@ enum Authority {
     case Public
 }
 
-/**
-    struct to define the description of an activity, which contains the form of music, image, hyperlink and text
- */
+///struct to define the description of an activity, which contains the form of music, image, hyperlink and text
 struct Description {
     var musics: [NSData]?
     var images: [NSData]?
@@ -30,9 +33,7 @@ struct Description {
     var text: String!
 }
 
-/**
-    abstraction of Activity
- */
+///Abstraction of Activity
 protocol Activity {
     var name: String { get set }
     var timeStart: Date? { get set }
@@ -45,9 +46,7 @@ protocol Activity {
     var participants: [UInt64:User] { get set }
 }
 
-/**
-    Class for a general activity based on Activity protocol
- */
+///Class for a general activity based on Activity protocol
 class GeneralActivity: Activity {
     var name: String
     var timeStart: Date?
@@ -57,13 +56,13 @@ class GeneralActivity: Activity {
     var numberOfParticipants: Int = 0
     var authority: Authority
     var description: Description
-    var participants: [UInt64:User] = [:]
+    var participants: [UInt64:PersonalUserForView] = [:]
     ///the user that releases the activity
     var userReleasing: User
     ///a list of users that are assigned by the user releasing this activity to take part in it
-    var assignedParticipants: [UInt64:User] = [:]
+    var assignedParticipants: [UInt64:PersonalUserForView] = [:]
     
-    init(name: String, tags: [String], authority: Authority, description: Description, userReleasing: User) {
+    init(name: String, tags: [String], authority: Authority, description: Description, userReleasing: PersonalUserForView) {
         self.name = name
         self.tags = tags
         self.authority = authority
@@ -71,11 +70,12 @@ class GeneralActivity: Activity {
         self.userReleasing = userReleasing
     }
     
-    /**
-        function to make assigned participant as participant when the assigned participant agrees to take part in this activity
-     */
-    func addAssignedParticipant(user: User) {}
-    func addParticipant(user: User) {}
+    ///function to make assigned participant as participant when the assigned participant agrees to take part in this activity
+    func addAssignedParticipant(user: PersonalUserForView) {}
+    
+    func addParticipant(user: PersonalUserForView) {}
+    
     func deleteParticipant(userId: UInt64) {}
-    func getParticipant(userId: UInt64) -> User {}
+    
+    func getParticipant(userId: UInt64) -> PersonalUserForView {}
 }
