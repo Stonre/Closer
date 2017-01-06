@@ -8,16 +8,28 @@
 
 import UIKit
 
-class DiscoverViewController: UIViewController {
+class DiscoverTableViewController: CircleTableViewController {
 
+//    @IBOutlet weak var activityTableView: UITableView!
+
+//    @IBAction func touchFilter(_ sender: UIButton) {
+//    }
+//    
+//    @IBAction func touchMap(_ sender: UIButton) {
+//    }
+    
+    var discoverTableViewController = CircleTableViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        searchText = "default"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        discoverTableViewController.searchText = "default"
         // Dispose of any resources that can be recreated.
     }
     
