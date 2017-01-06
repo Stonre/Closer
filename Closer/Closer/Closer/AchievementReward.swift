@@ -8,12 +8,16 @@
 
 import Foundation
 
-class AchievementReward: Reward {
-    var source = RewardSource.Achievement
-    var requiredAchivement: Achievement?
-    
-    func getRequiredAchievement() {
-        return requiredAchivement
-    }
-    
-}
+//enum Achievement {
+//    case others
+//}
+//
+//class AchievementReward: Reward {
+//    var source = RewardSource.Achievement
+//    var requiredAchivement: Achievement?
+//    
+//    func getRequiredAchievement() {
+//        return requiredAchivement
+//    }
+//    
+//}
