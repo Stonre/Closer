@@ -23,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6K-uC-hy7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-638" y="125"/>
+            <point key="canvasLocation" x="-823" y="125"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jdB-Jb-S8X">
@@ -44,10 +44,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3et-GN-tau" firstAttribute="bottom" secondItem="pTy-PO-J62" secondAttribute="top" id="1ir-zx-kfY"/>
-                            <constraint firstAttribute="trailing" secondItem="3et-GN-tau" secondAttribute="trailing" id="7JP-Uo-Gye"/>
-                            <constraint firstItem="3et-GN-tau" firstAttribute="top" secondItem="THo-24-cxD" secondAttribute="top" id="d9I-wr-Bcv"/>
-                            <constraint firstItem="3et-GN-tau" firstAttribute="leading" secondItem="THo-24-cxD" secondAttribute="leading" id="ngL-cC-7kh"/>
+                            <constraint firstItem="3et-GN-tau" firstAttribute="leading" secondItem="THo-24-cxD" secondAttribute="leading" id="2wR-Ay-QrN"/>
+                            <constraint firstItem="3et-GN-tau" firstAttribute="bottom" secondItem="pTy-PO-J62" secondAttribute="top" id="9eg-wy-wzv"/>
+                            <constraint firstAttribute="trailing" secondItem="3et-GN-tau" secondAttribute="trailing" id="Vhi-BN-vxU"/>
+                            <constraint firstItem="3et-GN-tau" firstAttribute="top" secondItem="THo-24-cxD" secondAttribute="top" id="jFA-pV-AWJ"/>
                         </constraints>
                     </view>
                 </viewController>
