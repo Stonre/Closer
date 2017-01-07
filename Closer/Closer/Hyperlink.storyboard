@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="GAU-WY-lfh" kind="showDetail" id="4Pg-PV-Qhh"/>
+                        <segue destination="GAU-WY-lfh" kind="show" id="uAD-AY-rYy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6K-uC-hy7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -37,17 +37,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3et-GN-tau">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geE-gT-P6s">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3et-GN-tau" firstAttribute="leading" secondItem="THo-24-cxD" secondAttribute="leading" id="2wR-Ay-QrN"/>
-                            <constraint firstItem="3et-GN-tau" firstAttribute="bottom" secondItem="pTy-PO-J62" secondAttribute="top" id="9eg-wy-wzv"/>
-                            <constraint firstAttribute="trailing" secondItem="3et-GN-tau" secondAttribute="trailing" id="Vhi-BN-vxU"/>
-                            <constraint firstItem="3et-GN-tau" firstAttribute="top" secondItem="THo-24-cxD" secondAttribute="top" id="jFA-pV-AWJ"/>
+                            <constraint firstItem="geE-gT-P6s" firstAttribute="width" secondItem="THo-24-cxD" secondAttribute="width" id="0Af-Rh-USo"/>
+                            <constraint firstItem="pTy-PO-J62" firstAttribute="top" secondItem="geE-gT-P6s" secondAttribute="bottom" id="36x-va-28s"/>
+                            <constraint firstItem="geE-gT-P6s" firstAttribute="centerX" secondItem="THo-24-cxD" secondAttribute="centerX" id="WRN-QD-LzM"/>
+                            <constraint firstItem="geE-gT-P6s" firstAttribute="top" secondItem="Wfz-pV-Mbe" secondAttribute="bottom" id="rHh-xx-SRX"/>
                         </constraints>
                     </view>
                 </viewController>
