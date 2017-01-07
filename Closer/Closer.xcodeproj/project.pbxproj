@@ -11,8 +11,11 @@
 		D752E4221E0FB775009C35CB /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D752E4211E0FB775009C35CB /* Activity.swift */; };
 		D752E4551E195C19009C35CB /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = D752E4541E195C19009C35CB /* Award.swift */; };
 		D752E4571E195C38009C35CB /* Searcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D752E4561E195C38009C35CB /* Searcher.swift */; };
-		D752E45B1E195CF1009C35CB /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D752E45A1E195CF1009C35CB /* HomePage.storyboard */; };
-		D752E45F1E196600009C35CB /* Hyperlink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D752E45E1E196600009C35CB /* Hyperlink.storyboard */; };
+		D778CC221E21710F00D14631 /* VirtualFortune.swift in Sources */ = {isa = PBXBuildFile; fileRef = D778CC211E21710F00D14631 /* VirtualFortune.swift */; };
+		D778CC261E21994800D14631 /* PersonalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D778CC251E21994800D14631 /* PersonalUser.swift */; };
+		D778CC281E21998000D14631 /* GeneralActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D778CC271E21998000D14631 /* GeneralActivity.swift */; };
+		D778CC2A1E219BFC00D14631 /* UserActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D778CC291E219BFC00D14631 /* UserActionType.swift */; };
+		D778CC2C1E219D9A00D14631 /* BusinessUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D778CC2B1E219D9A00D14631 /* BusinessUser.swift */; };
 		D7CE218B1E0D80D8006325EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CE218A1E0D80D8006325EB /* AppDelegate.swift */; };
 		D7CE21921E0D80D8006325EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7CE21911E0D80D8006325EB /* Assets.xcassets */; };
 		D7CE21951E0D80D8006325EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7CE21931E0D80D8006325EB /* LaunchScreen.storyboard */; };
@@ -24,8 +27,11 @@
 		D752E4211E0FB775009C35CB /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		D752E4541E195C19009C35CB /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
 		D752E4561E195C38009C35CB /* Searcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Searcher.swift; sourceTree = "<group>"; };
-		D752E45A1E195CF1009C35CB /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
-		D752E45E1E196600009C35CB /* Hyperlink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Hyperlink.storyboard; sourceTree = "<group>"; };
+		D778CC211E21710F00D14631 /* VirtualFortune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualFortune.swift; sourceTree = "<group>"; };
+		D778CC251E21994800D14631 /* PersonalUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalUser.swift; sourceTree = "<group>"; };
+		D778CC271E21998000D14631 /* GeneralActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralActivity.swift; sourceTree = "<group>"; };
+		D778CC291E219BFC00D14631 /* UserActionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionType.swift; sourceTree = "<group>"; };
+		D778CC2B1E219D9A00D14631 /* BusinessUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessUser.swift; sourceTree = "<group>"; };
 		D7CE21871E0D80D8006325EB /* Closer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Closer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7CE218A1E0D80D8006325EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7CE21911E0D80D8006325EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,14 +73,17 @@
 				D752E4541E195C19009C35CB /* Award.swift */,
 				D7CE218A1E0D80D8006325EB /* AppDelegate.swift */,
 				D752E41B1E0ECC1E009C35CB /* User.swift */,
+				D778CC251E21994800D14631 /* PersonalUser.swift */,
+				D778CC291E219BFC00D14631 /* UserActionType.swift */,
+				D778CC2B1E219D9A00D14631 /* BusinessUser.swift */,
+				D778CC211E21710F00D14631 /* VirtualFortune.swift */,
 				D7CE21911E0D80D8006325EB /* Assets.xcassets */,
 				D7CE21931E0D80D8006325EB /* LaunchScreen.storyboard */,
 				D7CE21961E0D80D8006325EB /* Info.plist */,
 				D7CE219C1E0D80EF006325EB /* GoogleService-Info.plist */,
 				D752E4211E0FB775009C35CB /* Activity.swift */,
+				D778CC271E21998000D14631 /* GeneralActivity.swift */,
 				D752E4561E195C38009C35CB /* Searcher.swift */,
-				D752E45A1E195CF1009C35CB /* HomePage.storyboard */,
-				D752E45E1E196600009C35CB /* Hyperlink.storyboard */,
 			);
 			path = Closer;
 			sourceTree = "<group>";
@@ -140,10 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CE21951E0D80D8006325EB /* LaunchScreen.storyboard in Resources */,
-				D752E45B1E195CF1009C35CB /* HomePage.storyboard in Resources */,
 				D7CE219D1E0D80EF006325EB /* GoogleService-Info.plist in Resources */,
 				D7CE21921E0D80D8006325EB /* Assets.xcassets in Resources */,
-				D752E45F1E196600009C35CB /* Hyperlink.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,10 +161,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D778CC2C1E219D9A00D14631 /* BusinessUser.swift in Sources */,
+				D778CC261E21994800D14631 /* PersonalUser.swift in Sources */,
 				D752E4221E0FB775009C35CB /* Activity.swift in Sources */,
+				D778CC2A1E219BFC00D14631 /* UserActionType.swift in Sources */,
+				D778CC221E21710F00D14631 /* VirtualFortune.swift in Sources */,
 				D752E4571E195C38009C35CB /* Searcher.swift in Sources */,
 				D7CE218B1E0D80D8006325EB /* AppDelegate.swift in Sources */,
 				D752E4551E195C19009C35CB /* Award.swift in Sources */,
+				D778CC281E21998000D14631 /* GeneralActivity.swift in Sources */,
 				D752E41C1E0ECC1E009C35CB /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
