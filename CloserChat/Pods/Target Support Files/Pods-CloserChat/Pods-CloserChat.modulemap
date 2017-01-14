@@ -1,0 +1,6 @@
+framework module Pods_CloserChat {
+  umbrella header "Pods-CloserChat-umbrella.h"
+
+  export *
+  module * { export * }
+}

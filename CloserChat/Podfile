@@ -1,0 +1,15 @@
+platform :ios, '10.0'
+use_frameworks!
+
+target 'CloserChat' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+    pod 'Firebase/Storage'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Database'
+    pod 'JSQMessagesViewController'
+    pod 'Firebase/Core'
+    use_frameworks!
+
+  # Pods for CloserChat
+
+end

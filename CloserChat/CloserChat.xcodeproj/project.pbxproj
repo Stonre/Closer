@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1906B76A1E22C5CA00A214DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906B7691E22C5CA00A214DD /* AppDelegate.swift */; };
+		1906B76F1E22C5CA00A214DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1906B76D1E22C5CA00A214DD /* Main.storyboard */; };
+		1906B7721E22C5CA00A214DD /* CloserChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1906B7701E22C5CA00A214DD /* CloserChat.xcdatamodeld */; };
+		1906B7741E22C5CA00A214DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906B7731E22C5CA00A214DD /* Assets.xcassets */; };
+		1906B7771E22C5CA00A214DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1906B7751E22C5CA00A214DD /* LaunchScreen.storyboard */; };
+		194DD88B1E23424100D65A2F /* EventChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194DD88A1E23424100D65A2F /* EventChat.swift */; };
+		194DD88D1E23426900D65A2F /* PersonalChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194DD88C1E23426900D65A2F /* PersonalChat.swift */; };
+		194DD88F1E234EBF00D65A2F /* PersonalChatProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194DD88E1E234EBF00D65A2F /* PersonalChatProfile.swift */; };
+		195569191E22C83D00985CBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 195569181E22C83D00985CBB /* GoogleService-Info.plist */; };
+		1955691E1E22CAD500985CBB /* ChatListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955691D1E22CAD500985CBB /* ChatListTableViewController.swift */; };
+		195569201E22CB1F00985CBB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1955691F1E22CB1F00985CBB /* LoginViewController.swift */; };
+		195569221E22CC9E00985CBB /* ChatUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195569211E22CC9E00985CBB /* ChatUnitViewController.swift */; };
+		1970A0891E2301DF00E39E17 /* ChatProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970A0881E2301DF00E39E17 /* ChatProfileTableViewCell.swift */; };
+		1970A08C1E230CA100E39E17 /* UnitChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970A08B1E230CA100E39E17 /* UnitChat.swift */; };
+		8C54EA7A3CF2F12AA9E23E90 /* Pods_CloserChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E5D6AC8F07AF15D049668B0 /* Pods_CloserChat.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1906B7661E22C5CA00A214DD /* CloserChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloserChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1906B7691E22C5CA00A214DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1906B76E1E22C5CA00A214DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1906B7711E22C5CA00A214DD /* CloserChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CloserChat.xcdatamodel; sourceTree = "<group>"; };
+		1906B7731E22C5CA00A214DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1906B7761E22C5CA00A214DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1906B7781E22C5CA00A214DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		194DD88A1E23424100D65A2F /* EventChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChat.swift; sourceTree = "<group>"; };
+		194DD88C1E23426900D65A2F /* PersonalChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalChat.swift; sourceTree = "<group>"; };
+		194DD88E1E234EBF00D65A2F /* PersonalChatProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalChatProfile.swift; sourceTree = "<group>"; };
+		195569181E22C83D00985CBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1955691D1E22CAD500985CBB /* ChatListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListTableViewController.swift; sourceTree = "<group>"; };
+		1955691F1E22CB1F00985CBB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		195569211E22CC9E00985CBB /* ChatUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUnitViewController.swift; sourceTree = "<group>"; };
+		1970A0881E2301DF00E39E17 /* ChatProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatProfileTableViewCell.swift; sourceTree = "<group>"; };
+		1970A08B1E230CA100E39E17 /* UnitChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitChat.swift; sourceTree = "<group>"; };
+		9E5D6AC8F07AF15D049668B0 /* Pods_CloserChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloserChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA4AFCA6D71144354672E47F /* Pods-CloserChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloserChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CloserChat/Pods-CloserChat.release.xcconfig"; sourceTree = "<group>"; };
+		FB08495256D8C8FE14C04290 /* Pods-CloserChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloserChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CloserChat/Pods-CloserChat.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1906B7631E22C5CA00A214DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C54EA7A3CF2F12AA9E23E90 /* Pods_CloserChat.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		173782E33C6BA8B83A6E08C4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB08495256D8C8FE14C04290 /* Pods-CloserChat.debug.xcconfig */,
+				FA4AFCA6D71144354672E47F /* Pods-CloserChat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1906B75D1E22C5CA00A214DD = {
+			isa = PBXGroup;
+			children = (
+				1906B7681E22C5CA00A214DD /* CloserChat */,
+				1906B7671E22C5CA00A214DD /* Products */,
+				173782E33C6BA8B83A6E08C4 /* Pods */,
+				4757A50C086185CE49492397 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1906B7671E22C5CA00A214DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1906B7661E22C5CA00A214DD /* CloserChat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1906B7681E22C5CA00A214DD /* CloserChat */ = {
+			isa = PBXGroup;
+			children = (
+				1970A08D1E230CA900E39E17 /* Model */,
+				1970A08A1E230C4800E39E17 /* Controller */,
+				195569171E22C7FC00985CBB /* Layout */,
+				1955691A1E22C84D00985CBB /* Supporting Files */,
+			);
+			path = CloserChat;
+			sourceTree = "<group>";
+		};
+		195569171E22C7FC00985CBB /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				1906B76D1E22C5CA00A214DD /* Main.storyboard */,
+				1906B7751E22C5CA00A214DD /* LaunchScreen.storyboard */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
+		1955691A1E22C84D00985CBB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1906B7691E22C5CA00A214DD /* AppDelegate.swift */,
+				1906B7781E22C5CA00A214DD /* Info.plist */,
+				195569181E22C83D00985CBB /* GoogleService-Info.plist */,
+				1906B7731E22C5CA00A214DD /* Assets.xcassets */,
+				1906B7701E22C5CA00A214DD /* CloserChat.xcdatamodeld */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1970A08A1E230C4800E39E17 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1955691F1E22CB1F00985CBB /* LoginViewController.swift */,
+				1955691D1E22CAD500985CBB /* ChatListTableViewController.swift */,
+				195569211E22CC9E00985CBB /* ChatUnitViewController.swift */,
+				1970A0881E2301DF00E39E17 /* ChatProfileTableViewCell.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1970A08D1E230CA900E39E17 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				194DD88E1E234EBF00D65A2F /* PersonalChatProfile.swift */,
+				1970A08B1E230CA100E39E17 /* UnitChat.swift */,
+				194DD88C1E23426900D65A2F /* PersonalChat.swift */,
+				194DD88A1E23424100D65A2F /* EventChat.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4757A50C086185CE49492397 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E5D6AC8F07AF15D049668B0 /* Pods_CloserChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1906B7651E22C5CA00A214DD /* CloserChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1906B77B1E22C5CA00A214DD /* Build configuration list for PBXNativeTarget "CloserChat" */;
+			buildPhases = (
+				F09F9E457783E090F9F05DFF /* [CP] Check Pods Manifest.lock */,
+				1906B7621E22C5CA00A214DD /* Sources */,
+				1906B7631E22C5CA00A214DD /* Frameworks */,
+				1906B7641E22C5CA00A214DD /* Resources */,
+				3E0FE5D4D634225B23C4CD48 /* [CP] Embed Pods Frameworks */,
+				62CA3C11E6931C2015DCAE08 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CloserChat;
+			productName = CloserChat;
+			productReference = 1906B7661E22C5CA00A214DD /* CloserChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1906B75E1E22C5CA00A214DD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Closer;
+				TargetAttributes = {
+					1906B7651E22C5CA00A214DD = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = CBAYGW38K9;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1906B7611E22C5CA00A214DD /* Build configuration list for PBXProject "CloserChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1906B75D1E22C5CA00A214DD;
+			productRefGroup = 1906B7671E22C5CA00A214DD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1906B7651E22C5CA00A214DD /* CloserChat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1906B7641E22C5CA00A214DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1906B7771E22C5CA00A214DD /* LaunchScreen.storyboard in Resources */,
+				195569191E22C83D00985CBB /* GoogleService-Info.plist in Resources */,
+				1906B7741E22C5CA00A214DD /* Assets.xcassets in Resources */,
+				1906B76F1E22C5CA00A214DD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E0FE5D4D634225B23C4CD48 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CloserChat/Pods-CloserChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		62CA3C11E6931C2015DCAE08 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CloserChat/Pods-CloserChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F09F9E457783E090F9F05DFF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1906B7621E22C5CA00A214DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1970A08C1E230CA100E39E17 /* UnitChat.swift in Sources */,
+				194DD88D1E23426900D65A2F /* PersonalChat.swift in Sources */,
+				1906B7721E22C5CA00A214DD /* CloserChat.xcdatamodeld in Sources */,
+				1955691E1E22CAD500985CBB /* ChatListTableViewController.swift in Sources */,
+				195569201E22CB1F00985CBB /* LoginViewController.swift in Sources */,
+				194DD88B1E23424100D65A2F /* EventChat.swift in Sources */,
+				1970A0891E2301DF00E39E17 /* ChatProfileTableViewCell.swift in Sources */,
+				195569221E22CC9E00985CBB /* ChatUnitViewController.swift in Sources */,
+				1906B76A1E22C5CA00A214DD /* AppDelegate.swift in Sources */,
+				194DD88F1E234EBF00D65A2F /* PersonalChatProfile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1906B76D1E22C5CA00A214DD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1906B76E1E22C5CA00A214DD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1906B7751E22C5CA00A214DD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1906B7761E22C5CA00A214DD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1906B7791E22C5CA00A214DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1906B77A1E22C5CA00A214DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1906B77C1E22C5CA00A214DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB08495256D8C8FE14C04290 /* Pods-CloserChat.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CBAYGW38K9;
+				INFOPLIST_FILE = CloserChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Closer.CloserChat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1906B77D1E22C5CA00A214DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA4AFCA6D71144354672E47F /* Pods-CloserChat.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CBAYGW38K9;
+				INFOPLIST_FILE = CloserChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Closer.CloserChat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1906B7611E22C5CA00A214DD /* Build configuration list for PBXProject "CloserChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1906B7791E22C5CA00A214DD /* Debug */,
+				1906B77A1E22C5CA00A214DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1906B77B1E22C5CA00A214DD /* Build configuration list for PBXNativeTarget "CloserChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1906B77C1E22C5CA00A214DD /* Debug */,
+				1906B77D1E22C5CA00A214DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1906B7701E22C5CA00A214DD /* CloserChat.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1906B7711E22C5CA00A214DD /* CloserChat.xcdatamodel */,
+			);
+			currentVersion = 1906B7711E22C5CA00A214DD /* CloserChat.xcdatamodel */;
+			path = CloserChat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1906B75E1E22C5CA00A214DD /* Project object */;
+}
