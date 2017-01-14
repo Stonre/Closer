@@ -56,6 +56,10 @@ class ActivitySearchController: CircleTableViewController {
         return cell
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.hidesBarsOnTap = false
+    }
+    
     /*
     // MARK: - Navigation
 

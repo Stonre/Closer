@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E24EE4D1E2AC10F00A4FFDD /* DCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */; };
 		D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */; };
 		D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF31E29EE4C005C6293 /* Activity.swift */; };
 		D72F7EFA1E29EE4C005C6293 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF41E29EE4C005C6293 /* Recommender.swift */; };
@@ -17,7 +18,6 @@
 		D72F7F041E29EE7A005C6293 /* CircleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EFF1E29EE7A005C6293 /* CircleTableViewController.swift */; };
 		D72F7F051E29EE7A005C6293 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F001E29EE7A005C6293 /* DiscoverViewController.swift */; };
 		D72F7F061E29EE7A005C6293 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F011E29EE7A005C6293 /* MapViewController.swift */; };
-		D72F7F071E29EE7A005C6293 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F021E29EE7A005C6293 /* ViewController.swift */; };
 		D72F7F0C1E29EEBE005C6293 /* ActivitySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0A1E29EEBE005C6293 /* ActivitySearchBar.swift */; };
 		D72F7F0D1E29EEBE005C6293 /* ActivitySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0B1E29EEBE005C6293 /* ActivitySearchController.swift */; };
 		D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0E1E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift */; };
@@ -40,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DCTabBarController.swift; path = "Discover & Circle/DCTabBarController.swift"; sourceTree = "<group>"; };
 		D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementReward.swift; path = Models/AchievementReward.swift; sourceTree = "<group>"; };
 		D72F7EF31E29EE4C005C6293 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = Models/Activity.swift; sourceTree = "<group>"; };
 		D72F7EF41E29EE4C005C6293 /* Recommender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recommender.swift; path = Models/Recommender.swift; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		D72F7EFF1E29EE7A005C6293 /* CircleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleTableViewController.swift; path = "Discover & Circle/CircleTableViewController.swift"; sourceTree = "<group>"; };
 		D72F7F001E29EE7A005C6293 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverViewController.swift; path = "Discover & Circle/DiscoverViewController.swift"; sourceTree = "<group>"; };
 		D72F7F011E29EE7A005C6293 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "Discover & Circle/MapViewController.swift"; sourceTree = "<group>"; };
-		D72F7F021E29EE7A005C6293 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "Discover & Circle/ViewController.swift"; sourceTree = "<group>"; };
 		D72F7F0A1E29EEBE005C6293 /* ActivitySearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchBar.swift; path = "Discover & Circle/Search Bar/ActivitySearchBar.swift"; sourceTree = "<group>"; };
 		D72F7F0B1E29EEBE005C6293 /* ActivitySearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchController.swift; path = "Discover & Circle/Search Bar/ActivitySearchController.swift"; sourceTree = "<group>"; };
 		D72F7F0E1E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuCategoryTableViewCell.swift; path = "Discover & Circle/Side Menu/SideMenuCategoryTableViewCell.swift"; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				D72F7EFF1E29EE7A005C6293 /* CircleTableViewController.swift */,
 				D72F7F001E29EE7A005C6293 /* DiscoverViewController.swift */,
 				D72F7F011E29EE7A005C6293 /* MapViewController.swift */,
-				D72F7F021E29EE7A005C6293 /* ViewController.swift */,
+				3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */,
 			);
 			name = "Discover & Circle";
 			sourceTree = "<group>";
@@ -283,7 +283,6 @@
 				D72F7F061E29EE7A005C6293 /* MapViewController.swift in Sources */,
 				D72F7F221E29EF1A005C6293 /* LoginViewController.swift in Sources */,
 				D72F7F131E29EED4005C6293 /* SideMenuTableViewController.swift in Sources */,
-				D72F7F071E29EE7A005C6293 /* ViewController.swift in Sources */,
 				D72F7F121E29EED4005C6293 /* SideMenuLauncher.swift in Sources */,
 				D72F7F031E29EE7A005C6293 /* CircleTableViewCell.swift in Sources */,
 				D72F7F1D1E29EF11005C6293 /* ActivityPreviewTableViewCell.swift in Sources */,
@@ -293,6 +292,7 @@
 				D72F7F201E29EF11005C6293 /* OtherUserTableViewCell.swift in Sources */,
 				D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */,
 				D72F7EFA1E29EE4C005C6293 /* Recommender.swift in Sources */,
+				3E24EE4D1E2AC10F00A4FFDD /* DCTabBarController.swift in Sources */,
 				D72F7EFC1E29EE4C005C6293 /* Reward.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
