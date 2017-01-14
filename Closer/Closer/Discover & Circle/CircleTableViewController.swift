@@ -10,6 +10,14 @@ import UIKit
 
 class CircleTableViewController: UITableViewController {
     
+//    static var viewTitle: String = {
+//        if let _ = self as? DiscoverViewController {
+//            return "发现"
+//        } else {
+//            return "圈子"
+//        }
+//    }()
+    
     static let cellReuseID = "CircleTableCell"
 
     var activities = [Array<Activity>]() {
@@ -43,8 +51,55 @@ class CircleTableViewController: UITableViewController {
         return
     }
     
+    private func setupNavigationBarTitle() {
+        if let _ = self as? DiscoverViewController {
+            tabBarController?.navigationItem.title = "发现"
+        } else {
+            tabBarController?.navigationItem.title = "圈子"
+        }
+//        tabBarController?.navigationItem.title = CircleTableViewController.viewTitle
+    }
+    
+    private func setupMainPageButton() {
+        let homeButton = UIButton()
+        homeButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
+        homeButton.setImage(#imageLiteral(resourceName: "home-icon"), for: .normal)
+        homeButton.addTarget(self, action: #selector(touchHome(_:)), for: .touchUpInside)
+        
+        let leftBarItem = UIBarButtonItem(customView: homeButton)
+        tabBarController?.navigationItem.leftBarButtonItem = leftBarItem
+    }
+
+    func touchHome(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+            //            tabBarController?.tabBar.isHidden = true
+            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
+        }
+    }
+    
+    private func setupChatButton() {
+        let chatButton = UIButton()
+        chatButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
+        chatButton.setImage(#imageLiteral(resourceName: "chat-icon"), for: .normal)
+        chatButton.addTarget(self, action: #selector(touchChat(_:)), for: .touchUpInside)
+        
+        let rightBarItem = UIBarButtonItem(customView: chatButton)
+        tabBarController?.navigationItem.rightBarButtonItem = rightBarItem
+    }
+    
+    func touchChat(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+            //            tabBarController?.tabBar.isHidden = true
+            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBarTitle()
 //        tableView.estimatedRowHeight = 120
 //        tableView.rowHeight = UITableViewAutomaticDimension
         searchText = "default"

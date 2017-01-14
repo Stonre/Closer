@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="o6p-6G-myK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hPz-d0-u0l">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="nij-Z1-eYu">
+            <objects>
+                <navigationController id="hPz-d0-u0l" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wxy-dk-948">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="o6p-6G-myK" kind="relationship" relationship="rootViewController" id="YEH-z9-bXz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="75I-0D-nlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-478" y="180"/>
+        </scene>
         <!--圈子-->
         <scene sceneID="Ydv-bV-Mef">
             <objects>
@@ -104,10 +120,8 @@
                             <outlet property="delegate" destination="lE5-N4-VAm" id="SkZ-Hn-Bb5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="圈子" id="eOg-pD-s5y">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="GfY-br-ibn"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="SOh-Ql-OPz"/>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="圈子" id="abD-A6-yUh"/>
+                    <navigationItem key="navigationItem" title="圈子" id="eOg-pD-s5y"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ere-pW-Y5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -116,39 +130,21 @@
         <!--Tab Bar Controller-->
         <scene sceneID="VMF-i4-lgf">
             <objects>
-                <tabBarController id="o6p-6G-myK" sceneMemberID="viewController">
+                <tabBarController id="o6p-6G-myK" customClass="DCTabBarController" customModule="Closer" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="tbs-Ip-xDu"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JZX-YH-q2P">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9hd-ye-aBI" kind="relationship" relationship="viewControllers" id="vni-SS-0Fp"/>
-                        <segue destination="8Yl-yr-1jL" kind="relationship" relationship="viewControllers" id="ukI-Gd-zoY"/>
+                        <segue destination="nti-pD-DZS" kind="relationship" relationship="viewControllers" id="PVG-mP-4HM"/>
+                        <segue destination="lE5-N4-VAm" kind="relationship" relationship="viewControllers" id="0WR-N9-gsn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RN9-D9-rfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-202" y="202"/>
-        </scene>
-        <!--发现-->
-        <scene sceneID="xOi-G5-g63">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9hd-ye-aBI" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" id="3e7-Z8-Vjf"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xdS-ne-mpV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="nti-pD-DZS" kind="relationship" relationship="rootViewController" id="WgC-zD-vKI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hHt-QZ-36s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="582" y="-131"/>
+            <point key="canvasLocation" x="266" y="181"/>
         </scene>
         <!--发现-->
         <scene sceneID="qsU-0A-6tv">
@@ -252,6 +248,7 @@
                             <outlet property="delegate" destination="nti-pD-DZS" id="WIV-aG-8bY"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="发现" id="Xmb-Zx-tXy"/>
                     <navigationItem key="navigationItem" title="发现" id="VVc-dR-ew0"/>
                     <connections>
                         <outlet property="tableView" destination="xdJ-5k-v5G" id="aOs-uk-g3X"/>
@@ -268,25 +265,6 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1396" y="-133"/>
-        </scene>
-        <!--圈子-->
-        <scene sceneID="yFo-Aq-egj">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Yl-yr-1jL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="圈子" id="QrF-Tw-JgY"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jd4-59-NdH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="lE5-N4-VAm" kind="relationship" relationship="rootViewController" id="V3Z-PV-9hD"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="au4-3d-wB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="582" y="523"/>
         </scene>
     </scenes>
 </document>
