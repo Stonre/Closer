@@ -34,7 +34,7 @@
 		D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */; };
 		D72F7F281E29EF32005C6293 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F251E29EF32005C6293 /* Info.plist */; };
 		D72F7F2A1E29F3F4005C6293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F291E29F3F4005C6293 /* Assets.xcassets */; };
-		D72F7F2D1E29F82B005C6293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F2B1E29F82B005C6293 /* Main.storyboard */; };
+		D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F2B1E29F82B005C6293 /* Login.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,7 @@
 		D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D72F7F251E29EF32005C6293 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D72F7F291E29F3F4005C6293 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D72F7F2C1E29F82B005C6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D72F7F2C1E29F82B005C6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		D7CE21871E0D80D8006325EB /* Closer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Closer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,7 +94,7 @@
 		D72F7EEE1E29EE1A005C6293 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				D72F7F2B1E29F82B005C6293 /* Main.storyboard */,
+				D72F7F2B1E29F82B005C6293 /* Login.storyboard */,
 				D72F7F211E29EF1A005C6293 /* LoginViewController.swift */,
 			);
 			name = Login;
@@ -248,7 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D72F7F2D1E29F82B005C6293 /* Main.storyboard in Resources */,
+				D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */,
 				D72F7F161E29EEEA005C6293 /* Discover.storyboard in Resources */,
 				D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */,
 				D72F7F181E29EF06005C6293 /* Hyperlink.storyboard in Resources */,
@@ -300,12 +300,12 @@
 			name = Discover.storyboard;
 			sourceTree = "<group>";
 		};
-		D72F7F2B1E29F82B005C6293 /* Main.storyboard */ = {
+		D72F7F2B1E29F82B005C6293 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D72F7F2C1E29F82B005C6293 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
