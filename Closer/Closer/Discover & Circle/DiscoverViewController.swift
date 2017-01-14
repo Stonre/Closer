@@ -82,11 +82,29 @@ class DiscoverViewController: CircleTableViewController {
         searchController = ActivitySearchController()
     }
     
+    private func setupMainPageButton() {
+        let homeButton = UIButton()
+        homeButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: buttomSize)
+        homeButton.setImage(#imageLiteral(resourceName: "home-icon"), for: .normal)
+        homeButton.addTarget(self, action: #selector(touchHome(_:)), for: .touchUpInside)
+        
+        let leftBarItem = UIBarButtonItem(customView: homeButton)
+        navigationItem.leftBarButtonItem = leftBarItem
+    }
+    
+    func touchHome(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+            navigationController?.pushViewController(controller.visibleViewController!, animated: true)
+        }
+    }
+    
     var discoverTableViewController = CircleTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableHeaderView()
+        setupMainPageButton()
 //        tableView.delegate = discoverTableViewController
 //        tableView.dataSource = discoverTableViewController
 //        tableView.register(CircleTableViewCell.self, forCellReuseIdentifier: CircleTableViewController.cellReuseID)

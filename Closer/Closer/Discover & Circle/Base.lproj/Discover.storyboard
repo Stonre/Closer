@@ -129,11 +129,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RN9-D9-rfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-202" y="202"/>
+            <point key="canvasLocation" x="-398" y="199"/>
         </scene>
         <!--发现-->
         <scene sceneID="xOi-G5-g63">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hHt-QZ-36s" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9hd-ye-aBI" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="发现" id="3e7-Z8-Vjf"/>
                     <toolbarItems/>
@@ -146,7 +147,6 @@
                         <segue destination="nti-pD-DZS" kind="relationship" relationship="rootViewController" id="WgC-zD-vKI"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hHt-QZ-36s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="582" y="-131"/>
         </scene>
@@ -272,6 +272,7 @@
         <!--圈子-->
         <scene sceneID="yFo-Aq-egj">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="au4-3d-wB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Yl-yr-1jL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="圈子" id="QrF-Tw-JgY"/>
                     <toolbarItems/>
@@ -284,7 +285,6 @@
                         <segue destination="lE5-N4-VAm" kind="relationship" relationship="rootViewController" id="V3Z-PV-9hD"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="au4-3d-wB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="582" y="523"/>
         </scene>

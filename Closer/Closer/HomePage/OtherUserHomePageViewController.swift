@@ -1,74 +1,51 @@
 //
-//  HomePageViewController.swift
+//  OtherUserHomePageViewController.swift
 //  Closer
 //
-//  Created by Lei Ding on 1/12/17.
+//  Created by Lei Ding on 1/14/17.
 //  Copyright © 2017 Lei Ding. All rights reserved.
 //
 
 import UIKit
 
-struct UserSample {
-    var userName: String?
-    var headPortrait: UIImage?
-    var activitiesParticipatedIn = [ActivitySample]()
-    var activitiesRelease = [ActivitySample]()
-}
-
-struct ActivitySample {
-    var activityName: String?
-    var activityContent: String?
-    var releaser: UserSample?
-}
-
-class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var contacts = [UserSample]()
-    var friends = [UserSample]()
-    var activitiesParticipatedIn = [ActivitySample]()
-    var activitiesRelease = [ActivitySample]()
-    var selectState = 0 {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var myBackground: UIImageView!
-    
-    @IBOutlet weak var headPortrait: UIImageView!
+class OtherUserHomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var background: UIImageView!
     
     @IBOutlet weak var nickName: UILabel!
     
-    @IBOutlet weak var myWords: UILabel!
+    @IBOutlet weak var homeWords: UILabel!
     
     @IBAction func moreButton(_ sender: UIButton) {
     }
     
-    @IBAction func activityParticipatedInButton(_ sender: UIButton) {
+    @IBAction func activityReleaseButton(_ sender: UIButton) {
         selectState = 0
     }
-
-    @IBAction func activityReleaseButton(_ sender: UIButton) {
+    
+    @IBAction func activityParticipatedInButton(_ sender: UIButton) {
         selectState = 1
     }
     
-    @IBAction func friendsButton(_ sender: UIButton) {
-        selectState = 2
+    @IBOutlet weak var activityTable: UITableView!
+    
+    var selectState = 0 {
+        didSet {
+            activityTable.reloadData()
+        }
     }
     
-    @IBAction func contactsButton(_ sender: UIButton) {
-        selectState = 3
-    }
+    var activitiesParticipatedIn = [ActivitySample]()
+    var activitiesRelease = [ActivitySample]()
+    var contacts = [UserSample]()
+    var friends = [UserSample]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSampleData()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.estimatedRowHeight = 90
-        tableView.rowHeight = UITableViewAutomaticDimension
+        activityTable.delegate = self
+        activityTable.dataSource = self
+        activityTable.estimatedRowHeight = 90
+        activityTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
     }
     
@@ -109,15 +86,11 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch selectState {
         case 0:
-            return activitiesParticipatedIn.count
-        case 1:
             return activitiesRelease.count
-        case 2:
-            return friends.count
-        case 3:
-            return contacts.count
+        case 1:
+            return activitiesParticipatedIn.count
         default:
-            return friends.count
+            return activitiesRelease.count
         }
     }
     
@@ -125,32 +98,17 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         var cell: UITableViewCell?
         switch selectState {
         case 0:
-            print("kami")
-            cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
+            cell = activityTable.dequeueReusableCell(withIdentifier: "OtherUserActivities", for: indexPath)
             let activityPreview = activitiesParticipatedIn[indexPath.row]
-            if let activitycell = cell as? ActivityPreviewTableViewCell {
+            if let activitycell = cell as? OtherHomePageTableViewCell {
                 activitycell.activity = activityPreview
             }
             break
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath)
+            cell = activityTable.dequeueReusableCell(withIdentifier: "OtherUserActivities", for: indexPath)
             let activityPreview = activitiesRelease[indexPath.row]
-            if let activitycell = cell as? ActivityPreviewTableViewCell {
+            if let activitycell = cell as? OtherHomePageTableViewCell {
                 activitycell.activity = activityPreview
-            }
-            break
-        case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "OtherUserHomePage", for: indexPath)
-            let otherUserPreview = friends[indexPath.row]
-            if let otherUserCell = cell as? OtherUserTableViewCell {
-                otherUserCell.user = otherUserPreview
-            }
-            break
-        case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "OtherUserHomePage", for: indexPath)
-            let otherUserPreview = contacts[indexPath.row]
-            if let otherUserCell = cell as? OtherUserTableViewCell {
-                otherUserCell.user = otherUserPreview
             }
             break
         default:
@@ -158,7 +116,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         return cell!
     }
-    
+
+
     /*
     // MARK: - Navigation
 

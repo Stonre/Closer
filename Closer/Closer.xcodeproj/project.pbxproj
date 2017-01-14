@@ -34,7 +34,9 @@
 		D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */; };
 		D72F7F281E29EF32005C6293 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F251E29EF32005C6293 /* Info.plist */; };
 		D72F7F2A1E29F3F4005C6293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F291E29F3F4005C6293 /* Assets.xcassets */; };
-		D72F7F2D1E29F82B005C6293 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F2B1E29F82B005C6293 /* Main.storyboard */; };
+		D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F2B1E29F82B005C6293 /* Login.storyboard */; };
+		D72F7F2F1E2ABB76005C6293 /* OtherUserHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F2E1E2ABB76005C6293 /* OtherUserHomePageViewController.swift */; };
+		D72F7F311E2AD72F005C6293 /* OtherHomePageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F301E2AD72F005C6293 /* OtherHomePageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +67,9 @@
 		D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D72F7F251E29EF32005C6293 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D72F7F291E29F3F4005C6293 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D72F7F2C1E29F82B005C6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D72F7F2C1E29F82B005C6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		D72F7F2E1E2ABB76005C6293 /* OtherUserHomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherUserHomePageViewController.swift; path = HomePage/OtherUserHomePageViewController.swift; sourceTree = "<group>"; };
+		D72F7F301E2AD72F005C6293 /* OtherHomePageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherHomePageTableViewCell.swift; path = HomePage/OtherHomePageTableViewCell.swift; sourceTree = "<group>"; };
 		D7CE21871E0D80D8006325EB /* Closer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Closer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +91,8 @@
 				D72F7F1A1E29EF11005C6293 /* HomePage.storyboard */,
 				D72F7F1B1E29EF11005C6293 /* HomePageViewController.swift */,
 				D72F7F1C1E29EF11005C6293 /* OtherUserTableViewCell.swift */,
+				D72F7F2E1E2ABB76005C6293 /* OtherUserHomePageViewController.swift */,
+				D72F7F301E2AD72F005C6293 /* OtherHomePageTableViewCell.swift */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -94,7 +100,7 @@
 		D72F7EEE1E29EE1A005C6293 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				D72F7F2B1E29F82B005C6293 /* Main.storyboard */,
+				D72F7F2B1E29F82B005C6293 /* Login.storyboard */,
 				D72F7F211E29EF1A005C6293 /* LoginViewController.swift */,
 			);
 			name = Login;
@@ -248,7 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D72F7F2D1E29F82B005C6293 /* Main.storyboard in Resources */,
+				D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */,
 				D72F7F161E29EEEA005C6293 /* Discover.storyboard in Resources */,
 				D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */,
 				D72F7F181E29EF06005C6293 /* Hyperlink.storyboard in Resources */,
@@ -266,7 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D72F7F051E29EE7A005C6293 /* DiscoverViewController.swift in Sources */,
+				D72F7F311E2AD72F005C6293 /* OtherHomePageTableViewCell.swift in Sources */,
 				D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */,
+				D72F7F2F1E2ABB76005C6293 /* OtherUserHomePageViewController.swift in Sources */,
 				D72F7F1F1E29EF11005C6293 /* HomePageViewController.swift in Sources */,
 				D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */,
 				D72F7F0D1E29EEBE005C6293 /* ActivitySearchController.swift in Sources */,
@@ -300,12 +308,12 @@
 			name = Discover.storyboard;
 			sourceTree = "<group>";
 		};
-		D72F7F2B1E29F82B005C6293 /* Main.storyboard */ = {
+		D72F7F2B1E29F82B005C6293 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D72F7F2C1E29F82B005C6293 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
