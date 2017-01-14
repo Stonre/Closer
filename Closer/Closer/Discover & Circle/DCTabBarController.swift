@@ -29,6 +29,7 @@ class DCTabBarController: UITabBarController {
         
         let leftBarItem = UIBarButtonItem(customView: homeButton)
         navigationItem.leftBarButtonItem = leftBarItem
+        
     }
     
     func touchHome(_ sender: UIButton) {
@@ -50,11 +51,11 @@ class DCTabBarController: UITabBarController {
     }
     
     func touchChat(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-//        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-//            //            tabBarController?.tabBar.isHidden = true
-//            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
-//        }
+        let storyboard = UIStoryboard(name: "Chat", bundle: nil)
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+            tabBarController?.tabBar.isHidden = true
+            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
+        }
         
     }
 
