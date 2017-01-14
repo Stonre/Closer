@@ -12,6 +12,11 @@
 		1905A0841E154EA20082DEDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1905A0821E154EA20082DEDC /* Main.storyboard */; };
 		1905A0861E154EA20082DEDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1905A0851E154EA20082DEDC /* Assets.xcassets */; };
 		1905A0891E154EA20082DEDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1905A0871E154EA20082DEDC /* LaunchScreen.storyboard */; };
+		1905A0921E17D23E0082DEDC /* ChatUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905A0911E17D23E0082DEDC /* ChatUnit.swift */; };
+		1905A0981E17DBF60082DEDC /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905A0951E17DBF60082DEDC /* Activity.swift */; };
+		1905A0991E17DBF60082DEDC /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905A0961E17DBF60082DEDC /* Award.swift */; };
+		1905A09A1E17DBF60082DEDC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905A0971E17DBF60082DEDC /* User.swift */; };
+		1905A09E1E1B799C0082DEDC /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1905A09D1E1B799C0082DEDC /* ChatsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		1905A0851E154EA20082DEDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1905A0881E154EA20082DEDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1905A08A1E154EA20082DEDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1905A0911E17D23E0082DEDC /* ChatUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUnit.swift; sourceTree = "<group>"; };
+		1905A0951E17DBF60082DEDC /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = ../../Closer_LeiDing/Closer/Closer/Activity.swift; sourceTree = "<group>"; };
+		1905A0961E17DBF60082DEDC /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Award.swift; path = ../../Closer_LeiDing/Closer/Closer/Award.swift; sourceTree = "<group>"; };
+		1905A0971E17DBF60082DEDC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../../Closer_LeiDing/Closer/Closer/User.swift; sourceTree = "<group>"; };
+		1905A09D1E1B799C0082DEDC /* ChatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				1905A0801E154EA20082DEDC /* ViewController.swift */,
+				1905A0911E17D23E0082DEDC /* ChatUnit.swift */,
+				1905A0951E17DBF60082DEDC /* Activity.swift */,
+				1905A0961E17DBF60082DEDC /* Award.swift */,
+				1905A0971E17DBF60082DEDC /* User.swift */,
 				1905A0821E154EA20082DEDC /* Main.storyboard */,
+				1905A09D1E1B799C0082DEDC /* ChatsTableViewController.swift */,
 				1905A0901E154FA80082DEDC /* Supporting Files */,
 			);
 			path = Closer;
@@ -145,8 +160,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1905A0981E17DBF60082DEDC /* Activity.swift in Sources */,
+				1905A0991E17DBF60082DEDC /* Award.swift in Sources */,
 				1905A0811E154EA20082DEDC /* ViewController.swift in Sources */,
 				1905A07F1E154EA20082DEDC /* AppDelegate.swift in Sources */,
+				1905A0921E17D23E0082DEDC /* ChatUnit.swift in Sources */,
+				1905A09A1E17DBF60082DEDC /* User.swift in Sources */,
+				1905A09E1E1B799C0082DEDC /* ChatsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +330,7 @@
 				1905A08F1E154EA20082DEDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
