@@ -12,6 +12,7 @@ class PersonalChatProfile {
     let userId: String
     let userName: String
     var userNickname: String?
+    var displayName: String
     let userProfileImage: NSData
     
     init(userId: String,
@@ -22,6 +23,7 @@ class PersonalChatProfile {
         self.userId = userId
         self.userName = userName
         self.userNickname = userNickname
+        self.displayName = userNickname ?? userName
         self.userProfileImage = userProfileImage
     }
 }

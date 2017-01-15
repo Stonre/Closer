@@ -86,7 +86,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qA4-lQ-qDc">
                                                     <rect key="frame" x="70" y="0.0" width="180" height="60"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="User's Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqH-SL-qgR">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Display Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqH-SL-qgR">
                                                             <rect key="frame" x="0.0" y="0.0" width="180" height="39.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="180" id="yKH-Dc-KgL"/>
@@ -128,9 +128,9 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="displayName" destination="QqH-SL-qgR" id="Gwv-yH-BbI"/>
                                     <outlet property="lastChatTime" destination="qDt-IA-fqS" id="lzy-pi-ee0"/>
                                     <outlet property="lastMessage" destination="64R-ax-xcR" id="G94-9v-ArY"/>
-                                    <outlet property="userNickName" destination="QqH-SL-qgR" id="zuY-mD-dvE"/>
                                     <outlet property="userProfileImage" destination="aPy-iQ-WTI" id="bxg-jT-QeD"/>
                                     <segue destination="2Za-PN-8UJ" kind="show" id="GQX-SH-XNy"/>
                                 </connections>
@@ -181,7 +181,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="byk-dA-Dy7" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R5X-bl-Mwp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="R5X-bl-Mwp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

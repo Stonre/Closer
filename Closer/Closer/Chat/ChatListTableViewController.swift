@@ -14,23 +14,50 @@ enum ChatSection: Int {
     case personalChatSection
 }
 
-class ChatListTableViewController: UITableViewController {
+class ChatListTableViewController: UITableViewController, UISearchResultsUpdating {
     
     //do the search
-    var searchController: UISearchController!
-    var resultController = UITableViewController()
+    var searchController = UISearchController(searchResultsController: nil)
+    //var resultController = ChatListTableViewController()
     
+    //TODO: change the display name
     var senderDisplayName: String? = "Lavender"
     
     private var personalChats: [PersonalChat] = []
     private var eventChats: [EventChat] = []
+    private var filteredPersonalChats = [PersonalChat]()
+    private var filteredEventChats = [EventChat]()
+    
+    func filterContentForSearchText(searchText: String, scope: String = "AllChats") {
+        //filter
+        filteredPersonalChats = personalChats.filter({ (personalChat: PersonalChat) -> Bool in
+            return personalChat.person.displayName.contains(searchText)
+        })
+        
+        filteredEventChats = eventChats.filter({ (eventChat: EventChat) -> Bool in
+            return eventChat.eventName.contains(searchText)
+        })
+        
+        //update
+        tableView.reloadData()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //add the search bar
-        self.searchController = UISearchController(searchResultsController: self.resultController)
-        self.tableView.tableHeaderView = self.searchController.searchBar
+        //resultController.tableView.dataSource = self
+        //resultController.tableView.delegate = self
+        
+        //searchController = UISearchController(searchResultsController: self.resultController)
+        tableView.tableHeaderView = self.searchController.searchBar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
         
         //load data for sample demo!
         let ZenithImage = UIImage(named: "sampleHeaderPortrait4")
@@ -42,9 +69,9 @@ class ChatListTableViewController: UITableViewController {
         let groupImage = UIImage(named: "Group-icon.png")
         let groupData = UIImagePNGRepresentation(groupImage!) as NSData?
         
-        let Zenith = PersonalChatProfile(userId: "1", userName: "Zenith", userNickname: "Zenith", userProfileImage: ZenithData!)
-        let Zack = PersonalChatProfile(userId: "2", userName: "Zack", userNickname: "Zack", userProfileImage: ZackData!)
-        let Kami = PersonalChatProfile(userId: "3", userName: "Kami", userNickname: "Kami", userProfileImage: KamiData!)
+        let Zenith = PersonalChatProfile(userId: "1", userName: "Zenith", userNickname: nil, userProfileImage: ZenithData!)
+        let Zack = PersonalChatProfile(userId: "2", userName: "Zack", userNickname: nil, userProfileImage: ZackData!)
+        let Kami = PersonalChatProfile(userId: "3", userName: "Kami", userNickname: nil, userProfileImage: KamiData!)
         let participants = [Zenith, Zack, Kami]
         let eventChat = EventChat(participants: participants, eventName: "一起吃饭！", groupImage: groupData!, lastMessage: "Happy new year!", lastContactTime: "2:03pm")
         personalChats.append(PersonalChat(person: Zenith, lastMessage: "😀", lastContactTime: "11:53am"))
@@ -74,9 +101,17 @@ class ChatListTableViewController: UITableViewController {
         if let currentChatSection: ChatSection = ChatSection(rawValue: section) {
             switch currentChatSection {
             case .eventChatSection:
-                return eventChats.count
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    return filteredEventChats.count
+                } else {
+                    return eventChats.count
+                }
             case .personalChatSection:
-                return personalChats.count
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    return filteredPersonalChats.count
+                } else {
+                    return personalChats.count
+                }
             }
         } else {
             return 0
@@ -84,44 +119,28 @@ class ChatListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let reuseIdentifier = (indexPath as NSIndexPath).section == ChatSection.eventChatSection.rawValue ? "eventChatSection" : "personalChatSection"
         let reuseIdentifier = "chatCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         if let chatCell = cell as? ChatProfileTableViewCell {
             switch (indexPath as NSIndexPath).section {
             case ChatSection.eventChatSection.rawValue:
-                chatCell.eventChat = eventChats[(indexPath as NSIndexPath).row]
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    chatCell.eventChat = filteredEventChats[(indexPath as NSIndexPath).row]
+                } else {
+                    chatCell.eventChat = eventChats[(indexPath as NSIndexPath).row]
+                }
             default:
-                chatCell.personalChat = personalChats[(indexPath as NSIndexPath).row]
+                if searchController.isActive && searchController.searchBar.text != "" {
+                    chatCell.personalChat = filteredPersonalChats[(indexPath as NSIndexPath).row]
+                } else {
+                    chatCell.personalChat = personalChats[(indexPath as NSIndexPath).row]
+                }
             }
         }
 
         return cell
     }
-    
-    private lazy var chatsRef: FIRDatabaseReference = FIRDatabase.database().reference().child("chats")
-    private var chatsRefHandle: FIRDatabaseHandle?
-    
-    // MARK: Firebase related methods
-    /*private func observeChannels() {
-        // Use the observe method to listen for new channels being written to the Firebase DB
-        chatsRefHandle = chatsRef.observe(
-            .childAdded,
-            with: {
-                (oneChat) -> Void in
-                let chatData = oneChat.value as! Dictionary<String, AnyObject>
-                let chatId = oneChat.key
-                /*let profile = oneChat["snapshot"]
-                if let name = oneChat["name"] as! String!, name.characters.count > 0 {
-                    self.channels.append(Channel(id: id, name: name))
-                    self.tableView.reloadData()
-                } else {
-                    print("Error! Could not decode channel data")
-                }*/
-            }
-        )
-    }*/
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
