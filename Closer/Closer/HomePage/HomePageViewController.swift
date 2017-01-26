@@ -65,11 +65,27 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         initSampleData()
+        setupLogoutButton()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
+    }
+    
+    private func setupLogoutButton() {
+        let logoutTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchLogout))
+        logoutTapRecognizer.numberOfTapsRequired = 2
+        view.addGestureRecognizer(logoutTapRecognizer)
+//        let logoutButton = UIButton(type: .system)
+//        logoutButton.frame = CGRect(origin: CGPoint(x: 8, y: 8), size: DiscoverViewController.buttomSize)
+//        logoutButton.setTitle("Logout", for: .normal)
+//        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: logoutButton)
+    }
+    
+    func touchLogout() {
+        DCViewController().handleLogout()
+//        navigationController?.present(LoginViewController(), animated: true, completion: nil)
     }
     
     private func initSampleData() {
