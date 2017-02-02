@@ -18,7 +18,7 @@ class ActivitySearchController: CircleTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
-        navigationController?.hidesBarsOnTap = true
+//        navigationController?.hidesBarsOnTap = true
         // Do any additional setup after loading the view.
     }
     
@@ -45,16 +45,16 @@ class ActivitySearchController: CircleTableViewController {
         tableView.tableHeaderView = searchController.searchBar
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "subtitleCell")
-        
-        let currAcvitity = activities[indexPath.section][indexPath.row]
-        
-        cell.textLabel?.text = currAcvitity.name
-        cell.detailTextLabel?.text = currAcvitity.description.text
-        
-        return cell
-    }
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "subtitleCell")
+//        
+//        let currAcvitity = activities[indexPath.section][indexPath.row]
+//        
+//        cell.textLabel?.text = currAcvitity.name
+//        cell.detailTextLabel?.text = currAcvitity.description.text
+//        
+//        return cell
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.hidesBarsOnTap = false
@@ -78,7 +78,7 @@ extension ActivitySearchController: UISearchResultsUpdating, UISearchControllerD
     }
     
     func willPresentSearchController(_ searchController: UISearchController) {
-        print("willPresent")
+//        print("willPresent")
     }
     
     func didPresentSearchController(_ searchController: UISearchController) {

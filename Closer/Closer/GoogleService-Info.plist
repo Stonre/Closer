@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>1090639561503-5biecqbmn6jj0fmrko37ubhegvc07905.apps.googleusercontent.com</string>
+	<string>71123812972-jqmj6vgldhk2t9sgj9d4funejh8eq1ek.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1090639561503-5biecqbmn6jj0fmrko37ubhegvc07905</string>
+	<string>com.googleusercontent.apps.71123812972-jqmj6vgldhk2t9sgj9d4funejh8eq1ek</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAF6vEASfuKsaIAjvMiRX8JEVQO1RjFc7U</string>
+	<string>AIzaSyCdeSoYvReeaU8y-OmAOINiPWAjsSSP_-Y</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1090639561503</string>
+	<string>71123812972</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.Closer.CloserChat</string>
+	<string>Closer.Development.Group</string>
 	<key>PROJECT_ID</key>
-	<string>closerchat-e1251</string>
+	<string>closer-17ee2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>closerchat-e1251.appspot.com</string>
+	<string>closer-17ee2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1090639561503:ios:a5f03b9337ad6e29</string>
+	<string>1:71123812972:ios:9dc5b80437945550</string>
 	<key>DATABASE_URL</key>
-	<string>https://closerchat-e1251.firebaseio.com</string>
+	<string>https://closer-17ee2.firebaseio.com</string>
 </dict>
 </plist>

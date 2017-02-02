@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DiscoverViewController: CircleTableViewController {
     
@@ -49,10 +50,26 @@ class DiscoverViewController: CircleTableViewController {
         tableHeaderView.addSubview(searchButton)
         
         
+        //Uncomment for adding activities
+//        tableHeaderView.addSubview(createActivityButton)
+//        setupCreateActivityButton()
+        
 //        searchController.searchBar.frame = CGRect(x: 88, y: 0, width: tableHeaderView.bounds.maxX - 88, height: 44)
 //        tableHeaderView.addSubview(searchController.searchBar)
         
         tableView.tableHeaderView = tableHeaderView
+    }
+    
+    let createActivityButton = UIButton(type: UIButtonType.contactAdd)
+    private func setupCreateActivityButton() {
+//        createActivityButton.backgroundColor = .red
+        createActivityButton.frame = CGRect(origin: CGPoint(x: 96, y: 8), size: DiscoverViewController.buttomSize)
+        createActivityButton.addTarget(self, action: #selector(touchCreateActivity(_:)), for: .touchUpInside)
+    }
+    
+    func touchCreateActivity(_ sender: UIButton) {
+        createActivities()
+        print("Activity created!")
     }
     
     var searchController: ActivitySearchController!
@@ -74,12 +91,7 @@ class DiscoverViewController: CircleTableViewController {
     }
     
     func touchSearch(_ sender: UIButton) {
-        setupSearchController()
-        self.navigationController?.pushViewController(searchController, animated: true)
-    }
-    
-    private func setupSearchController() {
-        searchController = ActivitySearchController()
+        self.navigationController?.pushViewController(ActivitySearchController(), animated: true)
     }
     
     var discoverTableViewController = CircleTableViewController()
@@ -94,7 +106,7 @@ class DiscoverViewController: CircleTableViewController {
 //        tableView.estimatedRowHeight = tableView.rowHeight
 //        tableView.rowHeight = UITableViewAutomaticDimension
 //        discoverTableViewController.searchText = "default"
-        searchText = "default"
+//        searchText = "default"
     }
     
 

@@ -17,22 +17,22 @@
 		194BE4B51E2AD2E3004DF108 /* ChatUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BE4B21E2AD2E3004DF108 /* ChatUnitViewController.swift */; };
 		194BE4B81E2AD384004DF108 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194BE4B71E2AD384004DF108 /* Chat.storyboard */; };
 		3E24EE4D1E2AC10F00A4FFDD /* DCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */; };
+		3E24EE511E36A01200A4FFDD /* OwnActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE501E36A01200A4FFDD /* OwnActivityCell.swift */; };
+		3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE521E36A04700A4FFDD /* ActivityCell.swift */; };
+		3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE571E36ADF800A4FFDD /* DCViewController.swift */; };
+		3E24EE5A1E397D0600A4FFDD /* ActivitySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */; };
 		D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */; };
 		D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF31E29EE4C005C6293 /* Activity.swift */; };
 		D72F7EFA1E29EE4C005C6293 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF41E29EE4C005C6293 /* Recommender.swift */; };
 		D72F7EFB1E29EE4C005C6293 /* RecommenderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF51E29EE4C005C6293 /* RecommenderContext.swift */; };
 		D72F7EFC1E29EE4C005C6293 /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF61E29EE4C005C6293 /* Reward.swift */; };
 		D72F7EFD1E29EE4C005C6293 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF71E29EE4C005C6293 /* User.swift */; };
-		D72F7F031E29EE7A005C6293 /* CircleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EFE1E29EE7A005C6293 /* CircleTableViewCell.swift */; };
 		D72F7F041E29EE7A005C6293 /* CircleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EFF1E29EE7A005C6293 /* CircleTableViewController.swift */; };
 		D72F7F051E29EE7A005C6293 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F001E29EE7A005C6293 /* DiscoverViewController.swift */; };
 		D72F7F061E29EE7A005C6293 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F011E29EE7A005C6293 /* MapViewController.swift */; };
-		D72F7F0C1E29EEBE005C6293 /* ActivitySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0A1E29EEBE005C6293 /* ActivitySearchBar.swift */; };
-		D72F7F0D1E29EEBE005C6293 /* ActivitySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0B1E29EEBE005C6293 /* ActivitySearchController.swift */; };
 		D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0E1E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift */; };
 		D72F7F121E29EED4005C6293 /* SideMenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0F1E29EED4005C6293 /* SideMenuLauncher.swift */; };
 		D72F7F131E29EED4005C6293 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F101E29EED4005C6293 /* SideMenuTableViewController.swift */; };
-		D72F7F161E29EEEA005C6293 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F141E29EEEA005C6293 /* Discover.storyboard */; };
 		D72F7F181E29EF06005C6293 /* Hyperlink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F171E29EF06005C6293 /* Hyperlink.storyboard */; };
 		D72F7F1D1E29EF11005C6293 /* ActivityPreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F191E29EF11005C6293 /* ActivityPreviewTableViewCell.swift */; };
 		D72F7F1E1E29EF11005C6293 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F1A1E29EF11005C6293 /* HomePage.storyboard */; };
@@ -58,6 +58,10 @@
 		194BE4B21E2AD2E3004DF108 /* ChatUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatUnitViewController.swift; path = Chat/ChatUnitViewController.swift; sourceTree = "<group>"; };
 		194BE4B71E2AD384004DF108 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Chat.storyboard; path = Chat/Chat.storyboard; sourceTree = "<group>"; };
 		3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DCTabBarController.swift; path = "Discover & Circle/DCTabBarController.swift"; sourceTree = "<group>"; };
+		3E24EE501E36A01200A4FFDD /* OwnActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OwnActivityCell.swift; path = "Discover & Circle/OwnActivityCell.swift"; sourceTree = "<group>"; };
+		3E24EE521E36A04700A4FFDD /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityCell.swift; path = "Discover & Circle/ActivityCell.swift"; sourceTree = "<group>"; };
+		3E24EE571E36ADF800A4FFDD /* DCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DCViewController.swift; path = "Discover & Circle/DCViewController.swift"; sourceTree = "<group>"; };
+		3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchController.swift; path = "Discover & Circle/Search Bar/ActivitySearchController.swift"; sourceTree = "<group>"; };
 		50F25207255F132C1B1DC24B /* Pods-Closer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.release.xcconfig"; sourceTree = "<group>"; };
 		CA32EC040E81732242A00E21 /* Pods-Closer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.debug.xcconfig"; sourceTree = "<group>"; };
 		D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementReward.swift; path = Models/AchievementReward.swift; sourceTree = "<group>"; };
@@ -66,16 +70,12 @@
 		D72F7EF51E29EE4C005C6293 /* RecommenderContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecommenderContext.swift; path = Models/RecommenderContext.swift; sourceTree = "<group>"; };
 		D72F7EF61E29EE4C005C6293 /* Reward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reward.swift; path = Models/Reward.swift; sourceTree = "<group>"; };
 		D72F7EF71E29EE4C005C6293 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
-		D72F7EFE1E29EE7A005C6293 /* CircleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleTableViewCell.swift; path = "Discover & Circle/CircleTableViewCell.swift"; sourceTree = "<group>"; };
 		D72F7EFF1E29EE7A005C6293 /* CircleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleTableViewController.swift; path = "Discover & Circle/CircleTableViewController.swift"; sourceTree = "<group>"; };
 		D72F7F001E29EE7A005C6293 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverViewController.swift; path = "Discover & Circle/DiscoverViewController.swift"; sourceTree = "<group>"; };
 		D72F7F011E29EE7A005C6293 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = "Discover & Circle/MapViewController.swift"; sourceTree = "<group>"; };
-		D72F7F0A1E29EEBE005C6293 /* ActivitySearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchBar.swift; path = "Discover & Circle/Search Bar/ActivitySearchBar.swift"; sourceTree = "<group>"; };
-		D72F7F0B1E29EEBE005C6293 /* ActivitySearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchController.swift; path = "Discover & Circle/Search Bar/ActivitySearchController.swift"; sourceTree = "<group>"; };
 		D72F7F0E1E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuCategoryTableViewCell.swift; path = "Discover & Circle/Side Menu/SideMenuCategoryTableViewCell.swift"; sourceTree = "<group>"; };
 		D72F7F0F1E29EED4005C6293 /* SideMenuLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuLauncher.swift; path = "Discover & Circle/Side Menu/SideMenuLauncher.swift"; sourceTree = "<group>"; };
 		D72F7F101E29EED4005C6293 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuTableViewController.swift; path = "Discover & Circle/Side Menu/SideMenuTableViewController.swift"; sourceTree = "<group>"; };
-		D72F7F151E29EEEA005C6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Discover & Circle/Base.lproj/Discover.storyboard"; sourceTree = "<group>"; };
 		D72F7F171E29EF06005C6293 /* Hyperlink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Hyperlink.storyboard; path = HyperLink/Hyperlink.storyboard; sourceTree = "<group>"; };
 		D72F7F191E29EF11005C6293 /* ActivityPreviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityPreviewTableViewCell.swift; path = HomePage/ActivityPreviewTableViewCell.swift; sourceTree = "<group>"; };
 		D72F7F1A1E29EF11005C6293 /* HomePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HomePage.storyboard; path = HomePage/HomePage.storyboard; sourceTree = "<group>"; };
@@ -166,14 +166,15 @@
 		D72F7EF01E29EE2C005C6293 /* Discover & Circle */ = {
 			isa = PBXGroup;
 			children = (
+				3E24EE571E36ADF800A4FFDD /* DCViewController.swift */,
+				3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */,
 				D72F7F091E29EEA2005C6293 /* Side Menu */,
 				D72F7F081E29EE8E005C6293 /* Search Bar */,
-				D72F7EFE1E29EE7A005C6293 /* CircleTableViewCell.swift */,
-				D72F7F141E29EEEA005C6293 /* Discover.storyboard */,
 				D72F7EFF1E29EE7A005C6293 /* CircleTableViewController.swift */,
 				D72F7F001E29EE7A005C6293 /* DiscoverViewController.swift */,
 				D72F7F011E29EE7A005C6293 /* MapViewController.swift */,
-				3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */,
+				3E24EE521E36A04700A4FFDD /* ActivityCell.swift */,
+				3E24EE501E36A01200A4FFDD /* OwnActivityCell.swift */,
 			);
 			name = "Discover & Circle";
 			sourceTree = "<group>";
@@ -198,8 +199,7 @@
 		D72F7F081E29EE8E005C6293 /* Search Bar */ = {
 			isa = PBXGroup;
 			children = (
-				D72F7F0A1E29EEBE005C6293 /* ActivitySearchBar.swift */,
-				D72F7F0B1E29EEBE005C6293 /* ActivitySearchController.swift */,
+				3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */,
 			);
 			name = "Search Bar";
 			sourceTree = "<group>";
@@ -314,7 +314,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */,
-				D72F7F161E29EEEA005C6293 /* Discover.storyboard in Resources */,
 				D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */,
 				D72F7F181E29EF06005C6293 /* Hyperlink.storyboard in Resources */,
 				D72F7F281E29EF32005C6293 /* Info.plist in Resources */,
@@ -379,14 +378,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E24EE5A1E397D0600A4FFDD /* ActivitySearchController.swift in Sources */,
 				D72F7F051E29EE7A005C6293 /* DiscoverViewController.swift in Sources */,
 				D72F7F311E2AD72F005C6293 /* OtherHomePageTableViewCell.swift in Sources */,
 				D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */,
 				D72F7F2F1E2ABB76005C6293 /* OtherUserHomePageViewController.swift in Sources */,
 				D72F7F1F1E29EF11005C6293 /* HomePageViewController.swift in Sources */,
 				D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */,
-				D72F7F0D1E29EEBE005C6293 /* ActivitySearchController.swift in Sources */,
-				D72F7F0C1E29EEBE005C6293 /* ActivitySearchBar.swift in Sources */,
 				194BE4AD1E2AD2C8004DF108 /* PersonalChat.swift in Sources */,
 				194BE4AC1E2AD2C8004DF108 /* EventChat.swift in Sources */,
 				D72F7EFB1E29EE4C005C6293 /* RecommenderContext.swift in Sources */,
@@ -396,14 +394,16 @@
 				D72F7F221E29EF1A005C6293 /* LoginViewController.swift in Sources */,
 				D72F7F131E29EED4005C6293 /* SideMenuTableViewController.swift in Sources */,
 				194BE4B51E2AD2E3004DF108 /* ChatUnitViewController.swift in Sources */,
+				3E24EE511E36A01200A4FFDD /* OwnActivityCell.swift in Sources */,
 				D72F7F121E29EED4005C6293 /* SideMenuLauncher.swift in Sources */,
 				194BE4AF1E2AD2C8004DF108 /* UnitChat.swift in Sources */,
-				D72F7F031E29EE7A005C6293 /* CircleTableViewCell.swift in Sources */,
 				D72F7F1D1E29EF11005C6293 /* ActivityPreviewTableViewCell.swift in Sources */,
 				D72F7F041E29EE7A005C6293 /* CircleTableViewController.swift in Sources */,
 				D72F7EFD1E29EE4C005C6293 /* User.swift in Sources */,
+				3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */,
 				D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */,
 				D72F7F201E29EF11005C6293 /* OtherUserTableViewCell.swift in Sources */,
+				3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */,
 				D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */,
 				D72F7EFA1E29EE4C005C6293 /* Recommender.swift in Sources */,
 				194BE4B31E2AD2E3004DF108 /* ChatListTableViewController.swift in Sources */,
@@ -415,14 +415,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D72F7F141E29EEEA005C6293 /* Discover.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D72F7F151E29EEEA005C6293 /* Base */,
-			);
-			name = Discover.storyboard;
-			sourceTree = "<group>";
-		};
 		D72F7F2B1E29F82B005C6293 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
