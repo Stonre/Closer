@@ -45,7 +45,7 @@ class CircleTableViewController: UITableViewController {
             for _ in 1...i{
                 description += "This is Activity \(i) "
             }
-            let act = GeneralActivity(name: "\(currUserName)'s Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: currUserName, userId: 0, gender: Gender.Female, age: 18))
+            let act = GeneralActivity(name: "\(currUserName)'s Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: currUserName, userId: 0, gender: Gender.Female, age: 18), identity: UInt64(i))
             let key = dbRef.child("activities").childByAutoId().key
             let activity = ["releasingUserID": currUserID,
                             "releasingUserName": currUserName,
@@ -71,7 +71,7 @@ class CircleTableViewController: UITableViewController {
                 for _ in 1...i{
                     description += "This is Activity \(i) "
                 }
-                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: "User \(i)", userId: 0, gender: Gender.Female, age: 18)))
+                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: "User \(i)", userId: 0, gender: Gender.Female, age: 18), identity: UInt64(i)))
             }
             activities.append(defaultSection)
         } else {
@@ -90,7 +90,7 @@ class CircleTableViewController: UITableViewController {
                         let releasingUserID = act["releasingUserID"] as? String ?? ""
                         let actDiscription = act["discription"] as? String ?? ""
                         let releasingUserName = act["releasingUserName"] as? String ?? ""
-                        let generalActivity = GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: actDiscription), userReleasing: PersonalUserForView(userName: releasingUserName, userId: 0, gender: Gender.Female, age: 18))
+                        let generalActivity = GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: actDiscription), userReleasing: PersonalUserForView(userName: releasingUserName, userId: 0, gender: Gender.Female, age: 18), identity: UInt64(1))
                         activitiesSection.append(generalActivity)
                     }
                 }
