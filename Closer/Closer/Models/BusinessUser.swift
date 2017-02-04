@@ -5,6 +5,7 @@
 //  Created by Lei Ding on 1/7/17.
 //  Copyright © 2017 Lei Ding. All rights reserved.
 //
+
 import Foundation
 
 
@@ -32,7 +33,7 @@ struct BusinessUserForView: BusinessUser {
      - activityId: UInt64
      - Returns: an activity released by the business user
      */
-    func getActivityReleased(activityId: UInt64) -> GeneralActivity {
-        return activitiesReleased[activityId]!
+    func getActivityReleased(activityId id: UInt64) -> GeneralActivity {
+        return activitiesReleased[id]!
     }
 }

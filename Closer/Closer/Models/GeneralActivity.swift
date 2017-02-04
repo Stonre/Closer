@@ -5,6 +5,7 @@
 //  Created by Lei Ding on 1/7/17.
 //  Copyright © 2017 Lei Ding. All rights reserved.
 //
+
 import Foundation
 import CoreLocation
 
@@ -12,6 +13,7 @@ import CoreLocation
 ///Class for a general activity based on Activity protocol
 class GeneralActivity: Activity {
     var name: String
+    var identity: UInt64
     var timeStart: Date?
     var timeEnd: Date?
     var location: CLLocation?
@@ -25,22 +27,23 @@ class GeneralActivity: Activity {
     ///a list of users that are assigned by the user releasing this activity to take part in it
     var assignedParticipants: [UInt64:PersonalUserForView] = [:]
     
-    init(name: String, tags: [String], authority: Authority, description: Description, userReleasing: PersonalUserForView) {
+    init(name: String, tags: [String], authority: Authority, description: Description, userReleasing: PersonalUserForView, identity: UInt64) {
         self.name = name
         self.tags = tags
         self.authority = authority
         self.description = description
         self.userReleasing = userReleasing
+        self.identity = identity
     }
     
     ///function to make assigned participant as participant when the assigned participant agrees to take part in this activity
-    func addAssignedParticipant(user: PersonalUserForView) {}
+    func addAssignedParticipant(user: User) {}
     
-    func addParticipant(user: PersonalUserForView) {}
+    func addParticipant(user: User) {}
     
     func deleteParticipant(userId: UInt64) {}
     
-    func getParticipant(userId: UInt64) -> PersonalUserForView {
-        return participants[userId]! as! PersonalUserForView
+    func getParticipant(userId id: UInt64) -> User {
+        return participants[id]!
     }
 }

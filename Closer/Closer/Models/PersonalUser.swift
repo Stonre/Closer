@@ -5,6 +5,7 @@
 //  Created by Lei Ding on 1/7/17.
 //  Copyright © 2017 Lei Ding. All rights reserved.
 //
+
 import Foundation
 
 ///View-only Class for personal user.
@@ -22,14 +23,14 @@ class PersonalUserForView: PersonalUser {
      - Key(activityId): UInt64
      - Value(activity): GeneralActivity
      */
-    private var activitiesParticipatedIn: Dictionary<UInt64, Activity> = [UInt64: Activity]()
+    private var activitiesParticipatedIn: Dictionary<UInt64, Activity> = [UInt64:Activity]()
     
     /**
      - Dictionary for storing the activities a personal user released
      - Key(activityId): UInt64
      - Value(activity): GeneralActivity
      */
-    private var activitiesReleased: Dictionary<UInt64, Activity> = [UInt64: Activity]()
+    private var activitiesReleased: Dictionary<UInt64, Activity> = [UInt64:Activity]()
     
     init(userName: String, userId: UInt64, gender: Gender, age: Int) {
         self.userName = userName
@@ -110,14 +111,14 @@ class PersonalUserAdmin: PersonalUser {
      - Key: activityId: UInt64
      - Value: activity: GeneralActivity
      */
-    private var activitiesParticipatedIn = [UInt64:Activity]()
+    private var activitiesParticipatedIn: Dictionary<UInt64, Activity> = [UInt64:Activity]()
     
     /**
      Dictionary for storing the activities a personal user released
      - Key: activityId: UInt64
      - Value: activity: GeneralActivity
      */
-    private var activitiesReleased = [UInt64: Activity]()
+    private var activitiesReleased: Dictionary<UInt64, Activity> = [UInt64:Activity]()
     
     /**
      Dictionary for storing the awards a user gets
@@ -138,7 +139,7 @@ class PersonalUserAdmin: PersonalUser {
      - Parameters:
      - userAction: a user's action that causes his virtual fortune to change
      */
-    func changeVirtualFortune(userAction: UserActionType) {}
+    func changeVirtualFortune(userAction userActionType: UserActionType) {}
     
     /**
      function to set the phone number of a user
@@ -146,49 +147,74 @@ class PersonalUserAdmin: PersonalUser {
      - region: the region code of the phone number
      - number: the main part of the phone number
      */
-    func setPhoneNumber(region: Int, number: Int) {}
-    
-    func addActivityParticipateIn(activity: Activity) {}
-    
-    func getActicityParticipateIn(activityId: UInt64) -> Activity {
-        return activitiesParticipatedIn[activityId]!
+    func setPhoneNumber(region r: Int, number n: Int) {
+        phoneNumber?.region = r
+        phoneNumber?.number = n
     }
     
-    func deleteActivityParticipateIn(activityId: UInt64) {}
-    
-    func addActivityReleased(activity: Activity) {}
-    
-    func getActivityReleased(activityId: UInt64) -> Activity {
-        return activitiesReleased[activityId]!
+    func addActivityParticipateIn(activity a: GeneralActivity) {
+        activitiesParticipatedIn[a.identity] = a
     }
     
-    func deleteActivityReleased(activityId: UInt64) {}
-    
-    func addFriend(user: PersonalUserForView) {}
-    
-    func getFriend(userId: UInt64) -> PersonalUserForView {
-        return friends[userId]!
+    func getActicityParticipateIn(activityId id: UInt64) -> Activity {
+        return activitiesParticipatedIn[id]!
     }
     
-    func deleteFriend(userId: UInt64) {}
-    
-    func addContact(user: PersonalUserForView) {}
-    
-    func getContact(userId: UInt64) -> PersonalUserForView {
-        return contacts[userId]!
+    func deleteActivityParticipateIn(activityId id: UInt64) {
+        activitiesParticipatedIn.removeValue(forKey: id)
+        //trigger update action?
     }
     
-    func deleteContact(userId: UInt64) {}
-    
-    func addBusinessUser(user: BusinessUserForView) {}
-    
-    func getBusinessUser(userId: UInt64) -> BusinessUserForView {
-        return savedBusinessUsers[userId]!
+    func addActivityReleased(activity a: GeneralActivity) {
+        activitiesReleased[a.identity] = a
     }
     
-    func deleteBusinessUser(userId: UInt64) {}
+    func getActivityReleased(activityId id: UInt64) -> Activity {
+        return activitiesReleased[id]!
+    }
     
-    func addAward(award: Reward) {}
+    func deleteActivityReleased(activityId id: UInt64) {
+        activitiesReleased.removeValue(forKey: id)
+        //trigger update action?
+    }
+    
+    func addFriend(user u: PersonalUserForView) {
+        friends[u.userId] = u
+    }
+    
+    func getFriend(userId id: UInt64) -> PersonalUserForView {
+        return friends[id]!
+    }
+    
+    func deleteFriend(userId id: UInt64) {
+        friends.removeValue(forKey: id)
+    }
+    
+    func addContact(user u: PersonalUserForView) {
+        contacts[u.userId] = u
+    }
+    
+    func getContact(userId id: UInt64) -> PersonalUserForView {
+        return contacts[id]!
+    }
+    
+    func deleteContact(userId id: UInt64) {
+        contacts.removeValue(forKey: id)
+    }
+    
+    func addBusinessUser(user u: BusinessUserForView) {
+        savedBusinessUsers[u.userId] = u
+    }
+    
+    func getBusinessUser(userId id: UInt64) -> BusinessUserForView {
+        return savedBusinessUsers[id]!
+    }
+    
+    func deleteBusinessUser(userId id: UInt64) {
+        savedBusinessUsers.removeValue(forKey: id)
+    }
+    
+    func addAward(award a: Reward) {}
     
     func getAward(awardId: UInt64) -> Reward {
         return awards[awardId]!
