@@ -10,6 +10,8 @@ import UIKit
 
 class ActivityCell: UITableViewCell {
     
+    static let cellReuseID = "ActivityCell"
+    
     open var activity: Activity? {
         didSet {
             if activity != nil {

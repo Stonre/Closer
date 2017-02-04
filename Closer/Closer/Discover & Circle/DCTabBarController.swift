@@ -44,12 +44,7 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func touchHome(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-            //            tabBarController?.tabBar.isHidden = true
-            let visibleView = controller.visibleViewController!
-            navigationController!.pushViewController(visibleView, animated: true)
-        }
+        self.navigationController?.pushViewController(HomePageController(), animated: true)
     }
     
     private func setupChatButton() {

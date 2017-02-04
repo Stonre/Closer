@@ -11,8 +11,6 @@ import Firebase
 
 class CircleTableViewController: UITableViewController {
     
-    static let cellReuseID = "ActivityCell"
-    
     var currUser: FIRUser? {
         didSet{
             if currUser == nil {
@@ -156,7 +154,7 @@ class CircleTableViewController: UITableViewController {
         currUser = FIRAuth.auth()?.currentUser
         tableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         setupNavigationBarTitle()
-        tableView.register(ActivityCell.self, forCellReuseIdentifier: CircleTableViewController.cellReuseID)
+        tableView.register(ActivityCell.self, forCellReuseIdentifier: ActivityCell.cellReuseID)
         tableView.tableFooterView?.isHidden = false
         searchText = currUser?.displayName!.lowercased()
         
@@ -186,7 +184,7 @@ class CircleTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CircleTableViewController.cellReuseID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ActivityCell.cellReuseID, for: indexPath)
 
         let currAcvitity = activities[indexPath.section][indexPath.row]
         if let activityCell = cell as? ActivityCell {
