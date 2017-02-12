@@ -22,6 +22,7 @@
 		3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE571E36ADF800A4FFDD /* DCViewController.swift */; };
 		3E24EE5A1E397D0600A4FFDD /* ActivitySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */; };
 		3E6549E21E46749400D41BAA /* ActivityMKAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6549E11E46749400D41BAA /* ActivityMKAnnotationView.swift */; };
+		3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */; };
 		D70762701E4FF0C200D7833B /* ActivityReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */; };
 		D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */; };
 		D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF31E29EE4C005C6293 /* Activity.swift */; };
@@ -66,6 +67,7 @@
 		3E24EE571E36ADF800A4FFDD /* DCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DCViewController.swift; path = "Discover & Circle/DCViewController.swift"; sourceTree = "<group>"; };
 		3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchController.swift; path = "Discover & Circle/Search Bar/ActivitySearchController.swift"; sourceTree = "<group>"; };
 		3E6549E11E46749400D41BAA /* ActivityMKAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMKAnnotationView.swift; path = ActivityMapView/ActivityMKAnnotationView.swift; sourceTree = "<group>"; };
+		3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestLoginViewController.swift; path = Login/TestLoginViewController.swift; sourceTree = "<group>"; };
 		50F25207255F132C1B1DC24B /* Pods-Closer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.release.xcconfig"; sourceTree = "<group>"; };
 		CA32EC040E81732242A00E21 /* Pods-Closer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.debug.xcconfig"; sourceTree = "<group>"; };
 		D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityReviewController.swift; path = ActivityReview/ActivityReviewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		D72F7EEE1E29EE1A005C6293 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */,
 				D72F7F2B1E29F82B005C6293 /* Login.storyboard */,
 				D72F7F211E29EF1A005C6293 /* LoginViewController.swift */,
 			);
@@ -401,6 +404,7 @@
 				194BE4AD1E2AD2C8004DF108 /* PersonalChat.swift in Sources */,
 				194BE4AC1E2AD2C8004DF108 /* EventChat.swift in Sources */,
 				D7D568611E45CE1B00CC68ED /* OtherUserHomePageController.swift in Sources */,
+				3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */,
 				D72F7EFB1E29EE4C005C6293 /* RecommenderContext.swift in Sources */,
 				194BE4B41E2AD2E3004DF108 /* ChatProfileTableViewCell.swift in Sources */,
 				194BE4AE1E2AD2C8004DF108 /* PersonalChatProfile.swift in Sources */,

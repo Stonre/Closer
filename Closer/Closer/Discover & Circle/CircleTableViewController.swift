@@ -45,15 +45,16 @@ class CircleTableViewController: UITableViewController {
             for _ in 1...i{
                 description += "This is Activity \(i) "
             }
-            let act = GeneralActivity(name: "\(currUserName)'s Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: currUserName, userId: 0, gender: Gender.Female, age: 18), identity: UInt64(i))
+            let du = DescriptionUnit(type: .Text, content: description)
+            let act = GeneralActivity(name: "\(currUserName)'s Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [du], userReleasing: PersonalUserForView(userName: currUserName, userId: currUserID, gender: Gender.Female, age: 18), identity: currUserID)
             let key = dbRef.child("activities").childByAutoId().key
             let activity = ["releasingUserID": currUserID,
                             "releasingUserName": currUserName,
                             "name": act.name,
-                            "description": act.description.text]
+                            "description": act.description.first?.content]
             let updates = ["activities/\(key)": activity,
                            "users/\(currUserID)/activities/\(key)": ["name": act.name,
-                                                                     "description": act.description.text]]
+                                                                     "description": act.description.first?.content]]
             dbRef.updateChildValues(updates)
         }
 
@@ -71,7 +72,7 @@ class CircleTableViewController: UITableViewController {
                 for _ in 1...i{
                     description += "This is Activity \(i) "
                 }
-                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: "User \(i)", userId: 0, gender: Gender.Female, age: 18), identity: UInt64(i)))
+                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: description)], userReleasing: PersonalUserForView(userName: "User \(i)", userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set"))
             }
             activities.append(defaultSection)
         } else {
@@ -103,7 +104,7 @@ class CircleTableViewController: UITableViewController {
         let actDescription = dictionary["description"] as? String ?? ""
         let releasingUserName = dictionary["releasingUserName"] as? String ?? ""
         let actName = dictionary["name"] as? String ?? ""
-        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: actDescription), userReleasing: PersonalUserForView(userName: releasingUserName, userId: 0, gender: Gender.Female, age: 18), identity: UInt64(1))
+        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: actDescription)], userReleasing: PersonalUserForView(userName: releasingUserName, userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set")
         
     }
     
@@ -215,7 +216,7 @@ class CircleTableViewController: UITableViewController {
             
             let estimatedActivityNameFrame = NSString(string: act.name).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .headline)], context: nil)
             
-            let estimatedActivityDescriptionFrame = NSString(string: act.description.text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
+            let estimatedActivityDescriptionFrame = NSString(string: (act.description.first?.content)!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
             
             let estimatedActivityDescriptionFrameHeight = min(130, estimatedActivityDescriptionFrame.height + 10)
             

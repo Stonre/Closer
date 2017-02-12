@@ -265,7 +265,7 @@ class OtherUserHomePageController: UIViewController, UITableViewDataSource, UITa
                 
                 let estimatedActivityNameFrame = NSString(string: act.name).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .headline)], context: nil)
                 
-                let estimatedActivityDescriptionFrame = NSString(string: act.description.text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
+                let estimatedActivityDescriptionFrame = NSString(string: (act.description.first?.content)!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
                 
                 let estimatedActivityDescriptionFrameHeight = min(130, estimatedActivityDescriptionFrame.height + 10)
                 
@@ -283,7 +283,7 @@ class OtherUserHomePageController: UIViewController, UITableViewDataSource, UITa
                 
                 let estimatedActivityNameFrame = NSString(string: act.name).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .headline)], context: nil)
                 
-                let estimatedActivityDescriptionFrame = NSString(string: act.description.text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
+                let estimatedActivityDescriptionFrame = NSString(string: (act.description.first?.content)!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
                 
                 let estimatedActivityDescriptionFrameHeight = min(130, estimatedActivityDescriptionFrame.height + 10)
                 

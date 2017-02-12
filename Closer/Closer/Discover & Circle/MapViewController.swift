@@ -226,8 +226,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for i in 1...15 {
             let ref = FIRDatabase.database().reference().child("geo-activities")
             let key = ref.childByAutoId().key
-            let description = "This is Activity \(i) "
-            let generalActivity = GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: "User \(i)", userId: 0, gender: Gender.Female, age: 18), identity: UInt64(i))
+            let description = DescriptionUnit(type: .Text, content: "This is Activity \(i) ")
+            let generalActivity = GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [description], userReleasing: PersonalUserForView(userName: "User \(i)", userId: currUserId, gender: Gender.Female, age: 18), identity: key)
             var randomDistance = (Double(arc4random()) / Double(UINT32_MAX) - 0.5) / 50.0
             let longitude = selfLocation.coordinate.longitude.advanced(by: randomDistance)
             randomDistance = (Double(arc4random()) / Double(UINT32_MAX) - 0.5) / 50.0
@@ -236,7 +236,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let activity = ["releasingUserID": currUserId,
                             "releasingUserName": currUserName,
                             "name": generalActivity.name,
-                            "discription": generalActivity.description.text]
+                            "description": generalActivity.description.first?.content]
             let location = ["longitude": longitude,
                             "latitude": latitude]
             let updates = ["/\(key)/activity": activity,

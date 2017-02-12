@@ -124,7 +124,7 @@ class ActivityCell: UITableViewCell {
         
         
         if let generalActivity = activity as? GeneralActivity {
-            activityDescriptionLabel.text = generalActivity.description.text
+            activityDescriptionLabel.text = generalActivity.description.first?.content
             
         }
     }
