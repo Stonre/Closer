@@ -13,21 +13,21 @@ import CoreLocation
 ///Class for a general activity based on Activity protocol
 class GeneralActivity: Activity {
     var name: String
-    var identity: UInt64
+    var identity: String
     var timeStart: Date?
     var timeEnd: Date?
     var location: CLLocation?
     var tags: [String] = []
     var numberOfParticipants: Int = 0
     var authority: Authority
-    var description: Description
-    var participants: [UInt64:User] = [:]
+    var description: [DescriptionUnit]
+    var participants: [String:User] = [:]
     ///the user that releases the activity
     var userReleasing: User
     ///a list of users that are assigned by the user releasing this activity to take part in it
-    var assignedParticipants: [UInt64:PersonalUserForView] = [:]
+    var assignedParticipants: [String:PersonalUserForView] = [:]
     
-    init(name: String, tags: [String], authority: Authority, description: Description, userReleasing: PersonalUserForView, identity: UInt64) {
+    init(name: String, tags: [String], authority: Authority, description: [DescriptionUnit], userReleasing: PersonalUserForView, identity: String) {
         self.name = name
         self.tags = tags
         self.authority = authority
@@ -41,9 +41,9 @@ class GeneralActivity: Activity {
     
     func addParticipant(user: User) {}
     
-    func deleteParticipant(userId: UInt64) {}
+    func deleteParticipant(userId: String) {}
     
-    func getParticipant(userId id: UInt64) -> User {
+    func getParticipant(userId id: String) -> User {
         return participants[id]!
     }
 }

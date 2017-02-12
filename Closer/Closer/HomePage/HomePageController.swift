@@ -387,21 +387,21 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func initSampleData() {
         //for sample users
-        let user1 = PersonalUserForView(userName: "Yi Zhou", userId: 1, gender: Gender.Female, age: 22)
+        let user1 = PersonalUserForView(userName: "Yi Zhou", userId: "1", gender: Gender.Female, age: 22)
         user1.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait4")) as NSData?
-        let user2 = PersonalUserForView(userName: "Yi Ding", userId: 2, gender: Gender.Female, age: 23)
+        let user2 = PersonalUserForView(userName: "Yi Ding", userId: "2", gender: Gender.Female, age: 23)
         user2.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait3")) as NSData?
-        let user3 = PersonalUserForView(userName: "Peter", userId: 3, gender: Gender.Male, age: 23)
+        let user3 = PersonalUserForView(userName: "Peter", userId: "3", gender: Gender.Male, age: 23)
         user3.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait1")) as NSData?
         friends.append(user1)
         friends.append(user2)
         friends.append(user3)
         
-        let user4 = PersonalUserForView(userName: "Lei Ding", userId: 4, gender: Gender.Female, age: 22)
+        let user4 = PersonalUserForView(userName: "Lei Ding", userId: "4", gender: Gender.Female, age: 22)
         user4.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait2")) as NSData?
-        let user5 = PersonalUserForView(userName: "Zenith", userId: 5, gender: Gender.Female, age: 23)
+        let user5 = PersonalUserForView(userName: "Zenith", userId: "5", gender: Gender.Female, age: 23)
         user5.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait5")) as NSData?
-        let user6 = PersonalUserForView(userName: "Kaimi", userId: 6, gender: Gender.Male, age: 23)
+        let user6 = PersonalUserForView(userName: "Kaimi", userId: "6", gender: Gender.Male, age: 23)
         user6.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait6")) as NSData?
         contacts.append(user4)
         contacts.append(user5)

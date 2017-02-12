@@ -12,7 +12,7 @@ import Foundation
 ///This class is mainly used for storing the non-private information of a personal user
 class PersonalUserForView: PersonalUser {
     var userName: String
-    var userId: UInt64
+    var userId: String
     var headPortrait: NSData?
     var background: NSData?
     var gender: Gender
@@ -23,16 +23,16 @@ class PersonalUserForView: PersonalUser {
      - Key(activityId): UInt64
      - Value(activity): GeneralActivity
      */
-    private var activitiesParticipatedIn: Dictionary<UInt64, Activity> = [UInt64:Activity]()
+    private var activitiesParticipatedIn: Dictionary<String, Activity> = [String:Activity]()
     
     /**
      - Dictionary for storing the activities a personal user released
      - Key(activityId): UInt64
      - Value(activity): GeneralActivity
      */
-    private var activitiesReleased: Dictionary<UInt64, Activity> = [UInt64:Activity]()
+    private var activitiesReleased: Dictionary<String, Activity> = [String:Activity]()
     
-    init(userName: String, userId: UInt64, gender: Gender, age: Int) {
+    init(userName: String, userId: String, gender: Gender, age: Int) {
         self.userName = userName
         self.userId = userId
         self.gender = gender
@@ -55,7 +55,7 @@ class PersonalUserForView: PersonalUser {
 ///This class contains all the information of a personal user including private information and non-private information
 class PersonalUserAdmin: PersonalUser {
     var userName: String
-    var userId: UInt64
+    var userId: String
     var headPortrait: NSData?
     var background: NSData?
     var gender: Gender
@@ -69,65 +69,65 @@ class PersonalUserAdmin: PersonalUser {
      - Key(userId): UInt64
      - Value(user): PersonalUserForView
      */
-    private var friends: Dictionary<UInt64, PersonalUserForView> = [UInt64:PersonalUserForView]()
+    private var friends: Dictionary<String, PersonalUserForView> = [String:PersonalUserForView]()
     
     /**
      Dictionary for storing the degrees of friendship for each friend
      - Key(userId): UInt64
      - Value(user): Int
      */
-    private var degreeOfFriendship: Dictionary<UInt64, Int> = [UInt64:Int]()
+    private var degreeOfFriendship: Dictionary<String, Int> = [String:Int]()
     
     /**
      Dictionary for storing the contacts of a user
      - Key(userId): UInt64
      - Value(user): PersonalUserForView
      */
-    private var contacts: Dictionary<UInt64, PersonalUserForView> = [UInt64:PersonalUserForView]()
+    private var contacts: Dictionary<String, PersonalUserForView> = [String:PersonalUserForView]()
     
     /**
      Dictionary for storing the degrees of contactship of for each contact
      - Key(userId): UInt64
      - Value(user): Int
      */
-    private var degreeOfContactship: Dictionary<UInt64, Int> = [UInt64:Int]()
+    private var degreeOfContactship: Dictionary<String, Int> = [String:Int]()
     
     /**
      Dictionary for storing the saved business user of a user
      - Key(userId): UInt64
      - Value(user): BusinessUserForView
      */
-    private var savedBusinessUsers: Dictionary<UInt64, BusinessUserForView> = [UInt64:BusinessUserForView]()
+    private var savedBusinessUsers: Dictionary<String, BusinessUserForView> = [String:BusinessUserForView]()
     
     /**
      Dictionary for storing the evaluations for each business user a user saved
      - Key(userId): UInt64
      - Value(user): Int
      */
-    private var evaluationOfSavedBusinessUsers: Dictionary<UInt64, Int> = [UInt64:Int]()
+    private var evaluationOfSavedBusinessUsers: Dictionary<String, Int> = [String:Int]()
     
     /**
      Dictionary for storing the activities a personal user attended or is attending
      - Key: activityId: UInt64
      - Value: activity: GeneralActivity
      */
-    private var activitiesParticipatedIn: Dictionary<UInt64, Activity> = [UInt64:Activity]()
+    private var activitiesParticipatedIn: Dictionary<String, Activity> = [String:Activity]()
     
     /**
      Dictionary for storing the activities a personal user released
      - Key: activityId: UInt64
      - Value: activity: GeneralActivity
      */
-    private var activitiesReleased: Dictionary<UInt64, Activity> = [UInt64:Activity]()
+    private var activitiesReleased: Dictionary<String, Activity> = [String:Activity]()
     
     /**
      Dictionary for storing the awards a user gets
      - Key: userId: UInt64
      - Value: user: Award
      */
-    private var awards = [UInt64:Reward]()
+    private var awards = [String:Reward]()
     
-    init(userName: String, userId: UInt64, gender: Gender, age: Int) {
+    init(userName: String, userId: String, gender: Gender, age: Int) {
         self.userName = userName
         self.userId = userId
         self.gender = gender
@@ -156,11 +156,11 @@ class PersonalUserAdmin: PersonalUser {
         activitiesParticipatedIn[a.identity] = a
     }
     
-    func getActicityParticipateIn(activityId id: UInt64) -> Activity {
+    func getActicityParticipateIn(activityId id: String) -> Activity {
         return activitiesParticipatedIn[id]!
     }
     
-    func deleteActivityParticipateIn(activityId id: UInt64) {
+    func deleteActivityParticipateIn(activityId id: String) {
         activitiesParticipatedIn.removeValue(forKey: id)
         //trigger update action?
     }
@@ -169,11 +169,11 @@ class PersonalUserAdmin: PersonalUser {
         activitiesReleased[a.identity] = a
     }
     
-    func getActivityReleased(activityId id: UInt64) -> Activity {
+    func getActivityReleased(activityId id: String) -> Activity {
         return activitiesReleased[id]!
     }
     
-    func deleteActivityReleased(activityId id: UInt64) {
+    func deleteActivityReleased(activityId id: String) {
         activitiesReleased.removeValue(forKey: id)
         //trigger update action?
     }
@@ -182,11 +182,11 @@ class PersonalUserAdmin: PersonalUser {
         friends[u.userId] = u
     }
     
-    func getFriend(userId id: UInt64) -> PersonalUserForView {
+    func getFriend(userId id: String) -> PersonalUserForView {
         return friends[id]!
     }
     
-    func deleteFriend(userId id: UInt64) {
+    func deleteFriend(userId id: String) {
         friends.removeValue(forKey: id)
     }
     
@@ -194,11 +194,11 @@ class PersonalUserAdmin: PersonalUser {
         contacts[u.userId] = u
     }
     
-    func getContact(userId id: UInt64) -> PersonalUserForView {
+    func getContact(userId id: String) -> PersonalUserForView {
         return contacts[id]!
     }
     
-    func deleteContact(userId id: UInt64) {
+    func deleteContact(userId id: String) {
         contacts.removeValue(forKey: id)
     }
     
@@ -206,21 +206,21 @@ class PersonalUserAdmin: PersonalUser {
         savedBusinessUsers[u.userId] = u
     }
     
-    func getBusinessUser(userId id: UInt64) -> BusinessUserForView {
+    func getBusinessUser(userId id: String) -> BusinessUserForView {
         return savedBusinessUsers[id]!
     }
     
-    func deleteBusinessUser(userId id: UInt64) {
+    func deleteBusinessUser(userId id: String) {
         savedBusinessUsers.removeValue(forKey: id)
     }
     
     func addAward(award a: Reward) {}
     
-    func getAward(awardId: UInt64) -> Reward {
+    func getAward(awardId: String) -> Reward {
         return awards[awardId]!
     }
     
-    func deleteAward(awardId: UInt64) {}
+    func deleteAward(awardId: String) {}
     
     /**
      function to update the degree of friendship based on friend user id and the evaluation of him
@@ -228,7 +228,7 @@ class PersonalUserAdmin: PersonalUser {
      - userId: UInt64
      - evaluation: Int
      */
-    func updateDegreeOfFriendship(userId: UInt64, evaluation: Int) {}
+    func updateDegreeOfFriendship(userId: String, evaluation: Int) {}
     
     /**
      function to update the degree of contactship based on contact user id and the evaluation of him
@@ -236,7 +236,7 @@ class PersonalUserAdmin: PersonalUser {
      - userId: UInt64
      - evaluation: Int
      */
-    func updateDegreeOfContactship(userId: UInt64, evaluation: Int) {}
+    func updateDegreeOfContactship(userId: String, evaluation: Int) {}
     
     /**
      function to update the evaluation of a saved business user
@@ -244,5 +244,5 @@ class PersonalUserAdmin: PersonalUser {
      - userId: UInt64
      - evaluation: Int
      */
-    func updateEvaluationOfSavedBusinessUser(userId: UInt64, evaluation: Int) {}
+    func updateEvaluationOfSavedBusinessUser(userId: String, evaluation: Int) {}
 }

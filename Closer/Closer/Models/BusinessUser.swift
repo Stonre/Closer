@@ -13,15 +13,15 @@ import Foundation
 ///This class is mainly used for storing the non-private information of a business user
 struct BusinessUserForView: BusinessUser {
     var userName: String
-    var userId: UInt64
+    var userId: String
     var headPortrait: NSData?
     var background: NSData?
     var businessName: String
     var phoneNumber: PhoneNumber?
     var credit: Int = 0
-    private var activitiesReleased: Dictionary<UInt64, GeneralActivity> = [UInt64:GeneralActivity]()
+    private var activitiesReleased: Dictionary<String, GeneralActivity> = [String:GeneralActivity]()
     
-    init(businessName: String, userName: String, userId: UInt64) {
+    init(businessName: String, userName: String, userId: String) {
         self.userName = userName
         self.userId = userId
         self.businessName = businessName
@@ -33,7 +33,7 @@ struct BusinessUserForView: BusinessUser {
      - activityId: UInt64
      - Returns: an activity released by the business user
      */
-    func getActivityReleased(activityId id: UInt64) -> GeneralActivity {
+    func getActivityReleased(activityId id: String) -> GeneralActivity {
         return activitiesReleased[id]!
     }
 }

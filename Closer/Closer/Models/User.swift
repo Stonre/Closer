@@ -14,7 +14,7 @@ enum Gender: String {
 }
 
 ///This is the enum type of thirdparty link that a user may link his Closer account to
-enum ThirdPartyLink {
+enum ThirdPartyLink: String {
     case Weibo
     case WeChat
     case QQ
@@ -28,7 +28,7 @@ struct PhoneNumber {
 ///Abstruction of general User interface
 protocol User {
     var userName: String { get set }
-    var userId: UInt64 { get set }
+    var userId: String { get set }
     var headPortrait: NSData? { get set }
     var background: NSData? { get set }
 }

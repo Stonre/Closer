@@ -21,6 +21,7 @@
 		3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE521E36A04700A4FFDD /* ActivityCell.swift */; };
 		3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE571E36ADF800A4FFDD /* DCViewController.swift */; };
 		3E24EE5A1E397D0600A4FFDD /* ActivitySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */; };
+		D707626A1E4FE50600D7833B /* ActivityReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70762691E4FE50600D7833B /* ActivityReviewController.swift */; };
 		D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */; };
 		D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF31E29EE4C005C6293 /* Activity.swift */; };
 		D72F7EFA1E29EE4C005C6293 /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF41E29EE4C005C6293 /* Recommender.swift */; };
@@ -66,6 +67,7 @@
 		3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchController.swift; path = "Discover & Circle/Search Bar/ActivitySearchController.swift"; sourceTree = "<group>"; };
 		50F25207255F132C1B1DC24B /* Pods-Closer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.release.xcconfig"; sourceTree = "<group>"; };
 		CA32EC040E81732242A00E21 /* Pods-Closer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.debug.xcconfig"; sourceTree = "<group>"; };
+		D70762691E4FE50600D7833B /* ActivityReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityReviewController.swift; path = ActivityReview/ActivityReviewController.swift; sourceTree = "<group>"; };
 		D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementReward.swift; path = Models/AchievementReward.swift; sourceTree = "<group>"; };
 		D72F7EF31E29EE4C005C6293 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = Models/Activity.swift; sourceTree = "<group>"; };
 		D72F7EF41E29EE4C005C6293 /* Recommender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Recommender.swift; path = Models/Recommender.swift; sourceTree = "<group>"; };
@@ -135,6 +137,14 @@
 				50F25207255F132C1B1DC24B /* Pods-Closer.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D70762681E4FE4E800D7833B /* ActivityReleaseAndReview */ = {
+			isa = PBXGroup;
+			children = (
+				D70762691E4FE50600D7833B /* ActivityReviewController.swift */,
+			);
+			name = ActivityReleaseAndReview;
 			sourceTree = "<group>";
 		};
 		D72F7EED1E29EDAA005C6293 /* HomePage */ = {
@@ -241,6 +251,7 @@
 		D7CE21891E0D80D8006325EB /* Closer */ = {
 			isa = PBXGroup;
 			children = (
+				D70762681E4FE4E800D7833B /* ActivityReleaseAndReview */,
 				D72F7F291E29F3F4005C6293 /* Assets.xcassets */,
 				D72F7F231E29EF32005C6293 /* AppDelegate.swift */,
 				D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */,
@@ -404,6 +415,7 @@
 				D72F7EFD1E29EE4C005C6293 /* User.swift in Sources */,
 				3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */,
 				D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */,
+				D707626A1E4FE50600D7833B /* ActivityReviewController.swift in Sources */,
 				D72F7F201E29EF11005C6293 /* OtherUserTableViewCell.swift in Sources */,
 				3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */,
 				D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */,

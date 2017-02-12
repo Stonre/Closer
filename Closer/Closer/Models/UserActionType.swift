@@ -7,7 +7,7 @@
 //
 import Foundation
 
-enum UserActionType {
+enum UserActionType: String {
     case DailyFirstUse
     case ReleaseActivity
     case ParticipatedInActivity
