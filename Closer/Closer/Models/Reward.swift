@@ -31,7 +31,7 @@ enum RewardType {
 }
 
 protocol Reward {
-    var Identifier: Int {get}
+    var Identifier: String {get}
     var name: String {get set}
     var source: RewardSource {get set}
     var type: RewardType {get set}

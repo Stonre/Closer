@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DiscoverViewController: CircleTableViewController {
     
@@ -21,6 +22,33 @@ class DiscoverViewController: CircleTableViewController {
     var filterButton: UIButton!
     var mapButton : UIButton!
     var searchButton: UIButton!
+    
+    var categoryFilters = [String]() {
+        didSet{
+            activities.removeAll()
+            
+            if categoryFilters.contains("All") || categoryFilters.count == 0{
+                searchForActivities()
+            } else {
+                for category in categoryFilters {
+                    dbRef.child("category-activities/\(category)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        var activitySection = [Activity]()
+                        self.activities.append(activitySection)
+                        let value = snapshot.value as? NSDictionary ?? NSDictionary()
+                        for (activityId, _) in value {
+                            self.dbRef.child("activities/\(activityId as! String)").observeSingleEvent(of: .value, with: { (snapshot) in
+                                let act = snapshot.value as? NSDictionary ?? NSDictionary()
+                                self.activities[self.activities.count - 1].append(self.dictionary2GeneralActivity(dictionary: act)!)
+//                                activitySection.append(self.dictionary2GeneralActivity(dictionary: act)!)
+                            })
+                        }
+//                        self.activities.append(activitySection)
+                    })
+                }
+            }
+        }
+    }
+
     
     private func setupTableHeaderView() {
         tableHeaderView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
@@ -49,37 +77,49 @@ class DiscoverViewController: CircleTableViewController {
         tableHeaderView.addSubview(searchButton)
         
         
+        //Uncomment for adding activities
+//        tableHeaderView.addSubview(createActivityButton)
+//        setupCreateActivityButton()
+        
 //        searchController.searchBar.frame = CGRect(x: 88, y: 0, width: tableHeaderView.bounds.maxX - 88, height: 44)
 //        tableHeaderView.addSubview(searchController.searchBar)
         
         tableView.tableHeaderView = tableHeaderView
     }
     
+    let createActivityButton = UIButton(type: UIButtonType.contactAdd)
+    private func setupCreateActivityButton() {
+//        createActivityButton.backgroundColor = .red
+        createActivityButton.frame = CGRect(origin: CGPoint(x: 96, y: 8), size: DiscoverViewController.buttomSize)
+        createActivityButton.addTarget(self, action: #selector(touchCreateActivity(_:)), for: .touchUpInside)
+    }
+    
+    func touchCreateActivity(_ sender: UIButton) {
+        createActivities()
+        print("Activity created!")
+    }
+    
     var searchController: ActivitySearchController!
 
-    @IBOutlet weak var activitySearchBar: UISearchBar!
+    weak var activitySearchBar: UISearchBar!
     
     let sideMenuLauncher = SideMenuLauncher()
     
     let mapViewController = MapViewController()
     
-    @IBAction func touchFilter(_ sender: UIButton) {
+    func touchFilter(_ sender: UIButton) {
+        sideMenuLauncher.sideMenuViewController.targetTableViewController = self
         sideMenuLauncher.prepareForView()
         sideMenuLauncher.menuWillShow()
     }
         
-    @IBAction func touchMap(_ sender: UIButton) {
+    func touchMap(_ sender: UIButton) {
         mapViewController.location = "UCLA"
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
     
     func touchSearch(_ sender: UIButton) {
-        setupSearchController()
-        self.navigationController?.pushViewController(searchController, animated: true)
-    }
-    
-    private func setupSearchController() {
-        searchController = ActivitySearchController()
+        self.navigationController?.pushViewController(ActivitySearchController(), animated: true)
     }
     
     var discoverTableViewController = CircleTableViewController()
@@ -94,7 +134,7 @@ class DiscoverViewController: CircleTableViewController {
 //        tableView.estimatedRowHeight = tableView.rowHeight
 //        tableView.rowHeight = UITableViewAutomaticDimension
 //        discoverTableViewController.searchText = "default"
-        searchText = "default"
+//        searchText = "default"
     }
     
 

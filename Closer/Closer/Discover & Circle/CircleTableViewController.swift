@@ -7,18 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class CircleTableViewController: UITableViewController {
     
-//    static var viewTitle: String = {
-//        if let _ = self as? DiscoverViewController {
-//            return "发现"
-//        } else {
-//            return "圈子"
-//        }
-//    }()
-    
-    static let cellReuseID = "CircleTableCell"
+    var currUser: FIRUser? {
+        didSet{
+            if currUser == nil {
+                handleLogout()
+            }
+        }
+    }
 
     var activities = [Array<Activity>]() {
         didSet {
@@ -28,27 +27,85 @@ class CircleTableViewController: UITableViewController {
     
     var searchText: String? {
         didSet {
+            searchText = searchText?.lowercased() // 
             activities.removeAll()
             searchForActivities()
         }
     }
     
-    private func searchForActivities() {
+    var dbRef = FIRDatabase.database().reference()
+    func createActivities() {
+        guard let currUserID = currUser?.uid, let currUserName = currUser?.displayName
+            else {
+                print("Cannot create activity!")
+                return
+        }
+        for i in 1...15 {
+            var description = ""
+            for _ in 1...i{
+                description += "This is Activity \(i) "
+            }
+            let du = DescriptionUnit(type: .Text, content: description)
+            let act = GeneralActivity(name: "\(currUserName)'s Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [du], userReleasing: PersonalUserForView(userName: currUserName, userId: currUserID, gender: Gender.Female, age: 18), identity: currUserID)
+            let key = dbRef.child("activities").childByAutoId().key
+            let activity = ["releasingUserID": currUserID,
+                            "releasingUserName": currUserName,
+                            "name": act.name,
+                            "description": act.description.first?.content]
+            let updates = ["activities/\(key)": activity,
+                           "users/\(currUserID)/activities/\(key)": ["name": act.name,
+                                                                     "description": act.description.first?.content]]
+            dbRef.updateChildValues(updates)
+        }
+
+    }
+    
+    private func handleLogout() {
+        DCViewController().handleLogout()
+    }
+    
+    func searchForActivities() {
         if searchText == "default" {
             var defaultSection = [Activity]()
-            for i in 1...10 {
+            for i in 1...15 {
                 var description = ""
                 for _ in 1...i{
-                    description += "This is Activity \(i) \n"
+                    description += "This is Activity \(i) "
                 }
-                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: description), userReleasing: PersonalUserForView(userName: "User \(i)", userId: 0, gender: Gender.Female, age: 18)))
+                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: description)], userReleasing: PersonalUserForView(userName: "User \(i)", userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set"))
             }
             activities.append(defaultSection)
+        } else {
+            fetchActivities()
         }
     }
     
     private func fetchActivities() {
+        dbRef.child("activities").observeSingleEvent(of: .value, with: { (snapshot) in
+            var activitiesSection = [Activity]()
+            let value = snapshot.value as? NSDictionary ?? NSDictionary()
+            for (_, activity) in value {
+                if let act = activity as? NSDictionary {
+                    let actName = act["name"] as? String ?? ""
+                    if actName.lowercased().contains(self.searchText!) {
+                        activitiesSection.append(self.dictionary2GeneralActivity(dictionary: act)!)
+                    }
+                }
+            }
+            self.activities.append(activitiesSection)
+        }){ (error) in
+            print(error.localizedDescription)
+        }
         return
+    }
+    
+    func dictionary2GeneralActivity(dictionary: NSDictionary) -> GeneralActivity? {
+//        let releasingUserID = dictionary["releasingUserID"] as? String ?? ""
+        let actDescription = dictionary["description"] as? String ?? ""
+        let releasingUserName = dictionary["releasingUserName"] as? String ?? ""
+        let actName = dictionary["name"] as? String ?? ""
+        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: actDescription)], userReleasing: PersonalUserForView(userName: releasingUserName, userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set")
+        
     }
     
     private func setupNavigationBarTitle() {
@@ -60,60 +117,67 @@ class CircleTableViewController: UITableViewController {
 //        tabBarController?.navigationItem.title = CircleTableViewController.viewTitle
     }
     
-    private func setupMainPageButton() {
-        let homeButton = UIButton()
-        homeButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
-        homeButton.setImage(#imageLiteral(resourceName: "home-icon"), for: .normal)
-        homeButton.addTarget(self, action: #selector(touchHome(_:)), for: .touchUpInside)
+//    private func setupMainPageButton() {
+//        let homeButton = UIButton()
+//        homeButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
+//        homeButton.setImage(#imageLiteral(resourceName: "home-icon"), for: .normal)
+//        homeButton.addTarget(self, action: #selector(touchHome(_:)), for: .touchUpInside)
+//        
+//        let leftBarItem = UIBarButtonItem(customView: homeButton)
+//        tabBarController?.navigationItem.leftBarButtonItem = leftBarItem
+//    }
+//
+//    func touchHome(_ sender: UIButton) {
+//        //replace controller with Homepage controller
+//        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+//        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+//            //            tabBarController?.tabBar.isHidden = true
+//            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
+//        }
+//    }
+//    
+//    private func setupChatButton() {
+//        let chatButton = UIButton()
+//        chatButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
+//        chatButton.setImage(#imageLiteral(resourceName: "chat-icon"), for: .normal)
+//        chatButton.addTarget(self, action: #selector(touchChat(_:)), for: .touchUpInside)
+//        
+//        let rightBarItem = UIBarButtonItem(customView: chatButton)
+//        tabBarController?.navigationItem.rightBarButtonItem = rightBarItem
+//    }
+//    
+//    func touchChat(_ sender: UIButton) {
+//        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
+//        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+//            //tabBarController?.tabBar.isHidden = true
+//            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
+//        }
+//    }
+    
         
-        let leftBarItem = UIBarButtonItem(customView: homeButton)
-        tabBarController?.navigationItem.leftBarButtonItem = leftBarItem
-    }
-
-    func touchHome(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-            //            tabBarController?.tabBar.isHidden = true
-            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
-        }
-    }
-    
-    private func setupChatButton() {
-        let chatButton = UIButton()
-        chatButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
-        chatButton.setImage(#imageLiteral(resourceName: "chat-icon"), for: .normal)
-        chatButton.addTarget(self, action: #selector(touchChat(_:)), for: .touchUpInside)
-        
-        let rightBarItem = UIBarButtonItem(customView: chatButton)
-        tabBarController?.navigationItem.rightBarButtonItem = rightBarItem
-    }
-    
-    func touchChat(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-            //            tabBarController?.tabBar.isHidden = true
-            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
-        }
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        currUser = FIRAuth.auth()?.currentUser
+        tableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         setupNavigationBarTitle()
-//        tableView.estimatedRowHeight = 120
+        tableView.register(ActivityCell.self, forCellReuseIdentifier: ActivityCell.cellReuseID)
+        tableView.tableFooterView?.isHidden = false
+        searchText = currUser?.displayName!.lowercased()
+        
 //        tableView.rowHeight = UITableViewAutomaticDimension
-        searchText = "default"
+//        tableView.estimatedRowHeight = 100
+        
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBarTitle()
+    }
 
     // MARK: - Table view data source
 
@@ -126,23 +190,48 @@ class CircleTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CircleTableViewController.cellReuseID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ActivityCell.cellReuseID, for: indexPath)
 
         let currAcvitity = activities[indexPath.section][indexPath.row]
-        if let activityCell = cell as? CircleTableViewCell {
+        if let activityCell = cell as? ActivityCell {
+            activityCell.userProfileImage = #imageLiteral(resourceName: "sampleHeaderPortrait2")
             activityCell.activity = currAcvitity
         }
 
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 1000
+        return UITableViewAutomaticDimension
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let currAcvitity = activities[indexPath.section][indexPath.row]
+
+        if let act = currAcvitity as? GeneralActivity{
+            let size = CGSize(width: tableView.bounds.width - 90, height: 1000)
+            
+            let estimatedUserNameFrame = NSString(string: act.userReleasing.userName).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .subheadline)], context: nil)
+            
+            let estimatedActivityNameFrame = NSString(string: act.name).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .headline)], context: nil)
+            
+            let estimatedActivityDescriptionFrame = NSString(string: (act.description.first?.content)!).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)], context: nil)
+            
+            let estimatedActivityDescriptionFrameHeight = min(130, estimatedActivityDescriptionFrame.height + 10)
+            
+            let estimatedHeight = max(80, estimatedUserNameFrame.height + estimatedActivityNameFrame.height + estimatedActivityDescriptionFrameHeight)
+            
+            return estimatedHeight
+        }
+
         return UITableViewAutomaticDimension
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        return
+    }
+    
     
     /*
     // Override to support conditional editing of the table view.
