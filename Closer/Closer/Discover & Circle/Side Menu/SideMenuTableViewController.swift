@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class SideMenuTableViewController: UITableViewController {
     
     let cellReuseID = "SideMenuTableViewCell"
+    var targetTableViewController: DiscoverViewController?
     
 //    var tableView: UITableView = UITableView()
     
@@ -21,11 +23,32 @@ class SideMenuTableViewController: UITableViewController {
     }
     
     func fetchCategory() {
-        var currArray = [String]()
-        for i in 1...20 {
-            currArray.append("Category \(i)")
-        }
-        categories.append(currArray)
+        let dbRef = FIRDatabase.database().reference().child("categories")
+        
+        dbRef.observe(.value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary ?? NSDictionary()
+            var categorySection = [String]()
+            categorySection.append("All")
+            for (category, subCategories) in value {
+                let cat = category as? String ?? "category-activities"
+                if cat != "category-activities" {
+//                    var categorySection = [String]()
+//                    let subCat = subCategories as? NSDictionary ?? NSDictionary()
+//                    for (subCatrgory,_) in subCat {
+//                        categorySection.append(subCatrgory as! String)
+//                    }
+//                    self.categories.append(categorySection)
+                    categorySection.append(cat)
+                }
+            }
+            self.categories.append(categorySection)
+        })
+        
+//        var currArray = [String]()
+//        for i in 1...20 {
+//            currArray.append("Category \(i)")
+//        }
+//        categories.append(currArray)
     }
 
     override func viewDidLoad() {
@@ -36,6 +59,7 @@ class SideMenuTableViewController: UITableViewController {
         tableView.register(SideMenuCategoryTableViewCell.self, forCellReuseIdentifier: cellReuseID)
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.allowsMultipleSelection = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -64,12 +88,30 @@ class SideMenuTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseID, for: indexPath)
 
         if let categoryCell = cell as? SideMenuCategoryTableViewCell {
+            cell.isUserInteractionEnabled = true
             categoryCell.category = categories[indexPath.section][indexPath.row]
         }
 
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        targetTableViewController?.categoryFilters = [(tableView.cellForRow(at: indexPath)?.textLabel?.text)
+        let currCategory = (tableView.cellForRow(at: indexPath)?.textLabel?.text)!
+        if (targetTableViewController?.categoryFilters.contains(currCategory))! {
+        } else {
+            targetTableViewController?.categoryFilters.append(currCategory)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let currCategory = (tableView.cellForRow(at: indexPath)?.textLabel?.text)!
+        if (targetTableViewController?.categoryFilters.contains(currCategory))! {
+            targetTableViewController?.categoryFilters.remove(at: (targetTableViewController?.categoryFilters.index(of: currCategory))!)
+        }
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
