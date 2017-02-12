@@ -35,7 +35,6 @@
 		D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0E1E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift */; };
 		D72F7F121E29EED4005C6293 /* SideMenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F0F1E29EED4005C6293 /* SideMenuLauncher.swift */; };
 		D72F7F131E29EED4005C6293 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F101E29EED4005C6293 /* SideMenuTableViewController.swift */; };
-		D72F7F181E29EF06005C6293 /* Hyperlink.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F171E29EF06005C6293 /* Hyperlink.storyboard */; };
 		D72F7F201E29EF11005C6293 /* OtherUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F1C1E29EF11005C6293 /* OtherUserTableViewCell.swift */; };
 		D72F7F221E29EF1A005C6293 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F211E29EF1A005C6293 /* LoginViewController.swift */; };
 		D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7F231E29EF32005C6293 /* AppDelegate.swift */; };
@@ -82,7 +81,6 @@
 		D72F7F0E1E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuCategoryTableViewCell.swift; path = "Discover & Circle/Side Menu/SideMenuCategoryTableViewCell.swift"; sourceTree = "<group>"; };
 		D72F7F0F1E29EED4005C6293 /* SideMenuLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuLauncher.swift; path = "Discover & Circle/Side Menu/SideMenuLauncher.swift"; sourceTree = "<group>"; };
 		D72F7F101E29EED4005C6293 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SideMenuTableViewController.swift; path = "Discover & Circle/Side Menu/SideMenuTableViewController.swift"; sourceTree = "<group>"; };
-		D72F7F171E29EF06005C6293 /* Hyperlink.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Hyperlink.storyboard; path = HyperLink/Hyperlink.storyboard; sourceTree = "<group>"; };
 		D72F7F1C1E29EF11005C6293 /* OtherUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OtherUserTableViewCell.swift; path = HomePage/OtherUserTableViewCell.swift; sourceTree = "<group>"; };
 		D72F7F211E29EF1A005C6293 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Login/LoginViewController.swift; sourceTree = "<group>"; };
 		D72F7F231E29EF32005C6293 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -177,14 +175,6 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		D72F7EEF1E29EE22005C6293 /* HyperLink */ = {
-			isa = PBXGroup;
-			children = (
-				D72F7F171E29EF06005C6293 /* Hyperlink.storyboard */,
-			);
-			name = HyperLink;
-			sourceTree = "<group>";
-		};
 		D72F7EF01E29EE2C005C6293 /* Discover & Circle */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,7 +259,6 @@
 				D72F7F251E29EF32005C6293 /* Info.plist */,
 				D72F7EF11E29EE36005C6293 /* Models */,
 				D72F7EF01E29EE2C005C6293 /* Discover & Circle */,
-				D72F7EEF1E29EE22005C6293 /* HyperLink */,
 				D72F7EEE1E29EE1A005C6293 /* Login */,
 				194BE4B61E2AD2E9004DF108 /* Chat */,
 				D72F7EED1E29EDAA005C6293 /* HomePage */,
@@ -343,7 +332,6 @@
 			files = (
 				D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */,
 				D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */,
-				D72F7F181E29EF06005C6293 /* Hyperlink.storyboard in Resources */,
 				D72F7F281E29EF32005C6293 /* Info.plist in Resources */,
 				D72F7F2A1E29F3F4005C6293 /* Assets.xcassets in Resources */,
 				194BE4B81E2AD384004DF108 /* Chat.storyboard in Resources */,
