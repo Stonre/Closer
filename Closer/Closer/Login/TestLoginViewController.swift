@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class TestLoginViewController: UIViewController {
     
     let logoImageView = UIImageView()
     let loginRegisterSegmentedControl = UISegmentedControl(items: ["Login", "Register"])
@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
     var passwordTextFieldHeightAnchor: NSLayoutConstraint?
-
+    
     
     
     override func viewDidLoad() {
@@ -78,13 +78,13 @@ class LoginViewController: UIViewController {
         emailTextFieldHeightAnchor?.isActive = false
         passwordTextFieldHeightAnchor?.isActive = false
         loginRegisterButton.setTitle(loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex), for: .normal)
-
-
+        
+        
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             containerViewHeightAnchor?.constant = 100
             nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.0)
-//            nameTextField.placeholder = ""
-//            nameTextField.text = nil
+            //            nameTextField.placeholder = ""
+            //            nameTextField.text = nil
             nameTextField.isHidden = true
             
             emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.5)
@@ -218,7 +218,7 @@ class LoginViewController: UIViewController {
                         print("Set new user display name failed!")
                     }
                     let ref = FIRDatabase.database().reference()
-//                    let key = ref.child("users").childByAutoId().key
+                    //                    let key = ref.child("users").childByAutoId().key
                     let user = ["email": email,
                                 "name": name]
                     ref.updateChildValues(["users/\(currUserID)": user])
@@ -266,28 +266,76 @@ class LoginViewController: UIViewController {
             userDefault.setValue(email, forKey: "userEmail")
             
             self.present(DCViewController(), animated: true, completion: nil)
-
-        
+            
+            
         })
-
+        
+//        addCategories()
+//        updateActivities()
+        
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
-extension LoginViewController: UITextFieldDelegate {
+extension TestLoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         touchLoginRegister(loginRegisterButton)
         return false
+    }
+}
+
+extension TestLoginViewController {
+    func addCategories() {
+        let dbRef = FIRDatabase.database().reference()
+        let subCategory = ["Null": "Null"]
+        let value = ["sport": subCategory,
+                     "study": subCategory,
+                     "game": subCategory]
+        let updates = ["categories": value,
+                       "category-activities": value]
+        dbRef.updateChildValues(updates)
+    }
+    
+    func updateActivities() {
+        let dbRef = FIRDatabase.database().reference()
+        dbRef.child("activities").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary ?? NSDictionary()
+            for (id, activity) in value {
+                let idString = id as? String ?? ""
+                let act = activity as? NSDictionary ?? NSDictionary()
+                let name = act["name"] as? String ?? " "
+//                let userName = act["releasingUserName"] as? String ?? " "
+                let activiryIndex = name[name.index(before: name.endIndex)]
+                var newActivity = [String: String?]()
+                newActivity["name"] = act.value(forKey: "name") as? String
+                newActivity["description"] = act.value(forKey: "description") as? String
+                newActivity["releasingUserID"] = act.value(forKey: "releasingUserID") as? String
+                newActivity["releasingUserName"] = act.value(forKey: "releasingUserName") as? String
+                switch  activiryIndex {
+                    case "1":
+                        newActivity["categories"] = "sport"
+                    case "2":
+                        newActivity["categories"] = "study"
+                    case "3":
+                        newActivity["categories"] = "game"
+                default :
+                    newActivity["categories"] = "default"
+                }
+                let updates: [String: [String: String?]] = ["activities/\(idString)": newActivity,
+                                                            "category-activities/\(act["categories"]!)/\(idString)": [idString: "0"]]
+                dbRef.updateChildValues(updates)
+            }
+        })
     }
 }

@@ -26,6 +26,7 @@ class GeneralActivity: Activity {
     var userReleasing: User
     ///a list of users that are assigned by the user releasing this activity to take part in it
     var assignedParticipants: [String:PersonalUserForView] = [:]
+    var categories = [String]()
     
     init(name: String, tags: [String], authority: Authority, description: [DescriptionUnit], userReleasing: PersonalUserForView, identity: String) {
         self.name = name

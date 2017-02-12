@@ -23,6 +23,33 @@ class DiscoverViewController: CircleTableViewController {
     var mapButton : UIButton!
     var searchButton: UIButton!
     
+    var categoryFilters = [String]() {
+        didSet{
+            activities.removeAll()
+            
+            if categoryFilters.contains("All") || categoryFilters.count == 0{
+                searchForActivities()
+            } else {
+                for category in categoryFilters {
+                    dbRef.child("category-activities/\(category)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        var activitySection = [Activity]()
+                        self.activities.append(activitySection)
+                        let value = snapshot.value as? NSDictionary ?? NSDictionary()
+                        for (activityId, _) in value {
+                            self.dbRef.child("activities/\(activityId as! String)").observeSingleEvent(of: .value, with: { (snapshot) in
+                                let act = snapshot.value as? NSDictionary ?? NSDictionary()
+                                self.activities[self.activities.count - 1].append(self.dictionary2GeneralActivity(dictionary: act)!)
+//                                activitySection.append(self.dictionary2GeneralActivity(dictionary: act)!)
+                            })
+                        }
+//                        self.activities.append(activitySection)
+                    })
+                }
+            }
+        }
+    }
+
+    
     private func setupTableHeaderView() {
         tableHeaderView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
         tableHeaderView.backgroundColor = .white
@@ -74,18 +101,19 @@ class DiscoverViewController: CircleTableViewController {
     
     var searchController: ActivitySearchController!
 
-    @IBOutlet weak var activitySearchBar: UISearchBar!
+    weak var activitySearchBar: UISearchBar!
     
     let sideMenuLauncher = SideMenuLauncher()
     
     let mapViewController = MapViewController()
     
-    @IBAction func touchFilter(_ sender: UIButton) {
+    func touchFilter(_ sender: UIButton) {
+        sideMenuLauncher.sideMenuViewController.targetTableViewController = self
         sideMenuLauncher.prepareForView()
         sideMenuLauncher.menuWillShow()
     }
         
-    @IBAction func touchMap(_ sender: UIButton) {
+    func touchMap(_ sender: UIButton) {
         mapViewController.location = "UCLA"
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }

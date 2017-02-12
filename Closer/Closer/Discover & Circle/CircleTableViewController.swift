@@ -27,13 +27,13 @@ class CircleTableViewController: UITableViewController {
     
     var searchText: String? {
         didSet {
-            searchText = searchText?.lowercased()
+            searchText = searchText?.lowercased() // 
             activities.removeAll()
             searchForActivities()
         }
     }
     
-    var dbRef = FIRDatabase.database().reference(fromURL: "https://closer-17ee2.firebaseio.com/")
+    var dbRef = FIRDatabase.database().reference()
     func createActivities() {
         guard let currUserID = currUser?.uid, let currUserName = currUser?.displayName
             else {
@@ -50,10 +50,10 @@ class CircleTableViewController: UITableViewController {
             let activity = ["releasingUserID": currUserID,
                             "releasingUserName": currUserName,
                             "name": act.name,
-                            "discription": act.description.text]
+                            "description": act.description.text]
             let updates = ["activities/\(key)": activity,
                            "users/\(currUserID)/activities/\(key)": ["name": act.name,
-                                                                     "discription": act.description.text]]
+                                                                     "description": act.description.text]]
             dbRef.updateChildValues(updates)
         }
 
@@ -63,7 +63,7 @@ class CircleTableViewController: UITableViewController {
         DCViewController().handleLogout()
     }
     
-    private func searchForActivities() {
+    func searchForActivities() {
         if searchText == "default" {
             var defaultSection = [Activity]()
             for i in 1...15 {
@@ -87,11 +87,7 @@ class CircleTableViewController: UITableViewController {
                 if let act = activity as? NSDictionary {
                     let actName = act["name"] as? String ?? ""
                     if actName.lowercased().contains(self.searchText!) {
-                        let releasingUserID = act["releasingUserID"] as? String ?? ""
-                        let actDiscription = act["discription"] as? String ?? ""
-                        let releasingUserName = act["releasingUserName"] as? String ?? ""
-                        let generalActivity = GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: actDiscription), userReleasing: PersonalUserForView(userName: releasingUserName, userId: 0, gender: Gender.Female, age: 18), identity: UInt64(1))
-                        activitiesSection.append(generalActivity)
+                        activitiesSection.append(self.dictionary2GeneralActivity(dictionary: act)!)
                     }
                 }
             }
@@ -100,6 +96,15 @@ class CircleTableViewController: UITableViewController {
             print(error.localizedDescription)
         }
         return
+    }
+    
+    func dictionary2GeneralActivity(dictionary: NSDictionary) -> GeneralActivity? {
+//        let releasingUserID = dictionary["releasingUserID"] as? String ?? ""
+        let actDescription = dictionary["description"] as? String ?? ""
+        let releasingUserName = dictionary["releasingUserName"] as? String ?? ""
+        let actName = dictionary["name"] as? String ?? ""
+        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: Description(txt: actDescription), userReleasing: PersonalUserForView(userName: releasingUserName, userId: 0, gender: Gender.Female, age: 18), identity: UInt64(1))
+        
     }
     
     private func setupNavigationBarTitle() {
