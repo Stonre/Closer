@@ -17,6 +17,8 @@ class GeneralActivity: Activity {
     var timeStart: Date?
     var timeEnd: Date?
     var location: CLLocation?
+    var isOnline: Bool = true
+    var isActive: Bool = true
     var tags: [String] = []
     var numberOfParticipants: Int = 0
     var authority: Authority

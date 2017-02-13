@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class HomePageController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -138,6 +139,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         view.backgroundColor = UIColor(red:0.91, green:0.93, blue:0.95, alpha:1.0)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.97, green:0.95, blue:0.95, alpha:1.0)
         tableView.delegate = self
         tableView.dataSource = self
         setupBasicInfoView()
@@ -369,6 +371,9 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         switch tarBarSelect {
         case 0:
+            let controller = ActivityReviewController()
+            controller.activity = activitiesParticipatedIn[indexPath.row]
+            navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
             break
@@ -387,9 +392,9 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func initSampleData() {
         //for sample users
-        let user1 = PersonalUserForView(userName: "Yi Zhou", userId: "1", gender: Gender.Female, age: 22)
+        let user1 = PersonalUserForView(userName: "周逸", userId: "1", gender: Gender.Female, age: 22)
         user1.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait4")) as NSData?
-        let user2 = PersonalUserForView(userName: "Yi Ding", userId: "2", gender: Gender.Female, age: 23)
+        let user2 = PersonalUserForView(userName: "丁一", userId: "2", gender: Gender.Female, age: 23)
         user2.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait3")) as NSData?
         let user3 = PersonalUserForView(userName: "Peter", userId: "3", gender: Gender.Male, age: 23)
         user3.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait1")) as NSData?
@@ -397,16 +402,38 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         friends.append(user2)
         friends.append(user3)
         
-        let user4 = PersonalUserForView(userName: "Lei Ding", userId: "4", gender: Gender.Female, age: 22)
+        let user4 = PersonalUserForView(userName: "丁磊", userId: "4", gender: Gender.Female, age: 22)
         user4.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait2")) as NSData?
         let user5 = PersonalUserForView(userName: "Zenith", userId: "5", gender: Gender.Female, age: 23)
         user5.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait5")) as NSData?
-        let user6 = PersonalUserForView(userName: "Kaimi", userId: "6", gender: Gender.Male, age: 23)
+        let user6 = PersonalUserForView(userName: "王凯铭", userId: "6", gender: Gender.Male, age: 23)
         user6.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait6")) as NSData?
         contacts.append(user4)
         contacts.append(user5)
         contacts.append(user6)
         contacts.append(user1)
         contacts.append(user2)
+        
+        let description: [DescriptionUnit]
+        let description1 = DescriptionUnit(type: ContentType.Text, content: "真是太兴奋了，真的是掩饰不了自己的期待，Closer就快要上线了！")
+        let description2 = DescriptionUnit(type: ContentType.Image, content: "https://pic3.zhimg.com/v2-897dde8d58d235a211c3774f3a7648ea_b.png")
+        let description3 = DescriptionUnit(type: ContentType.Hyperlink, content: "Amazon::::::https://www.amazon.com/")
+        description = [description1, description2, description3]
+        let activity1 = GeneralActivity(name: "去改变世界吧", tags: ["热情", "活力"], authority: Authority.Public, description: description, userReleasing: user1, identity: "7feuf289f89s89f8f")
+        activity1.timeStart = Date()
+        activity1.timeEnd = Date(timeIntervalSinceNow: 10*60)
+        activity1.location = CLLocation(latitude: 37, longitude: 122)
+        activitiesParticipatedIn.append(activity1)
+        
+        let descriptiont: [DescriptionUnit]
+        let description4 = DescriptionUnit(type: ContentType.Text, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
+        let description5 = DescriptionUnit(type: ContentType.Image, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
+        let description6 = DescriptionUnit(type: ContentType.Hyperlink, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
+        descriptiont = [description4, description5, description6]
+        let activity2 = GeneralActivity(name: "去看看上海交大吧！", tags: ["Closer", "活动"], authority: Authority.Public, description: descriptiont, userReleasing: user2, identity: "fjaioef2308f90w2")
+        activity2.timeStart = Date()
+        activity2.timeEnd = Date(timeIntervalSinceNow: 10*60)
+        activity2.location = CLLocation(latitude: 37, longitude: 122)
+        activitiesParticipatedIn.append(activity2)
     }
 }

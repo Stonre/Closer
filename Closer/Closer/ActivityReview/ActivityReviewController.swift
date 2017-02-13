@@ -7,44 +7,75 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ActivityReviewController: UIViewController {
+    
+    var activity: Activity?
+    
+//    init(activity a: Activity) {
+//        activity = a
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     let activityName: UILabel = {
         let label = UILabel()
         label.text = "任务名称"
-        label.backgroundColor = .yellow
         label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let releaserView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let timeView: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let locationView: UIView = {
         let view = UIView()
-        view.backgroundColor = .orange
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    let locationIconView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let locationText: UIButton = {
+        let button = UIButton()
+        button.contentHorizontalAlignment = .left
+        button.titleLabel?.font = UIFont.italicSystemFont(ofSize: 14)
+        button.setTitleColor(UIColor(red: 0.149, green: 0.1176, blue: 0.0902, alpha: 1.0), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let tagView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    let tag: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.textColor = UIColor(red: 0.149, green: 0.1176, blue: 0.0902, alpha: 1.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let descriptionView: UIWebView = {
@@ -55,16 +86,28 @@ class ActivityReviewController: UIViewController {
     
     let userName: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .black
+        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let userPortrait: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .yellow
+        imageView.layer.cornerRadius = 4
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderWidth = 1
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.textColor = UIColor(red: 0.149, green: 0.1176, blue: 0.0902, alpha: 1.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let notInterestedButton: UIButton = {
@@ -104,13 +147,56 @@ class ActivityReviewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red:0.91, green:0.93, blue:0.95, alpha:1.0)
         edgesForExtendedLayout = []
+        loadData()
         setupActivityName()
         setupReleaserView()
         setupTimeAndLocationView()
+        setupLocationInfo()
         setupTagView()
         setupDescriptionView()
         setupreleaserInfo()
         setupBottomStack()
+        setupTimeLabel()
+    }
+    
+    func loadData() {
+        if let activity = activity as? GeneralActivity {
+            activityName.text = activity.name
+            userName.text = activity.userReleasing.userName
+            userPortrait.image = UIImage(data: activity.userReleasing.headPortrait as! Data)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+            timeLabel.text = dateFormatter.string(from: activity.timeStart!)
+            if activity.isOnline {
+                locationIconView.image = #imageLiteral(resourceName: "online")
+                locationText.setTitle("在线", for: .normal)
+            } else {
+                locationIconView.image = #imageLiteral(resourceName: "map-icon")
+                let geoCoder = CLGeocoder()
+                geoCoder.reverseGeocodeLocation(activity.location!, completionHandler: { (placemarks, error) -> Void in
+                    var placeMark: CLPlacemark!
+                    placeMark = placemarks?[0]
+                    let placeName = placeMark.addressDictionary?["Name"] as? NSString
+                    let placeStreet = placeMark.addressDictionary?["Thoroughfare"] as? NSString
+                    let placeCity = placeMark.addressDictionary?["City"] as? NSString
+                    self.locationText.setTitle("\(placeName),\(placeStreet),\(placeCity)", for: .normal)
+                })
+            }
+            
+            var tags: String = "标签： "
+            activity.tags.forEach({ (tag) in
+                tags.append(tag)
+                tags.append("; ")
+            })
+            tag.text = tags
+            
+            let description = generateHtmlBody(description: activity.description)
+            let htm = prepareWebContent(body: description, css: ["https://news-at.zhihu.com/css/news_qa.auto.css"])
+            DispatchQueue.main.async { [weak self] in
+                self!.descriptionView.loadHTMLString(htm, baseURL: nil)
+            }
+        }
+        
     }
     
     func setupActivityName() {
@@ -126,7 +212,7 @@ class ActivityReviewController: UIViewController {
         releaserView.topAnchor.constraint(equalTo: activityName.bottomAnchor, constant: 2).isActive = true
         releaserView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         releaserView.widthAnchor.constraint(equalTo: activityName.widthAnchor, multiplier: 0.4).isActive = true
-        releaserView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.56).isActive = true
+        releaserView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.4).isActive = true
     }
     
     func setupTimeAndLocationView() {
@@ -143,12 +229,26 @@ class ActivityReviewController: UIViewController {
         locationView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
     }
     
+    func setupTimeLabel() {
+        timeView.addSubview(timeLabel)
+        timeLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor).isActive = true
+        timeLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: timeView.topAnchor, constant: 2).isActive = true
+        timeLabel.bottomAnchor.constraint(equalTo: timeView.bottomAnchor, constant: 2).isActive = true
+    }
+    
     func setupTagView() {
         view.addSubview(tagView)
         tagView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tagView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tagView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
         tagView.topAnchor.constraint(equalTo: locationView.bottomAnchor).isActive = true
+        
+        tagView.addSubview(tag)
+        tag.leftAnchor.constraint(equalTo: tagView.leftAnchor, constant: 25).isActive = true
+        tag.rightAnchor.constraint(equalTo: tagView.rightAnchor, constant: 4).isActive = true
+        tag.topAnchor.constraint(equalTo: tagView.topAnchor, constant: 2).isActive = true
+        tag.bottomAnchor.constraint(equalTo: tagView.bottomAnchor, constant: 2).isActive = true
     }
     
     func setupDescriptionView() {
@@ -160,16 +260,30 @@ class ActivityReviewController: UIViewController {
     }
     
     func setupreleaserInfo() {
-        releaserView.addSubview(userName)
-        userName.topAnchor.constraint(equalTo: releaserView.topAnchor, constant: 0).isActive = true
-        userName.bottomAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 0).isActive = true
-        userName.leftAnchor.constraint(equalTo: releaserView.leftAnchor).isActive = true
-        userName.widthAnchor.constraint(equalTo: releaserView.heightAnchor, multiplier: 1).isActive = true
         releaserView.addSubview(userPortrait)
         userPortrait.topAnchor.constraint(equalTo: releaserView.topAnchor, constant: 0).isActive = true
         userPortrait.bottomAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 0).isActive = true
-        userPortrait.rightAnchor.constraint(equalTo: releaserView.rightAnchor, constant: 0).isActive = true
-        userPortrait.widthAnchor.constraint(equalTo: releaserView.widthAnchor, multiplier: 0.75).isActive = true
+        userPortrait.rightAnchor.constraint(equalTo: releaserView.centerXAnchor, constant: -10).isActive = true
+        userPortrait.widthAnchor.constraint(equalTo: releaserView.heightAnchor, multiplier: 1).isActive = true
+        releaserView.addSubview(userName)
+        userName.topAnchor.constraint(equalTo: releaserView.topAnchor, constant: 0).isActive = true
+        userName.bottomAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 0).isActive = true
+        userName.rightAnchor.constraint(equalTo: releaserView.rightAnchor, constant: 0).isActive = true
+        userName.leftAnchor.constraint(equalTo: releaserView.centerXAnchor, constant: 5).isActive = true
+    }
+    
+    func setupLocationInfo() {
+        locationView.addSubview(locationIconView)
+        locationIconView.leftAnchor.constraint(equalTo: locationView.leftAnchor, constant: 10).isActive = true
+        locationIconView.centerYAnchor.constraint(equalTo: locationView.centerYAnchor).isActive = true
+        locationIconView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        locationIconView.widthAnchor.constraint(equalTo: locationIconView.heightAnchor).isActive = true
+        
+        locationView.addSubview(locationText)
+        locationText.leftAnchor.constraint(equalTo: locationIconView.rightAnchor, constant: 6).isActive = true
+        locationText.rightAnchor.constraint(equalTo: locationView.rightAnchor, constant: 2).isActive = true
+        locationText.topAnchor.constraint(equalTo: locationView.topAnchor, constant: 2).isActive = true
+        locationText.bottomAnchor.constraint(equalTo: locationView.bottomAnchor, constant: 2).isActive = true
     }
     
     func setupBottomStack() {
@@ -220,14 +334,15 @@ class ActivityReviewController: UIViewController {
         description.forEach {
             switch $0.type {
             case ContentType.Image:
-                body += "<p><img class=\"content-image\" src=\($0) alt=\"\" /></p>"
+                print($0)
+                body += "<p><img class=\"content-image\" src=\($0.content) alt=\"\" /></p>"
                 break
             case ContentType.Hyperlink:
                 var contents: [String] = $0.content.components(separatedBy: "::::::")
-                body += "<a href=\"\(contents[0])\">\(contents[1])</a>"
+                body += "<a href=\"\(contents[1])\">\(contents[0])</a>"
                 break
             case ContentType.Text:
-                body += "<p>(\($0.content))</p>"
+                body += "<p>\($0.content)</p>"
                 break
             default: break
             }
@@ -242,10 +357,16 @@ class ActivityReviewController: UIViewController {
         var html = "<html>"
         html += "<head>"
         css.forEach { html += "<link rel=\"stylesheet\" href=\($0)>" }
+        html += "<style>img{max-width:320px !important;}</style>"
         html += "</head>"
-        
         html += "<body>"
+        html += "<div class=\"main-wrap content-wrap\">"
+        html += "<div class=\"content-inner\">"
+        html += "<div class=\"content\">"
         html += body
+        html += "</div>"
+        html += "</div>"
+        html += "</div>"
         html += "</body>"
         
         html += "</html>"

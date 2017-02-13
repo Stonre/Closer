@@ -48,6 +48,7 @@ protocol Activity {
     var timeEnd: Date? { get set }
     var location: CLLocation? { get set }
     var tags: [String] { get set }
+    var isActive: Bool { get set }
     var numberOfParticipants: Int { get set }
     var authority: Authority { get set }
     var description: [DescriptionUnit] { get set }///This is a array of description unit. If a user tries to get a complete good looking description, he may need to check all the elements of this array and combine all the units together based on their types.
