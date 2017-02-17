@@ -142,6 +142,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.97, green:0.95, blue:0.95, alpha:1.0)
         tableView.delegate = self
         tableView.dataSource = self
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target: nil, action: nil)
         setupBasicInfoView()
         setupTarStackView()
         setupTableView()
@@ -316,10 +317,6 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        return
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch tarBarSelect {
         case 0:
@@ -368,21 +365,26 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tarBarSelect {
         case 0:
             let controller = ActivityReviewController()
             controller.activity = activitiesParticipatedIn[indexPath.row]
-            navigationController?.pushViewController(controller, animated: true)
+            self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
+            let controller = ActivityReviewController()
+            controller.activity = activitiesReleased[indexPath.row]
+            self.navigationController?.pushViewController(controller, animated: true)
             break
         case 2:
             let controller = OtherUserHomePageController()
+            controller.user = friends[indexPath.row]
             navigationController?.pushViewController(controller, animated: true)
             break
         case 3:
             let controller = OtherUserHomePageController()
+            controller.user = contacts[indexPath.row]
             navigationController?.pushViewController(controller, animated: true)
             break
         default:
@@ -394,20 +396,32 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         //for sample users
         let user1 = PersonalUserForView(userName: "周逸", userId: "1", gender: Gender.Female, age: 22)
         user1.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait4")) as NSData?
+        user1.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground"), 1.0) as NSData?
+        user1.signature = "我是魔王我怕谁"
         let user2 = PersonalUserForView(userName: "丁一", userId: "2", gender: Gender.Female, age: 23)
         user2.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait3")) as NSData?
+        user2.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground2"), 1.0) as NSData?
+        user2.signature = "全世界我最萌"
         let user3 = PersonalUserForView(userName: "Peter", userId: "3", gender: Gender.Male, age: 23)
         user3.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait1")) as NSData?
+        user3.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground"), 1.0) as NSData?
+        user3.signature = "我是创业达人"
         friends.append(user1)
         friends.append(user2)
         friends.append(user3)
         
         let user4 = PersonalUserForView(userName: "丁磊", userId: "4", gender: Gender.Female, age: 22)
         user4.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait2")) as NSData?
+        user4.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground2"), 1.0) as NSData?
+        user4.signature = "我的艺术细胞有限，但是很自恋"
         let user5 = PersonalUserForView(userName: "Zenith", userId: "5", gender: Gender.Female, age: 23)
         user5.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait5")) as NSData?
+        user5.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground"), 1.0) as NSData?
+        user5.signature = "我是一个有思想的产品经理"
         let user6 = PersonalUserForView(userName: "王凯铭", userId: "6", gender: Gender.Male, age: 23)
         user6.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait6")) as NSData?
+        user6.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground2"), 1.0) as NSData?
+        user6.signature = "我是一个闷骚而优秀的男人"
         contacts.append(user4)
         contacts.append(user5)
         contacts.append(user6)
@@ -423,7 +437,6 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         activity1.timeStart = Date()
         activity1.timeEnd = Date(timeIntervalSinceNow: 10*60)
         activity1.location = CLLocation(latitude: 37, longitude: 122)
-        activitiesParticipatedIn.append(activity1)
         
         let descriptiont: [DescriptionUnit]
         let description4 = DescriptionUnit(type: ContentType.Text, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
@@ -434,6 +447,22 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         activity2.timeStart = Date()
         activity2.timeEnd = Date(timeIntervalSinceNow: 10*60)
         activity2.location = CLLocation(latitude: 37, longitude: 122)
+        
+        let descriptiontt: [DescriptionUnit]
+        let description7 = DescriptionUnit(type: ContentType.Text, content: "明天有谁想一起来吃饭的？新开的新疆餐厅很不错，就在拖鞋门口，时间是晚上6点半，地点在拖鞋门口直走左拐100米处，欢迎大家一起来参加啊~")
+        let description8 = DescriptionUnit(type: ContentType.Image, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
+        let description9 = DescriptionUnit(type: ContentType.Hyperlink, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
+        descriptiontt = [description7, description8, description9]
+        let activity3 = GeneralActivity(name: "聚餐，一起来尝尝新开的新疆餐厅吧！", tags: ["聚餐", "活动"], authority: Authority.Public, description: descriptiontt, userReleasing: user3, identity: "fjaioef2308f90w2")
+        activity3.timeStart = Date()
+        activity3.timeEnd = Date(timeIntervalSinceNow: 10*60)
+        activity3.location = CLLocation(latitude: 37, longitude: 122)
+        activitiesParticipatedIn.append(activity1)
         activitiesParticipatedIn.append(activity2)
+        activitiesReleased.append(activity2)
+        activitiesReleased.append(activity1)
+        activitiesParticipatedIn.append(activity3)
+        activitiesReleased.append(activity3)
+
     }
 }

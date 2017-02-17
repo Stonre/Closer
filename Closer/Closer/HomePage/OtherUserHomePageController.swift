@@ -10,7 +10,23 @@ import UIKit
 
 class OtherUserHomePageController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var user: PersonalUserForView?
+    var user: User? {
+        didSet {
+            if let newUser = user as? PersonalUserForView {
+                if let bgimage = newUser.background {
+                    backgroundImageView.image = UIImage(data: bgimage as Data)
+                }
+                userNameView.text = newUser.userName
+                if let pimage = newUser.headPortrait {
+                    portraitImageView.image = UIImage(data: pimage as Data)
+                }
+                if let s = newUser.signature {
+                    signature.text = s
+                }
+                tableView.reloadData()
+            }
+        }
+    }
     
     var tarBarSelect = 0 {
         didSet{

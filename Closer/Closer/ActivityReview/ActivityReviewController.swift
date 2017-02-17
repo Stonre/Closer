@@ -31,6 +31,25 @@ class ActivityReviewController: UIViewController {
         return label
     }()
     
+    let infoView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "mybackground")!)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //always fill the view
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurEffectView)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 1
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.shadowRadius = 10
+        view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+        view.layer.shouldRasterize = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let releaserView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +83,13 @@ class ActivityReviewController: UIViewController {
         return button
     }()
     
+//    let backgroundImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.clipsToBounds = true
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
+    
     let tagView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +98,7 @@ class ActivityReviewController: UIViewController {
     
     let tag: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = UIFont.italicSystemFont(ofSize: 14)
         label.textColor = UIColor(red: 0.149, green: 0.1176, blue: 0.0902, alpha: 1.0)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +107,7 @@ class ActivityReviewController: UIViewController {
     
     let descriptionView: UIWebView = {
         let webView = UIWebView()
+        webView.backgroundColor = .white
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
     }()
@@ -146,8 +174,9 @@ class ActivityReviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red:0.91, green:0.93, blue:0.95, alpha:1.0)
-        edgesForExtendedLayout = []
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target: nil, action: nil)
         loadData()
+        setupInfoView()
         setupActivityName()
         setupReleaserView()
         setupTimeAndLocationView()
@@ -157,6 +186,14 @@ class ActivityReviewController: UIViewController {
         setupreleaserInfo()
         setupBottomStack()
         setupTimeLabel()
+    }
+    
+    func setupInfoView() {
+        view.addSubview(infoView)
+        infoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        infoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        infoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        infoView.heightAnchor.constraint(equalToConstant: 220).isActive = true
     }
     
     func loadData() {
@@ -200,32 +237,32 @@ class ActivityReviewController: UIViewController {
     }
     
     func setupActivityName() {
-        view.addSubview(activityName)
-        activityName.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        activityName.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        activityName.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        infoView.addSubview(activityName)
+        activityName.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 40).isActive = true
+        activityName.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
+        activityName.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
         activityName.heightAnchor.constraint(equalToConstant: 55).isActive = true
     }
     
     func setupReleaserView() {
-        view.addSubview(releaserView)
+        infoView.addSubview(releaserView)
         releaserView.topAnchor.constraint(equalTo: activityName.bottomAnchor, constant: 2).isActive = true
-        releaserView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        releaserView.centerXAnchor.constraint(equalTo: infoView.centerXAnchor).isActive = true
         releaserView.widthAnchor.constraint(equalTo: activityName.widthAnchor, multiplier: 0.4).isActive = true
         releaserView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.4).isActive = true
     }
     
     func setupTimeAndLocationView() {
-        view.addSubview(timeView)
-        timeView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        infoView.addSubview(timeView)
+        timeView.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
         timeView.topAnchor.constraint(equalTo: releaserView.bottomAnchor).isActive = true
-        timeView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        timeView.widthAnchor.constraint(equalTo: infoView.widthAnchor, multiplier: 0.5).isActive = true
         timeView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
         
-        view.addSubview(locationView)
-        locationView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        infoView.addSubview(locationView)
+        locationView.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
         locationView.topAnchor.constraint(equalTo: releaserView.bottomAnchor).isActive = true
-        locationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        locationView.widthAnchor.constraint(equalTo: infoView.widthAnchor, multiplier: 0.5).isActive = true
         locationView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
     }
     
@@ -238,9 +275,9 @@ class ActivityReviewController: UIViewController {
     }
     
     func setupTagView() {
-        view.addSubview(tagView)
-        tagView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        tagView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        infoView.addSubview(tagView)
+        tagView.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
+        tagView.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
         tagView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
         tagView.topAnchor.constraint(equalTo: locationView.bottomAnchor).isActive = true
         
@@ -254,8 +291,8 @@ class ActivityReviewController: UIViewController {
     func setupDescriptionView() {
         view.addSubview(descriptionView)
         descriptionView.topAnchor.constraint(equalTo: tagView.bottomAnchor, constant: 2).isActive = true
-        descriptionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        descriptionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        descriptionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        descriptionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         descriptionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
@@ -296,16 +333,16 @@ class ActivityReviewController: UIViewController {
         bottomStackView.axis = .horizontal
         bottomStackView.distribution = .fillEqually
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-        viewContainer1.backgroundColor = .yellow
+        viewContainer1.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         viewContainer1.translatesAutoresizingMaskIntoConstraints = false
-        viewContainer2.backgroundColor = .yellow
+        viewContainer2.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         viewContainer2.translatesAutoresizingMaskIntoConstraints = false
-        viewContainer3.backgroundColor = .yellow
+        viewContainer3.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         viewContainer3.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(bottomStackView)
-        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        bottomStackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        bottomStackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         bottomStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         bottomStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         

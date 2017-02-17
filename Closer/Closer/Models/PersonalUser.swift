@@ -17,6 +17,7 @@ class PersonalUserForView: PersonalUser {
     var background: NSData?
     var gender: Gender
     var age: Int
+    var signature: String?
     
     /**
      Dictionary for storing the activities a personal user attended or is attending
@@ -60,6 +61,7 @@ class PersonalUserAdmin: PersonalUser {
     var background: NSData?
     var gender: Gender
     var age: Int
+    var signature: String?
     private var virtualFortune = VirtualFortune()
     private var phoneNumber: PhoneNumber?
     private var ThirdPartyLinks: [ThirdPartyLink]?
