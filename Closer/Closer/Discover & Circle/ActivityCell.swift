@@ -6,11 +6,10 @@
 //  Copyright © 2017年 Lei Ding. All rights reserved.
 //
 
+import Firebase
 import UIKit
 
 class ActivityCell: UITableViewCell {
-    
-    static let cellReuseID = "ActivityCell"
     
     open var activity: Activity? {
         didSet {
@@ -19,7 +18,23 @@ class ActivityCell: UITableViewCell {
             }
         }
     }
-    var userProfileImage: UIImage = #imageLiteral(resourceName: "sampleHeaderPortrait1")
+    var userProfileImageUrl: NSURL? {
+        didSet {
+            DispatchQueue.global(qos: .userInteractive).async {
+                if let imageData = NSData(contentsOf: self.userProfileImageUrl as! URL) {
+                    DispatchQueue.main.async {
+                        self.userProfileImage = UIImage(data: imageData as Data)
+                    }
+                }
+            }
+        }
+    }
+    
+    var userProfileImage: UIImage? {
+        didSet {
+            profileImageView.image = userProfileImage
+        }
+    }
     
     open let seperatorLineView: UIView = {
         let lineView = UIView()
@@ -44,7 +59,11 @@ class ActivityCell: UITableViewCell {
     }
     
     open func setupViews(userProfileImageViewWidth: CGFloat, userNameLabelHeight: CGFloat?){
-        
+        if userProfileImageViewWidth > 0.0 {
+            DispatchQueue.global(qos: .userInteractive).async(execute: { 
+                self.getUserProfileImageUrl()
+            })
+        }
         addSubview(seperatorLineView)
         backgroundColor = UIColor.white
         selectedBackgroundView = UIView()
@@ -53,6 +72,25 @@ class ActivityCell: UITableViewCell {
         setupUserNameLabel(height: userNameLabelHeight)
         setupActivityNameLabel()
         setupActivityDescriptionLabel()
+    }
+    
+    private func getUserProfileImageUrl(){
+        if let act = activity as? GeneralActivity {
+            let releaser = act.userReleasing.userId
+            
+            let releaserDbRef = FIRDatabase.database().reference().child("users").child(releaser)
+            releaserDbRef.observe(.value, with: { (snapshot) in
+                if let value = snapshot.value as? NSDictionary {
+                    if let profileImageUrlString = value["profileImageUrl"] as? String{
+                        DispatchQueue.main.async(execute: { 
+                            self.userProfileImageUrl = NSURL(string: profileImageUrlString)
+                        })
+                    }
+                }
+            })
+        }
+        
+//        return releaserProfileImageUrl
     }
     
     private func setupProfileImageView(width: CGFloat) {
@@ -69,11 +107,10 @@ class ActivityCell: UITableViewCell {
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         
-        profileImageView.image = userProfileImage
+        profileImageView.image = nil
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         
     }
-    
     
     private func setupUserNameLabel(height: CGFloat?) {
         addSubview(userNameLabel)
@@ -120,8 +157,6 @@ class ActivityCell: UITableViewCell {
         
         activityDescriptionLabel.numberOfLines = 5
         activityDescriptionLabel.lineBreakMode = .byWordWrapping
-        
-        
         
         if let generalActivity = activity as? GeneralActivity {
             activityDescriptionLabel.text = generalActivity.description.first?.content

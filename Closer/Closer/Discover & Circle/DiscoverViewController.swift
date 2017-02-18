@@ -142,15 +142,15 @@ class DiscoverViewController: CircleTableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "Show Map" {
-//            if let dvc = segue.destination.presentingViewController {
-//                
-//            }
-        }
-        
-    }
+//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//        if segue.identifier == "Show Map" {
+////            if let dvc = segue.destination.presentingViewController {
+////                
+////            }
+//        }
+//        
+//    }
 
 }

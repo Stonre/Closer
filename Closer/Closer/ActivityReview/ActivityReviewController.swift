@@ -290,7 +290,7 @@ class ActivityReviewController: UIViewController {
     
     func setupDescriptionView() {
         view.addSubview(descriptionView)
-        descriptionView.topAnchor.constraint(equalTo: tagView.bottomAnchor, constant: 2).isActive = true
+        descriptionView.topAnchor.constraint(equalTo: infoView.bottomAnchor, constant: 2).isActive = true
         descriptionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         descriptionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         descriptionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

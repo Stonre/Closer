@@ -10,8 +10,6 @@ import UIKit
 
 class OwnActivityCell: ActivityCell {
     
-    static let cellReuseId = "OwnActivityCell"
-    
     override var activity: Activity? {
         didSet{
             if activity != nil {

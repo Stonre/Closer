@@ -103,8 +103,9 @@ class CircleTableViewController: UITableViewController {
 //        let releasingUserID = dictionary["releasingUserID"] as? String ?? ""
         let actDescription = dictionary["description"] as? String ?? ""
         let releasingUserName = dictionary["releasingUserName"] as? String ?? ""
+        let releasingUserId = dictionary["releasingUserID"] as? String ?? ""
         let actName = dictionary["name"] as? String ?? ""
-        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: actDescription)], userReleasing: PersonalUserForView(userName: releasingUserName, userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set")
+        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: actDescription)], userReleasing: PersonalUserForView(userName: releasingUserName, userId: releasingUserId, gender: Gender.Female, age: 18), identity: "not set")
         
     }
     
@@ -160,7 +161,7 @@ class CircleTableViewController: UITableViewController {
         currUser = FIRAuth.auth()?.currentUser
         tableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         setupNavigationBarTitle()
-        tableView.register(ActivityCell.self, forCellReuseIdentifier: ActivityCell.cellReuseID)
+        tableView.register(ActivityCell.self, forCellReuseIdentifier: CloserUtility.ActivityCellReuseId)
         tableView.tableFooterView?.isHidden = false
         searchText = currUser?.displayName!.lowercased()
         
@@ -190,7 +191,7 @@ class CircleTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ActivityCell.cellReuseID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CloserUtility.ActivityCellReuseId, for: indexPath)
 
         let currAcvitity = activities[indexPath.section][indexPath.row]
         if let activityCell = cell as? ActivityCell {

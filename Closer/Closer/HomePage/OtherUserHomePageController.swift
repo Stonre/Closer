@@ -206,8 +206,8 @@ class OtherUserHomePageController: UIViewController, UITableViewDataSource, UITa
     func setupTableView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(OwnActivityCell.self, forCellReuseIdentifier: OwnActivityCell.cellReuseID)
-        tableView.register(ActivityCell.self, forCellReuseIdentifier: ActivityCell.cellReuseID)
+        tableView.register(OwnActivityCell.self, forCellReuseIdentifier: CloserUtility.OwnActivityCellReuseId)
+        tableView.register(ActivityCell.self, forCellReuseIdentifier: CloserUtility.ActivityCellReuseId)
         tableView.register(OtherUserTableViewCell.self, forCellReuseIdentifier: OtherUserTableViewCell.cellReuseId)
         tableView.topAnchor.constraint(equalTo: tarStackView.bottomAnchor, constant: 0).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
@@ -237,21 +237,21 @@ class OtherUserHomePageController: UIViewController, UITableViewDataSource, UITa
         var cell: UITableViewCell?
         switch tarBarSelect {
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: ActivityCell.cellReuseID, for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: CloserUtility.ActivityCellReuseId, for: indexPath)
             let activity = activitiesParticipatedIn[indexPath.row]
             if let activityCell = cell as? ActivityCell {
                 activityCell.activity = activity
             }
             break
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: OwnActivityCell.cellReuseID, for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: CloserUtility.OwnActivityCellReuseId, for: indexPath)
             let activity = activitiesReleased[indexPath.row]
             if let activityCell = cell as? OwnActivityCell {
                 activityCell.activity = activity
             }
             break
         default:
-            cell = tableView.dequeueReusableCell(withIdentifier: ActivityCell.cellReuseID, for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: CloserUtility.ActivityCellReuseId, for: indexPath)
             let activity = activitiesParticipatedIn[indexPath.row]
             if let activityCell = cell as? ActivityCell {
                 activityCell.activity = activity
