@@ -46,7 +46,7 @@ class OtherUserTableViewCell: UITableViewCell {
         profileImageView.image = nil
         userName.text = nil
         if let user = self.user {
-            if let profileImageUrlString = user.userProfileImage {
+            if let profileImageUrlString = user.userProfileImageUrl {
                 setupProfileImage(imageUrl: profileImageUrlString)
             }
             userName.text = user.userName
