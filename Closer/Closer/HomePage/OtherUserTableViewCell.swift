@@ -12,7 +12,7 @@ class OtherUserTableViewCell: UITableViewCell {
     
     static let cellReuseId = "OtherUserTableCell"
     
-    let userHeaderPortrait: UIImageView = {
+    let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -43,24 +43,41 @@ class OtherUserTableViewCell: UITableViewCell {
     }
     
     func updateUI() {
-        userHeaderPortrait.image = nil
+        profileImageView.image = nil
         userName.text = nil
         if let user = self.user {
-            userHeaderPortrait.image = UIImage(data: user.headPortrait as! Data)
+            if let profileImageUrlString = user.userProfileImage {
+                setupProfileImage(imageUrl: profileImageUrlString)
+            }
             userName.text = user.userName
         }
     }
     
+    func setupProfileImage(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data: data!)
+                }
+                
+            }).resume()
+        }
+    }
+    
     func setUpView() {
-        addSubview(userHeaderPortrait)
-        userHeaderPortrait.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        userHeaderPortrait.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
-        userHeaderPortrait.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        userHeaderPortrait.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        addSubview(profileImageView)
+        profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        profileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 12).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 45).isActive = true
         addSubview(userName)
         userName.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        userName.heightAnchor.constraint(equalTo: userHeaderPortrait.heightAnchor).isActive = true
-        userName.leftAnchor.constraint(equalTo: userHeaderPortrait.rightAnchor, constant: 20).isActive = true
+        userName.heightAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
+        userName.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 20).isActive = true
         userName.rightAnchor.constraint(equalTo: rightAnchor, constant: 12).isActive = true
     }
 
