@@ -29,8 +29,8 @@ struct PhoneNumber {
 protocol User {
     var userName: String { get set }
     var userId: String { get set }
-    var headPortrait: NSData? { get set }
-    var background: NSData? { get set }
+    var userProfileImage: String? { get set }
+    var backgroundImage: String? { get set }
 }
 
 ///Abstraction of personal user interface

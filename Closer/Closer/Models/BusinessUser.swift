@@ -14,8 +14,8 @@ import Foundation
 struct BusinessUserForView: BusinessUser {
     var userName: String
     var userId: String
-    var headPortrait: NSData?
-    var background: NSData?
+    var userProfileImage: String?
+    var backgroundImage: String?
     var businessName: String
     var phoneNumber: PhoneNumber?
     var credit: Int = 0
