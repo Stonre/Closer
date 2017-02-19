@@ -403,32 +403,32 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     private func initSampleData() {
         //for sample users
         let user1 = PersonalUserForView(userName: "周逸", userId: "1", gender: Gender.Female, age: 22)
-        user1.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait4")) as NSData?
-        user1.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground"), 1.0) as NSData?
+        user1.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait4.jpeg?alt=media&token=f18cb3cc-f78e-406d-a305-c35b72040c70"
+        user1.backgroundImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground.jpeg?alt=media&token=cbbf9a20-9401-4d4f-a069-7750e2d7f8b6"
         user1.signature = "我是魔王我怕谁"
         let user2 = PersonalUserForView(userName: "丁一", userId: "2", gender: Gender.Female, age: 23)
-        user2.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait3")) as NSData?
-        user2.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground2"), 1.0) as NSData?
+        user2.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait3.jpg?alt=media&token=afc1760d-dcd4-48df-885e-4d3999824fc3"
+        user2.backgroundImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b"
         user2.signature = "全世界我最萌"
         let user3 = PersonalUserForView(userName: "Peter", userId: "3", gender: Gender.Male, age: 23)
-        user3.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait1")) as NSData?
-        user3.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground"), 1.0) as NSData?
+        user3.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait1.jpeg?alt=media&token=81737b88-20a3-4ac2-b3e3-ec55ac1c7b41"
+        user3.backgroundImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground.jpeg?alt=media&token=cbbf9a20-9401-4d4f-a069-7750e2d7f8b6"
         user3.signature = "我是创业达人"
         friends.append(user1)
         friends.append(user2)
         friends.append(user3)
         
         let user4 = PersonalUserForView(userName: "丁磊", userId: "4", gender: Gender.Female, age: 22)
-        user4.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait2")) as NSData?
-        user4.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground2"), 1.0) as NSData?
+        user4.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait2.png?alt=media&token=fc65090f-fd7a-47f3-8a6a-bb4def659c32"
+        user4.backgroundImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b"
         user4.signature = "我的艺术细胞有限，但是很自恋"
         let user5 = PersonalUserForView(userName: "Zenith", userId: "5", gender: Gender.Female, age: 23)
-        user5.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait5")) as NSData?
-        user5.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground"), 1.0) as NSData?
+        user5.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait5.jpeg?alt=media&token=e55f0d45-431a-491d-b34f-74ec78aa2753"
+        user5.backgroundImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground.jpeg?alt=media&token=cbbf9a20-9401-4d4f-a069-7750e2d7f8b6"
         user5.signature = "我是一个有思想的产品经理"
         let user6 = PersonalUserForView(userName: "王凯铭", userId: "6", gender: Gender.Male, age: 23)
-        user6.headPortrait = UIImagePNGRepresentation(#imageLiteral(resourceName: "sampleHeaderPortrait6")) as NSData?
-        user6.background = UIImageJPEGRepresentation(#imageLiteral(resourceName: "mybackground2"), 1.0) as NSData?
+        user6.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait6.jpeg?alt=media&token=6b484d7f-103c-4e6d-b95b-33b3f15df705"
+        user6.backgroundImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b"
         user6.signature = "我是一个闷骚而优秀的男人"
         contacts.append(user4)
         contacts.append(user5)

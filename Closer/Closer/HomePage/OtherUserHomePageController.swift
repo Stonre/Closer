@@ -13,12 +13,32 @@ class OtherUserHomePageController: UIViewController, UITableViewDataSource, UITa
     var user: User? {
         didSet {
             if let newUser = user as? PersonalUserForView {
-                if let bgimage = newUser.background {
-                    backgroundImageView.image = UIImage(data: bgimage as Data)
+                
+                if let url = URL(string: newUser.backgroundImageUrl!) {
+                    URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                        if error != nil {
+                            print(error!)
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            self.backgroundImageView.image = UIImage(data: data!)
+                        }
+                        
+                    }).resume()
                 }
                 userNameView.text = newUser.userName
-                if let pimage = newUser.headPortrait {
-                    portraitImageView.image = UIImage(data: pimage as Data)
+                
+                if let url = URL(string: newUser.userProfileImageUrl!) {
+                    URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                        if error != nil {
+                            print(error!)
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            self.portraitImageView.image = UIImage(data: data!)
+                        }
+                        
+                    }).resume()
                 }
                 if let s = newUser.signature {
                     signature.text = s

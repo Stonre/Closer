@@ -200,7 +200,18 @@ class ActivityReviewController: UIViewController {
         if let activity = activity as? GeneralActivity {
             activityName.text = activity.name
             userName.text = activity.userReleasing.userName
-            userPortrait.image = UIImage(data: activity.userReleasing.headPortrait as! Data)
+            if let url = URL(string: activity.userReleasing.userProfileImageUrl!) {
+                URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.userPortrait.image = UIImage(data: data!)
+                    }
+                    
+                }).resume()
+            }
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
             timeLabel.text = dateFormatter.string(from: activity.timeStart!)
