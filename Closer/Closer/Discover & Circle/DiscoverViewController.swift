@@ -32,7 +32,7 @@ class DiscoverViewController: CircleTableViewController {
             } else {
                 for category in categoryFilters {
                     dbRef.child("category-activities/\(category)").observeSingleEvent(of: .value, with: { (snapshot) in
-                        var activitySection = [Activity]()
+                        let activitySection = [Activity]()
                         self.activities.append(activitySection)
                         let value = snapshot.value as? NSDictionary ?? NSDictionary()
                         for (activityId, _) in value {
