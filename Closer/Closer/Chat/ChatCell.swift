@@ -27,9 +27,11 @@ class ChatCell: UITableViewCell {
             let ref = FIRDatabase.database().reference().child("users").child(partnerId)
             ref.observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                if let Dictionary = snapshot.value as? [String: Any] {
-                    self.textLabel?.text = Dictionary["name"] as? String
-                    
+                if let dictionary = snapshot.value as? [String: Any] {
+                    self.textLabel?.text = dictionary["name"] as? String
+                    if let imageUrl = dictionary["profileImageUrl"] as? String {
+                        self.setupProfileImage(imageUrl: imageUrl)
+                    }
                 }
                 
             }, withCancel: nil)
@@ -88,7 +90,24 @@ class ChatCell: UITableViewCell {
         chatTimeLabel.text = personalChat?.lastContactTime
         detailTextLabel?.text = personalChat?.lastMessage
         textLabel?.text = personalChat?.person.displayName
-        //profileImageView.image = UIImage(data:personalChat?.person.userProfileImage as! Data,scale:1.0)
+        if let profileImageUrl = personalChat?.person.userProfileImage {
+            setupProfileImage(imageUrl: profileImageUrl)
+        }
+    }
+    
+    private func setupProfileImage(imageUrl: String) {
+        if let url = URL(string: imageUrl) {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data: data!)
+                }
+                
+            }).resume()
+        }
     }
     
     private func updateEventChatUI() {

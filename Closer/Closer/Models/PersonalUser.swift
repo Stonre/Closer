@@ -13,8 +13,8 @@ import Foundation
 class PersonalUserForView: PersonalUser {
     var userName: String
     var userId: String
-    var headPortrait: NSData?
-    var background: NSData?
+    var userProfileImage: String?
+    var backgroundImage: String?
     var gender: Gender
     var age: Int
     var signature: String?
@@ -57,8 +57,8 @@ class PersonalUserForView: PersonalUser {
 class PersonalUserAdmin: PersonalUser {
     var userName: String
     var userId: String
-    var headPortrait: NSData?
-    var background: NSData?
+    var userProfileImage: String?
+    var backgroundImage: String?
     var gender: Gender
     var age: Int
     var signature: String?

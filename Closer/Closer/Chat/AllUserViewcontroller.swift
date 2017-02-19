@@ -62,10 +62,12 @@ class AllUserViewcontroller: UITableViewController, UISearchResultsUpdating {
     func fetchPersonalUser() {
         FIRDatabase.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
-            if let name = snapshot.childSnapshot(forPath: "name").value as? String {
-                let user = PersonalChatProfile(userId: snapshot.key, userName: name, userNickname: name, userProfileImage: "")
-                let chat = PersonalChat(person: user, lastMessage: "message", lastContactTime: "time")
-                self.personalChats.append(chat)
+            if let dictionary = snapshot.value as? [String: Any] {
+                if let name = dictionary["name"] as? String, let url = dictionary["profileImageUrl"] as? String? {
+                    let user = PersonalChatProfile(userId: snapshot.key, userName: name, userNickname: nil, userProfileImage: url)
+                    let chat = PersonalChat(person: user, lastMessage: "message", lastContactTime: "time")
+                    self.personalChats.append(chat)
+                }
             }
             
             DispatchQueue.main.async {
