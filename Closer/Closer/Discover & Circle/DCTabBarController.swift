@@ -9,6 +9,10 @@
 import UIKit
 
 class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
+    
+    let newActivityButton = UIButton(type: .contactAdd)
+    let homeButton = UIButton()
+    let chatButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +34,27 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
     private func setupNavigationBar() {
         setupMainPageButton()
         setupChatButton()
+        setupNewActivityButton()
+    }
+    
+    private func setupNewActivityButton() {
+        view.addSubview(newActivityButton)
+        newActivityButton.backgroundColor = .white
+        newActivityButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        newActivityButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newActivityButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
+        
+        newActivityButton.addTarget(self, action: #selector(touchNewActivity), for: .touchUpInside)
+    }
+    
+    func touchNewActivity() {
+        
+        navigationController?.pushViewController(NewActivityController(), animated: true)
+        
     }
     
     private func setupMainPageButton() {
-        let homeButton = UIButton()
         homeButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
         homeButton.setImage(#imageLiteral(resourceName: "home-icon"), for: .normal)
         homeButton.addTarget(self, action: #selector(touchHome(_:)), for: .touchUpInside)
@@ -48,7 +69,6 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func setupChatButton() {
-        let chatButton = UIButton()
         chatButton.frame = CGRect(origin: CGPoint(x: 8, y: 8), size: DiscoverViewController.buttomSize)
         chatButton.setImage(#imageLiteral(resourceName: "chat-icon"), for: .normal)
         chatButton.addTarget(self, action: #selector(touchChat(_:)), for: .touchUpInside)
