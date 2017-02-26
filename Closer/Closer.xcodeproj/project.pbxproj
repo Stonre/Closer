@@ -26,6 +26,13 @@
 		3E6549E21E46749400D41BAA /* ActivityMKAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6549E11E46749400D41BAA /* ActivityMKAnnotationView.swift */; };
 		3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */; };
 		3E78FFB31E57B0F800507F97 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFB21E57B0F800507F97 /* utility.swift */; };
+		3E78FFB61E5BED6500507F97 /* NewActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFB51E5BED6500507F97 /* NewActivityController.swift */; };
+		3E78FFB91E5C026700507F97 /* NewActivityNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFB81E5C026700507F97 /* NewActivityNameViewController.swift */; };
+		3E78FFBB1E5C028D00507F97 /* NewActivityTimeLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFBA1E5C028D00507F97 /* NewActivityTimeLocationViewController.swift */; };
+		3E78FFBD1E5C02A300507F97 /* NewActivityDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFBC1E5C02A300507F97 /* NewActivityDescriptionViewController.swift */; };
+		3E78FFBF1E5C17B400507F97 /* NewActivityContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFBE1E5C17B400507F97 /* NewActivityContentViewController.swift */; };
+		3E78FFC11E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFC01E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift */; };
+		3E78FFC31E5D709700507F97 /* RadioButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFC21E5D709700507F97 /* RadioButtonsViewController.swift */; };
 		D70762701E4FF0C200D7833B /* ActivityReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */; };
 		D70A32FA1E59107200C023B4 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A32F91E59107200C023B4 /* FetchData.swift */; };
 		D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */; };
@@ -75,6 +82,13 @@
 		3E6549E11E46749400D41BAA /* ActivityMKAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMKAnnotationView.swift; path = ActivityMapView/ActivityMKAnnotationView.swift; sourceTree = "<group>"; };
 		3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestLoginViewController.swift; path = Login/TestLoginViewController.swift; sourceTree = "<group>"; };
 		3E78FFB21E57B0F800507F97 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
+		3E78FFB51E5BED6500507F97 /* NewActivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewActivityController.swift; path = "New Activity/NewActivityController.swift"; sourceTree = "<group>"; };
+		3E78FFB81E5C026700507F97 /* NewActivityNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewActivityNameViewController.swift; path = "New Activity/NewActivityNameViewController.swift"; sourceTree = "<group>"; };
+		3E78FFBA1E5C028D00507F97 /* NewActivityTimeLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewActivityTimeLocationViewController.swift; path = "New Activity/NewActivityTimeLocationViewController.swift"; sourceTree = "<group>"; };
+		3E78FFBC1E5C02A300507F97 /* NewActivityDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewActivityDescriptionViewController.swift; path = "New Activity/NewActivityDescriptionViewController.swift"; sourceTree = "<group>"; };
+		3E78FFBE1E5C17B400507F97 /* NewActivityContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewActivityContentViewController.swift; path = "New Activity/NewActivityContentViewController.swift"; sourceTree = "<group>"; };
+		3E78FFC01E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewActivityAuthorizationViewController.swift; path = "New Activity/NewActivityAuthorizationViewController.swift"; sourceTree = "<group>"; };
+		3E78FFC21E5D709700507F97 /* RadioButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioButtonsViewController.swift; path = "New Activity/RadioButtonsViewController.swift"; sourceTree = "<group>"; };
 		50F25207255F132C1B1DC24B /* Pods-Closer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.release.xcconfig"; sourceTree = "<group>"; };
 		CA32EC040E81732242A00E21 /* Pods-Closer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.debug.xcconfig"; sourceTree = "<group>"; };
 		D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityReviewController.swift; path = ActivityReview/ActivityReviewController.swift; sourceTree = "<group>"; };
@@ -150,6 +164,20 @@
 			name = ActivityMapView;
 			sourceTree = "<group>";
 		};
+		3E78FFB41E5BECF700507F97 /* NewActivityController */ = {
+			isa = PBXGroup;
+			children = (
+				3E78FFB51E5BED6500507F97 /* NewActivityController.swift */,
+				3E78FFB81E5C026700507F97 /* NewActivityNameViewController.swift */,
+				3E78FFC01E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift */,
+				3E78FFBA1E5C028D00507F97 /* NewActivityTimeLocationViewController.swift */,
+				3E78FFBC1E5C02A300507F97 /* NewActivityDescriptionViewController.swift */,
+				3E78FFBE1E5C17B400507F97 /* NewActivityContentViewController.swift */,
+				3E78FFC21E5D709700507F97 /* RadioButtonsViewController.swift */,
+			);
+			name = NewActivityController;
+			sourceTree = "<group>";
+		};
 		CCD51B5F3BF6CD3E7CFFA315 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +226,7 @@
 		D72F7EF01E29EE2C005C6293 /* Discover & Circle */ = {
 			isa = PBXGroup;
 			children = (
+				3E78FFB41E5BECF700507F97 /* NewActivityController */,
 				3E24EE571E36ADF800A4FFDD /* DCViewController.swift */,
 				3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */,
 				D72F7F091E29EEA2005C6293 /* Side Menu */,
@@ -417,6 +446,7 @@
 			files = (
 				3E24EE5A1E397D0600A4FFDD /* ActivitySearchController.swift in Sources */,
 				D72F7F051E29EE7A005C6293 /* DiscoverViewController.swift in Sources */,
+				3E78FFBB1E5C028D00507F97 /* NewActivityTimeLocationViewController.swift in Sources */,
 				D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */,
 				D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */,
 				D70762701E4FF0C200D7833B /* ActivityReviewController.swift in Sources */,
@@ -429,6 +459,7 @@
 				194BE4AE1E2AD2C8004DF108 /* PersonalChatProfile.swift in Sources */,
 				D72F7F061E29EE7A005C6293 /* MapViewController.swift in Sources */,
 				199E87E91E501A26003F85B6 /* ChatLogViewController.swift in Sources */,
+				3E78FFC31E5D709700507F97 /* RadioButtonsViewController.swift in Sources */,
 				D72F7F221E29EF1A005C6293 /* LoginViewController.swift in Sources */,
 				D72F7F131E29EED4005C6293 /* SideMenuTableViewController.swift in Sources */,
 				3E78FFB31E57B0F800507F97 /* utility.swift in Sources */,
@@ -441,9 +472,12 @@
 				D72F7F041E29EE7A005C6293 /* CircleTableViewController.swift in Sources */,
 				D72F7EFD1E29EE4C005C6293 /* User.swift in Sources */,
 				3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */,
+				3E78FFBD1E5C02A300507F97 /* NewActivityDescriptionViewController.swift in Sources */,
+				3E78FFBF1E5C17B400507F97 /* NewActivityContentViewController.swift in Sources */,
 				D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */,
 				D72F7F201E29EF11005C6293 /* OtherUserTableViewCell.swift in Sources */,
 				3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */,
+				3E78FFB91E5C026700507F97 /* NewActivityNameViewController.swift in Sources */,
 				D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */,
 				D7D5686D1E4652C000CC68ED /* UserActionType.swift in Sources */,
 				D7D568671E464FCF00CC68ED /* BusinessUser.swift in Sources */,
@@ -451,11 +485,13 @@
 				D7BB71071E4324150071219C /* HomePageController.swift in Sources */,
 				199E87E71E501A26003F85B6 /* ChatCell.swift in Sources */,
 				D7D568631E464DD000CC68ED /* GeneralActivity.swift in Sources */,
+				3E78FFB61E5BED6500507F97 /* NewActivityController.swift in Sources */,
 				3E24EE4D1E2AC10F00A4FFDD /* DCTabBarController.swift in Sources */,
 				D7D568651E464E4000CC68ED /* PersonalUser.swift in Sources */,
 				3E6549E21E46749400D41BAA /* ActivityMKAnnotationView.swift in Sources */,
 				199E87EC1E501A43003F85B6 /* Message.swift in Sources */,
 				D72F7EFC1E29EE4C005C6293 /* Reward.swift in Sources */,
+				3E78FFC11E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift in Sources */,
 				D7D5686B1E4652A800CC68ED /* VirtualFortune.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
