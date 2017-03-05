@@ -115,6 +115,13 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         return stackView
     }()
     
+    let settingsButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(origin: CGPoint(x: 8, y: 8), size: CGSize(width: 24, height: 24))
+        button.setImage(#imageLiteral(resourceName: "settings-icon"), for: .normal)
+        return button
+    }()
+    
     let tableView = UITableView()
     
     func selectActivitiesParticipatedIn(_ sender: UIButton) {
@@ -143,10 +150,17 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target: nil, action: nil)
+        setupSettingsIcon()
         setupBasicInfoView()
         setupTarStackView()
         setupTableView()
         initSampleData()
+    }
+    
+    func setupSettingsIcon() {
+        settingsButton.addTarget(self, action: #selector(touchSettings(_:)), for: .touchUpInside)
+        let rightBarItem = UIBarButtonItem(customView: settingsButton)
+        navigationItem.rightBarButtonItem = rightBarItem
     }
     
     func setupBasicInfoView() {
@@ -259,6 +273,10 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     var friends = [User]()
     var contacts = [User]()
+    
+    func touchSettings(_ sender: UIButton) {
+        self.navigationController?.pushViewController(SettingsController(), animated: true)
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
