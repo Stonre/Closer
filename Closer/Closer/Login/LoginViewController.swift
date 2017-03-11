@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
     let emailTextField = UITextField()
     let passwordTextField = UITextField()
     
+    let userDefault = UserDefaults.standard
+    
     var containerViewHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
@@ -143,7 +145,7 @@ class LoginViewController: UIViewController {
         emailTextField.placeholder = "Email address"
         emailTextField.delegate = self
         emailTextField.autocapitalizationType = .none
-        if let lastEmail = UserDefaults.standard.value(forKey: "userEmail") as? String {
+        if let lastEmail = userDefault.value(forKey: "userEmail") as? String {
             emailTextField.text = lastEmail
         }
         containerView.addSubview(emailTextField)
@@ -159,7 +161,13 @@ class LoginViewController: UIViewController {
         passwordTextField.placeholder = "Password"
         passwordTextField.delegate = self
         passwordTextField.isSecureTextEntry = true
-        passwordTextField.becomeFirstResponder()
+        if let lastEmail = emailTextField.text {
+            if let lastPassword = userDefault.value(forKey: lastEmail) as? String {
+                passwordTextField.text = lastPassword
+                handleLogin()
+            }
+        }
+//        passwordTextField.becomeFirstResponder()
         containerView.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor).isActive = true
@@ -262,8 +270,8 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            let userDefault = UserDefaults.standard
-            userDefault.setValue(email, forKey: "userEmail")
+            self.userDefault.setValue(email, forKey: "userEmail")
+            self.userDefault.setValue(password, forKey: email)
             
             self.present(DCViewController(), animated: true, completion: nil)
 

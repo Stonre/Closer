@@ -9,18 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ActivityReviewController: UIViewController {
-    
-    var activity: Activity?
-    
-//    init(activity a: Activity) {
-//        activity = a
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+class FullActivityReviewViewController: ActivityReviewViewController {
     
     let activityName: UILabel = {
         let label = UILabel()
@@ -183,7 +172,7 @@ class ActivityReviewController: UIViewController {
         setupLocationInfo()
         setupTagView()
         setupDescriptionView()
-        setupreleaserInfo()
+        setupReleaserInfo()
         setupBottomStack()
         setupTimeLabel()
     }
@@ -196,25 +185,29 @@ class ActivityReviewController: UIViewController {
         infoView.heightAnchor.constraint(equalToConstant: 220).isActive = true
     }
     
-    func loadData() {
+    override func loadData() {
         if let activity = activity as? GeneralActivity {
             activityName.text = activity.name
             userName.text = activity.userReleasing.userName
-            if let url = URL(string: activity.userReleasing.userProfileImageUrl!) {
-                URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                    if error != nil {
-                        print(error!)
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.userPortrait.image = UIImage(data: data!)
-                    }
-                    
-                }).resume()
+            if let portraitUrl = activity.userReleasing.userProfileImageUrl {
+                if let url = URL(string: portraitUrl) {
+                    URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                        if error != nil {
+                            print(error!)
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            self.userPortrait.image = UIImage(data: data!)
+                        }
+                        
+                    }).resume()
+                }
             }
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-            timeLabel.text = dateFormatter.string(from: activity.timeStart!)
+            if let timeStart = activity.timeStart {
+                timeLabel.text = dateFormatter.string(from: timeStart)
+            }
             if activity.isOnline {
                 locationIconView.image = #imageLiteral(resourceName: "online")
                 locationText.setTitle("在线", for: .normal)
@@ -244,7 +237,6 @@ class ActivityReviewController: UIViewController {
                 self!.descriptionView.loadHTMLString(htm, baseURL: nil)
             }
         }
-        
     }
     
     func setupActivityName() {
@@ -307,7 +299,7 @@ class ActivityReviewController: UIViewController {
         descriptionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func setupreleaserInfo() {
+    func setupReleaserInfo() {
         releaserView.addSubview(userPortrait)
         userPortrait.topAnchor.constraint(equalTo: releaserView.topAnchor, constant: 0).isActive = true
         userPortrait.bottomAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 0).isActive = true
@@ -374,52 +366,6 @@ class ActivityReviewController: UIViewController {
         goParticipateInButton.rightAnchor.constraint(equalTo: viewContainer3.rightAnchor, constant: 0).isActive = true
         goParticipateInButton.topAnchor.constraint(equalTo: viewContainer3.topAnchor, constant: 0).isActive = true
         goParticipateInButton.bottomAnchor.constraint(equalTo: viewContainer3.bottomAnchor, constant: 0).isActive = true
-    }
-    
-    private func generateHtmlBody(description: [DescriptionUnit]) -> String {
-        var body: String = "<div class = \"content\">"
-        
-        description.forEach {
-            switch $0.type {
-            case ContentType.Image:
-                print($0)
-                body += "<p><img class=\"content-image\" src=\($0.content) alt=\"\" /></p>"
-                break
-            case ContentType.Hyperlink:
-                var contents: [String] = $0.content.components(separatedBy: "::::::")
-                body += "<a href=\"\(contents[1])\">\(contents[0])</a>"
-                break
-            case ContentType.Text:
-                body += "<p>\($0.content)</p>"
-                break
-            default: break
-            }
-        }
-        
-        body += "</div>"
-        
-        return body
-    }
-    
-    private func prepareWebContent(body: String, css: [String]) -> String {
-        var html = "<html>"
-        html += "<head>"
-        css.forEach { html += "<link rel=\"stylesheet\" href=\($0)>" }
-        html += "<style>img{max-width:320px !important;}</style>"
-        html += "</head>"
-        html += "<body>"
-        html += "<div class=\"main-wrap content-wrap\">"
-        html += "<div class=\"content-inner\">"
-        html += "<div class=\"content\">"
-        html += body
-        html += "</div>"
-        html += "</div>"
-        html += "</div>"
-        html += "</body>"
-        
-        html += "</html>"
-        
-        return html
     }
 }
 

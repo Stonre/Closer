@@ -110,6 +110,10 @@ class SettingsController: UITableViewController {
         } catch let error as NSError {
             print("Sign out error %@", error)
         }
+        let userDefault = UserDefaults.standard
+        if let currEmail = userDefault.value(forKey: "userEmail") as? String {
+            userDefault.removeObject(forKey: currEmail)
+        }
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.window?.rootViewController = LoginViewController()
         }

@@ -12,6 +12,7 @@ import MapKit
 class ActivityMKPointAnnotation: MKPointAnnotation {
     
     var activityDescription: String?
+    var activity: Activity?
 
     /*
     // Only override draw() if you perform custom drawing.

@@ -23,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //    var discoverView: UIView?
     var mapView: MKMapView?
     var discriptionLabel: UILabel?
+    var activityReviewController: BriefActivityReviewViewController?
     var mdRatio: CGFloat = 0.5
     var activities = [Activity]()
     var selfLocation: CLLocation!
@@ -61,13 +62,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         discriptionLabel?.numberOfLines = 7
         discriptionLabel?.text = "This is an activity. \n"
         discriptionLabel?.textColor = UIColor.black
-
+    }
+    
+    private func addActivityReviewViewController() {
+        activityReviewController = BriefActivityReviewViewController()
+        self.addChildViewController(activityReviewController!)
+        activityReviewController?.view.frame = (discriptionLabel?.frame)!
+        activityReviewController?.view.backgroundColor = .white
+        view.addSubview((activityReviewController?.view)!)
     }
     
     private func setupView() {
         self.title = "附近的任务"
         addMapView()
         addLabel()
+        addActivityReviewViewController()
 //        self.navigationController?.hidesBarsOnTap = true
 //        let geocoder = CLGeocoder()
 //        geocoder.geocodeAddressString(location, completionHandler: {(placemarks, error) in
@@ -120,7 +129,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     annotation.coordinate.longitude = longitude
                     annotation.coordinate.latitude = latitude
                     annotation.title = name
-                    
+                    let descriptiont: [DescriptionUnit]
+                    let description4 = DescriptionUnit(type: ContentType.Text, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
+                    let description5 = DescriptionUnit(type: ContentType.Image, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
+                    let description6 = DescriptionUnit(type: ContentType.Hyperlink, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
+                    descriptiont = [description4, description5, description6]
+                    let user = PersonalUserForView(userName: "丁磊", userId: "4", gender: Gender.Female, age: 22)
+                    user.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait2.png?alt=media&token=fc65090f-fd7a-47f3-8a6a-bb4def659c32"
+                    annotation.activity = GeneralActivity(name: name, tags: ["hh"], authority: .Public, description: descriptiont, userReleasing: user, identity: "hh")
+                    annotation.activity?.timeStart = Date()
                     self.mapView?.addAnnotation(annotation)
                 }
             }
@@ -164,7 +181,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let anno = view.annotation as? ActivityMKPointAnnotation {
-            discriptionLabel?.text = anno.activityDescription!
+            activityReviewController?.activity = anno.activity
         }
 //        mapView.addAnnotation(view.annotation!)
     }

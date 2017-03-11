@@ -19,11 +19,13 @@ class CircleTableViewController: UITableViewController {
         }
     }
 
+    var newActivities = [Activity]()
     var activities = [Array<Activity>]() {
         didSet {
             tableView.reloadData()
         }
     }
+    var updateInfoLabel = UILabel()
     
     var searchText: String? {
         didSet {
@@ -99,6 +101,38 @@ class CircleTableViewController: UITableViewController {
         return
     }
     
+    private func keepUpdatingActivities() {
+        dbRef.child("activities").observe(.childChanged, with: { (snapshot) in
+            var activitiesSection = [Activity]()
+            let value = snapshot.value as? NSDictionary ?? NSDictionary()
+            for (_, activity) in value {
+                if let act = activity as? NSDictionary {
+                    let actName = act["name"] as? String ?? ""
+                    if actName.lowercased().contains(self.searchText!) {
+                        self.newActivities.append(self.dictionary2GeneralActivity(dictionary: act)!)
+                    }
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        return
+    }
+    
+    private func setupUpdateInfoLabel() {
+        view.addSubview(updateInfoLabel)
+        updateInfoLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        updateInfoLabel.textAlignment = .center
+        updateInfoLabel.backgroundColor = .green
+        updateInfoLabel.isHidden = true
+        
+        updateInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        updateInfoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        updateInfoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        updateInfoLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
+        updateInfoLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
     func dictionary2GeneralActivity(dictionary: NSDictionary) -> GeneralActivity? {
 //        let releasingUserID = dictionary["releasingUserID"] as? String ?? ""
         let actDescription = dictionary["description"] as? String ?? ""
@@ -117,44 +151,6 @@ class CircleTableViewController: UITableViewController {
         }
 //        tabBarController?.navigationItem.title = CircleTableViewController.viewTitle
     }
-    
-//    private func setupMainPageButton() {
-//        let homeButton = UIButton()
-//        homeButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
-//        homeButton.setImage(#imageLiteral(resourceName: "home-icon"), for: .normal)
-//        homeButton.addTarget(self, action: #selector(touchHome(_:)), for: .touchUpInside)
-//        
-//        let leftBarItem = UIBarButtonItem(customView: homeButton)
-//        tabBarController?.navigationItem.leftBarButtonItem = leftBarItem
-//    }
-//
-//    func touchHome(_ sender: UIButton) {
-//        //replace controller with Homepage controller
-//        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-//        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-//            //            tabBarController?.tabBar.isHidden = true
-//            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
-//        }
-//    }
-//    
-//    private func setupChatButton() {
-//        let chatButton = UIButton()
-//        chatButton.frame = CGRect(origin: CGPoint(x: 8, y:8), size: DiscoverViewController.buttomSize)
-//        chatButton.setImage(#imageLiteral(resourceName: "chat-icon"), for: .normal)
-//        chatButton.addTarget(self, action: #selector(touchChat(_:)), for: .touchUpInside)
-//        
-//        let rightBarItem = UIBarButtonItem(customView: chatButton)
-//        tabBarController?.navigationItem.rightBarButtonItem = rightBarItem
-//    }
-//    
-//    func touchChat(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "HomePage", bundle: nil)
-//        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-//            //tabBarController?.tabBar.isHidden = true
-//            navigationController!.pushViewController(controller.visibleViewController!, animated: true)
-//        }
-//    }
-    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +160,9 @@ class CircleTableViewController: UITableViewController {
         tableView.register(ActivityCell.self, forCellReuseIdentifier: CloserUtility.ActivityCellReuseId)
         tableView.tableFooterView?.isHidden = false
         searchText = currUser?.displayName!.lowercased()
+        setupRefreshControl()
+        keepUpdatingActivities()
+        setupUpdateInfoLabel()
         
 //        tableView.rowHeight = UITableViewAutomaticDimension
 //        tableView.estimatedRowHeight = 100
@@ -173,6 +172,35 @@ class CircleTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    private func setupRefreshControl() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.backgroundColor = .red
+        self.refreshControl?.addTarget(self, action: #selector(getLatestActivities), for: .valueChanged)
+    }
+    
+    func getLatestActivities() {
+        if (self.refreshControl != nil) {
+            var title = "refreshing"
+            self.refreshControl?.attributedTitle = NSAttributedString(string: title)
+            updateInfoLabel.text = "已更新\(newActivities.count)条活动"
+            view.bringSubview(toFront: updateInfoLabel)
+            let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(hideUpdateInfoLabel), userInfo: nil, repeats: false)
+            if newActivities.count == 0 {
+                self.refreshControl?.endRefreshing()
+                updateInfoLabel.isHidden = false
+                return
+            }
+            activities.insert(newActivities, at: 0)
+            newActivities.removeAll()
+            self.refreshControl?.endRefreshing()
+            updateInfoLabel.isHidden = false
+        }
+    }
+    
+    func hideUpdateInfoLabel() {
+        updateInfoLabel.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -230,6 +258,9 @@ class CircleTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let activityReviewViewController = FullActivityReviewViewController()
+        activityReviewViewController.activity = activities[indexPath.section][indexPath.row]
+        navigationController?.pushViewController(activityReviewViewController, animated: true)
         return
     }
     
