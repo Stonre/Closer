@@ -27,7 +27,7 @@ class RadioButtonView: UIButton {
     init(_ optionName: String) {
         super.init(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         self.optionName = optionName
-        //        self.backgroundColor = .red
+//        self.backgroundColor = .red
         setupIndicator()
         setupNameLabel(optionName)
     }
@@ -75,6 +75,7 @@ class RadioButtonView: UIButton {
     
     private func setupTextField(withPlaceholder placeholder: String) {
         self.addSubview(attachedTextField)
+//        attachedTextField.backgroundColor = .blue
 //        attachedTextField.isUserInteractionEnabled = true
         attachedTextField.placeholder = placeholder
         attachedTextField.font = UIFont.preferredFont(forTextStyle: .body)
@@ -83,6 +84,10 @@ class RadioButtonView: UIButton {
         attachedTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
         attachedTextField.heightAnchor.constraint(equalToConstant: 24).isActive = true
         attachedTextField.rightAnchor.constraint(equalTo: nameLabel.rightAnchor, constant: 0).isActive = true
+    }
+    
+    func getTextFieldText() -> String? {
+        return attachedText
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -98,6 +103,7 @@ class RadioButtonsViewController: UIViewController {
     
     var radioButtons = [RadioButtonView]()
     var selectedButton: UIButton?
+    var textFields = [String: RadioButtonView]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +132,7 @@ class RadioButtonsViewController: UIViewController {
     
     public func addOption(optionName: String, withTextFieldPlaceholder placeholder: String) {
         let newRadioButton = RadioButtonView(optionName, withTextFieldPlaceholder: placeholder)
+        textFields[placeholder] = newRadioButton
         containerViewHeight += 96
         addButton(newRadioButton)
     }
@@ -143,9 +150,11 @@ class RadioButtonsViewController: UIViewController {
         selectedButton = sender
         for btn in radioButtons {
             btn.indicator.isSelected = false
+            btn.attachedTextField.isUserInteractionEnabled = false
         }
         if let radioSender = sender as? RadioButtonView {
             radioSender.indicator.isSelected = true
+            radioSender.attachedTextField.isUserInteractionEnabled = true
         }
     }
     
@@ -154,5 +163,9 @@ class RadioButtonsViewController: UIViewController {
             return sb.getName()
         }
         return nil
+    }
+    
+    func getTextFieldText(byPlaceholder placeholder: String) -> String? {
+        return textFields[placeholder]?.getTextFieldText()
     }
 }

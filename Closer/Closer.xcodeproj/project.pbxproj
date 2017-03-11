@@ -23,6 +23,8 @@
 		3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE521E36A04700A4FFDD /* ActivityCell.swift */; };
 		3E24EE581E36ADF800A4FFDD /* DCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE571E36ADF800A4FFDD /* DCViewController.swift */; };
 		3E24EE5A1E397D0600A4FFDD /* ActivitySearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */; };
+		3E3562F41E73BB990023C917 /* BriefActivityReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3562F31E73BB990023C917 /* BriefActivityReviewViewController.swift */; };
+		3E3562F61E73BC070023C917 /* ActivityReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3562F51E73BC070023C917 /* ActivityReviewViewController.swift */; };
 		3E6549E21E46749400D41BAA /* ActivityMKAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6549E11E46749400D41BAA /* ActivityMKAnnotationView.swift */; };
 		3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */; };
 		3E78FFB31E57B0F800507F97 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFB21E57B0F800507F97 /* utility.swift */; };
@@ -33,7 +35,7 @@
 		3E78FFBF1E5C17B400507F97 /* NewActivityContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFBE1E5C17B400507F97 /* NewActivityContentViewController.swift */; };
 		3E78FFC11E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFC01E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift */; };
 		3E78FFC31E5D709700507F97 /* RadioButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78FFC21E5D709700507F97 /* RadioButtonsViewController.swift */; };
-		D70762701E4FF0C200D7833B /* ActivityReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */; };
+		D70762701E4FF0C200D7833B /* FullActivityReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D707626F1E4FF0C200D7833B /* FullActivityReviewController.swift */; };
 		D70A32FA1E59107200C023B4 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A32F91E59107200C023B4 /* FetchData.swift */; };
 		D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */; };
 		D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7EF31E29EE4C005C6293 /* Activity.swift */; };
@@ -80,6 +82,8 @@
 		3E24EE521E36A04700A4FFDD /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityCell.swift; path = "Discover & Circle/ActivityCell.swift"; sourceTree = "<group>"; };
 		3E24EE571E36ADF800A4FFDD /* DCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DCViewController.swift; path = "Discover & Circle/DCViewController.swift"; sourceTree = "<group>"; };
 		3E24EE591E397D0600A4FFDD /* ActivitySearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitySearchController.swift; path = "Discover & Circle/Search Bar/ActivitySearchController.swift"; sourceTree = "<group>"; };
+		3E3562F31E73BB990023C917 /* BriefActivityReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BriefActivityReviewViewController.swift; path = ActivityReview/BriefActivityReviewViewController.swift; sourceTree = "<group>"; };
+		3E3562F51E73BC070023C917 /* ActivityReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityReviewViewController.swift; path = ActivityReview/ActivityReviewViewController.swift; sourceTree = "<group>"; };
 		3E6549E11E46749400D41BAA /* ActivityMKAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityMKAnnotationView.swift; path = ActivityMapView/ActivityMKAnnotationView.swift; sourceTree = "<group>"; };
 		3E6549E51E50139D00D41BAA /* TestLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestLoginViewController.swift; path = Login/TestLoginViewController.swift; sourceTree = "<group>"; };
 		3E78FFB21E57B0F800507F97 /* utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
@@ -92,7 +96,7 @@
 		3E78FFC21E5D709700507F97 /* RadioButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioButtonsViewController.swift; path = "New Activity/RadioButtonsViewController.swift"; sourceTree = "<group>"; };
 		50F25207255F132C1B1DC24B /* Pods-Closer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.release.xcconfig"; sourceTree = "<group>"; };
 		CA32EC040E81732242A00E21 /* Pods-Closer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Closer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Closer/Pods-Closer.debug.xcconfig"; sourceTree = "<group>"; };
-		D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityReviewController.swift; path = ActivityReview/ActivityReviewController.swift; sourceTree = "<group>"; };
+		D707626F1E4FF0C200D7833B /* FullActivityReviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullActivityReviewController.swift; path = ActivityReview/FullActivityReviewController.swift; sourceTree = "<group>"; };
 		D70A32F91E59107200C023B4 /* FetchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchData.swift; path = Service/FetchData.swift; sourceTree = "<group>"; };
 		D72F7EF21E29EE4C005C6293 /* AchievementReward.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AchievementReward.swift; path = Models/AchievementReward.swift; sourceTree = "<group>"; };
 		D72F7EF31E29EE4C005C6293 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Activity.swift; path = Models/Activity.swift; sourceTree = "<group>"; };
@@ -192,7 +196,9 @@
 		D707626E1E4FF0AF00D7833B /* ActivityReleaseAndReview */ = {
 			isa = PBXGroup;
 			children = (
-				D707626F1E4FF0C200D7833B /* ActivityReviewController.swift */,
+				D707626F1E4FF0C200D7833B /* FullActivityReviewController.swift */,
+				3E3562F31E73BB990023C917 /* BriefActivityReviewViewController.swift */,
+				3E3562F51E73BC070023C917 /* ActivityReviewViewController.swift */,
 			);
 			name = ActivityReleaseAndReview;
 			sourceTree = "<group>";
@@ -452,10 +458,12 @@
 				3E78FFBB1E5C028D00507F97 /* NewActivityTimeLocationViewController.swift in Sources */,
 				D72F7F111E29EED4005C6293 /* SideMenuCategoryTableViewCell.swift in Sources */,
 				D72F7EF91E29EE4C005C6293 /* Activity.swift in Sources */,
-				D70762701E4FF0C200D7833B /* ActivityReviewController.swift in Sources */,
+				D70762701E4FF0C200D7833B /* FullActivityReviewController.swift in Sources */,
 				D7532CCA1E6AAEFD0019B580 /* SettingsController.swift in Sources */,
+				3E3562F61E73BC070023C917 /* ActivityReviewViewController.swift in Sources */,
 				194BE4AD1E2AD2C8004DF108 /* PersonalChat.swift in Sources */,
 				194BE4AC1E2AD2C8004DF108 /* EventChat.swift in Sources */,
+				3E3562F41E73BB990023C917 /* BriefActivityReviewViewController.swift in Sources */,
 				D7D568611E45CE1B00CC68ED /* OtherUserHomePageController.swift in Sources */,
 				3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */,
 				199E87E81E501A26003F85B6 /* ChatListViewController.swift in Sources */,

@@ -31,11 +31,11 @@ class NewActivityAuthorizationViewController: NewActivityContentViewController {
         titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
     }
 
-
     private func setupAuthorizationRadioButtons() {
         authorizationRadioButtons.addOption(optionName: "指定好友或联系人", withTextFieldPlaceholder: "请输入好友或联系人姓名")
         authorizationRadioButtons.addOption(optionName: "好友可见")
         authorizationRadioButtons.addOption(optionName: "联系人可见")
+        authorizationRadioButtons.addOption(optionName: "好友和联系人可见")
         authorizationRadioButtons.addOption(optionName: "公开")
 //        authorizationRadioButtons.view.isUserInteractionEnabled = true
 //        authorizationRadioButtons.view.backgroundColor = .yellow
@@ -47,11 +47,6 @@ class NewActivityAuthorizationViewController: NewActivityContentViewController {
         authorizationRadioButtons.view.leftAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: 0).isActive = true
         authorizationRadioButtons.view.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         authorizationRadioButtons.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func getAuth() -> String? {
@@ -71,15 +66,7 @@ class NewActivityAuthorizationViewController: NewActivityContentViewController {
         return nil
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func getTextFieldText(byPlaceholder placeholder: String) -> String? {
+        return authorizationRadioButtons.getTextFieldText(byPlaceholder: placeholder)
     }
-    */
-
 }

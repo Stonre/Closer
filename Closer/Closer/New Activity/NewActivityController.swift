@@ -59,18 +59,36 @@ class NewActivityController: UIViewController {
                         "description": description,
                         "authorization": auth,
                         "releasingUserID": currUser.uid,
-                        "releasingUserName": currUser.displayName,
-                        "locationName": location]
+                        "releasingUserName": currUser.displayName ?? "unknown",
+                        "locationName": location,
+                        "numberOfParticipants": 0] as [String : Any]
+        
+        var assignedParticipants = [String: Int]()
+        if auth == "OnlyAssignedFriendsOrContacts" {
+            let names = authViewController.getTextFieldText(byPlaceholder: "请输入好友或联系人姓名")
+            if let names = names {
+                let nameArr = names.characters.split(separator: ",").map(String.init)
+                for name in nameArr {
+                    assignedParticipants[name] = 1
+                }
+            }
+            activity["assignedParticipants"] = assignedParticipants
+        }
+        
+        if let categories = timeLocationTagViewController.getCategories() {
+            activity["catrgories"] = categories
+        }
+        
         if let tags = timeLocationTagViewController.getTags() {
             activity["tags"] = tags
         }
         
         if let start = timeLocationTagViewController.getStartingTime() {
-            activity["startingTime"] = String(start.timeIntervalSince1970)
+            activity["timeStartStamp"] = start.timeIntervalSince1970
         }
         
         if let end = timeLocationTagViewController.getEndTime() {
-            activity["endingTime"] = String(end.timeIntervalSince1970)
+            activity["timeEndStamp"] = end.timeIntervalSince1970
         }
         
         let briefActivity = ["name": name,
@@ -78,7 +96,8 @@ class NewActivityController: UIViewController {
         let updates = ["newActivities/\(activityId)": activity,
                        "users/\(currUser.uid)/activities/\(activityId)": briefActivity]
         dbRef.updateChildValues(updates)
-        navigationController?.popViewController(animated: true)
+//        dbRef.updateChildValues(["newActivities/\(activityId)/assignedParticipants": assignedParticipants])
+        let _ = navigationController?.popViewController(animated: true)
     }
 
     private func setupViewControllers() {

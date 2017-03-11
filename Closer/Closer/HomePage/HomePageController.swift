@@ -394,12 +394,12 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tarBarSelect {
         case 0:
-            let controller = ActivityReviewController()
+            let controller = FullActivityReviewViewController()
             controller.activity = activitiesParticipatedIn[indexPath.row]
             self.navigationController?.pushViewController(controller, animated: true)
             break
         case 1:
-            let controller = ActivityReviewController()
+            let controller = FullActivityReviewViewController()
             controller.activity = activitiesReleased[indexPath.row]
             self.navigationController?.pushViewController(controller, animated: true)
             break
