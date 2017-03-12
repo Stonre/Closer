@@ -74,27 +74,6 @@ class ChatCell: UITableViewCell {
         return timeView
     }()
     
-    var personalChat: PersonalChat? {
-        didSet {
-            updatePersonalChatUI()
-        }
-    }
-    
-    var eventChat: EventChat? {
-        didSet {
-            updateEventChatUI()
-        }
-    }
-    
-    private func updatePersonalChatUI() {
-        chatTimeLabel.text = personalChat?.lastContactTime
-        detailTextLabel?.text = personalChat?.lastMessage
-        textLabel?.text = personalChat?.person.displayName
-        if let profileImageUrl = personalChat?.person.userProfileImage {
-            setupProfileImage(imageUrl: profileImageUrl)
-        }
-    }
-    
     private func setupProfileImage(imageUrl: String) {
         if let url = URL(string: imageUrl) {
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
@@ -110,10 +89,31 @@ class ChatCell: UITableViewCell {
         }
     }
     
+    var personalChat: PersonalChat? {
+        didSet {
+            updatePersonalChatUI()
+        }
+    }
+    
+    var eventChat: ActivityChatProfile? {
+        didSet {
+            updateEventChatUI()
+        }
+    }
+    
+    private func updatePersonalChatUI() {
+        chatTimeLabel.text = personalChat?.lastContactTime
+        detailTextLabel?.text = personalChat?.lastMessage
+        textLabel?.text = personalChat?.person.displayName
+        if let profileImageUrl = personalChat?.person.userProfileImage {
+            setupProfileImage(imageUrl: profileImageUrl)
+        }
+    }
+    
     private func updateEventChatUI() {
-        chatTimeLabel.text = eventChat?.lastContactTime
-        detailTextLabel?.text = eventChat?.lastMessage
-        textLabel?.text = eventChat?.eventName
+        //chatTimeLabel.text = eventChat?.lastContactTime
+        //detailTextLabel?.text = eventChat?.lastMessage
+        textLabel?.text = eventChat?.activityName
         //profileImageView.image = UIImage(data:eventChat?.groupImage as! Data,scale:1.0)
     }
     

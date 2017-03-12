@@ -33,6 +33,13 @@ class OtherUserTableViewCell: UITableViewCell {
             updateUI()
         }
     }
+    
+    var activity: ActivityChatProfile? {
+        didSet {
+            updateActivityUI()
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
@@ -50,6 +57,17 @@ class OtherUserTableViewCell: UITableViewCell {
                 setupProfileImage(imageUrl: profileImageUrlString)
             }
             userName.text = user.userName
+        }
+    }
+    
+    func updateActivityUI() {
+        profileImageView.image = nil
+        userName.text = nil
+        if let activity = self.activity {
+            if let profileImageUrlString = activity.userReleasing.userProfileImageUrl {
+                setupProfileImage(imageUrl: profileImageUrlString)
+            }
+            userName.text = activity.activityName
         }
     }
     

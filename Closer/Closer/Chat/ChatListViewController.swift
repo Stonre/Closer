@@ -14,7 +14,7 @@ import Firebase
     case personalChatSection
 }*/
 
-class ChatListViewController: UITableViewController, UISearchResultsUpdating {
+class ChatListViewController: UITableViewController, UISearchResultsUpdating, UINavigationControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
     var cellId = "cellId"
     
@@ -22,33 +22,40 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating {
     var messagesDictionary = [String: Message]()
     
     //do the search
-    var searchController = UISearchController(searchResultsController: nil)
-    
-    func filterContentForSearchText(searchText: String, scope: String = "AllChats") {
-        //filter
-        
-        //update
-        tableView.reloadData()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchText: searchController.searchBar.text!)
-    }
+    let searchScopeController = AllUserViewcontroller()
+    var searchController: UISearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.tableHeaderView = self.searchController.searchBar
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        
         self.navigationItem.title = "聊天"
+        //self.searchScopeController = AllUserViewcontroller()
+        searchController = UISearchController(searchResultsController: searchScopeController)
+        //searchScopeController.navigationController?.delegate = self
+        searchScopeController.tableView.delegate = self
+        searchController?.delegate = self
+        tableView.tableHeaderView = self.searchController?.searchBar
+        searchController?.searchResultsUpdater = self
+        searchController?.dimsBackgroundDuringPresentation = true
+        searchController?.searchBar.delegate = self
+        definesPresentationContext = true
         
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
         
-        //observeMessages()
         observeUserMessages()
+    }
+    
+    /*func filterContentForSearchText(searchText: String, scope: String = "AllChats") {
+        //filter
+        
+        //update
+        tableView.reloadData()
+    }*/
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        searchScopeController.searchText = searchController.searchBar.text!
+        //self.navigationController?.pushViewController(searchScopeController, animated: true)
+        //filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
     
     func observeUserMessages() {
@@ -146,19 +153,48 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatView = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        let message = messages[indexPath.row]
-        guard let partnerId = message.chatPartnerId() else {
-            return
-        }
-        let userRef = FIRDatabase.database().reference().child("users").child(partnerId)
-        userRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: Any] {
-                let userName = dictionary["name"] as! String
-                let user = PersonalChatProfile(userId: snapshot.key, userName: userName, userNickname: nil, userProfileImage: "")
-                chatView.personalUser = user
-                self.navigationController?.pushViewController(chatView, animated: true)
+        if tableView === self.tableView {
+            let message = messages[indexPath.row]
+            guard let partnerId = message.chatPartnerId() else {
+                return
             }
-        }, withCancel: nil)
+            let userRef = FIRDatabase.database().reference().child("users").child(partnerId)
+            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: Any] {
+                    let userName = dictionary["name"] as! String
+                    //let user = PersonalChatProfile(userId: snapshot.key, userName: userName, userNickname: nil, userProfileImage: "")
+                    let user = PersonalUserForView(userName: userName, userId: snapshot.key, gender: Gender.Female, age: 22)
+                    chatView.personalUser = user
+                    self.navigationController?.pushViewController(chatView, animated: true)
+                }
+            }, withCancel: nil)
+        }
+        
+        else {
+            switch (indexPath as NSIndexPath).section {
+            case SearchSection.activities.rawValue:
+                if searchScopeController.searchText != nil && searchScopeController.searchText != "" {
+                    chatView.eventChat = searchScopeController.filteredActivities[(indexPath as NSIndexPath).row]
+                } else {
+                    chatView.eventChat = searchScopeController.activities[(indexPath as NSIndexPath).row]
+                }
+            case SearchSection.friends.rawValue:
+                if searchScopeController.searchText != nil && searchScopeController.searchText != "" {
+                    chatView.personalUser = searchScopeController.filteredFriends[(indexPath as NSIndexPath).row]
+                } else {
+                    chatView.personalUser = searchScopeController.friends[(indexPath as NSIndexPath).row]
+                }
+            case SearchSection.contacts.rawValue:
+                if searchScopeController.searchText != nil && searchScopeController.searchText != "" {
+                    chatView.personalUser = searchScopeController.filteredContacts[(indexPath as NSIndexPath).row]
+                } else {
+                    chatView.personalUser = searchScopeController.contacts[(indexPath as NSIndexPath).row]
+                }
+            default:
+                return
+            }
+            self.navigationController?.pushViewController(chatView, animated: true)
+        }
 
     }
 
