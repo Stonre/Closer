@@ -47,7 +47,7 @@ class CircleTableViewController: UITableViewController {
             for _ in 1...i{
                 description += "This is Activity \(i) "
             }
-            let du = DescriptionUnit(type: .Text, content: description)
+            let du = DescriptionUnit(type: ContentType.Text.rawValue, content: description)
             let act = GeneralActivity(name: "\(currUserName)'s Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [du], userReleasing: PersonalUserForView(userName: currUserName, userId: currUserID, gender: Gender.Female, age: 18), identity: currUserID)
             let key = dbRef.child("activities").childByAutoId().key
             let activity = ["releasingUserID": currUserID,
@@ -74,7 +74,7 @@ class CircleTableViewController: UITableViewController {
                 for _ in 1...i{
                     description += "This is Activity \(i) "
                 }
-                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: description)], userReleasing: PersonalUserForView(userName: "User \(i)", userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set"))
+                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: ContentType.Text.rawValue, content: description)], userReleasing: PersonalUserForView(userName: "User \(i)", userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set"))
             }
             activities.append(defaultSection)
         } else {
@@ -126,11 +126,13 @@ class CircleTableViewController: UITableViewController {
         updateInfoLabel.backgroundColor = .green
         updateInfoLabel.isHidden = true
         
-        updateInfoLabel.translatesAutoresizingMaskIntoConstraints = false
-        updateInfoLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-        updateInfoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        updateInfoLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
-        updateInfoLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        updateInfoLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 24)
+        
+//        updateInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+//        updateInfoLabel.topAnchor.constraint(equalTo: (navigationController?.navigationBar.bottomAnchor)!, constant: 0).isActive = true
+//        updateInfoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+//        updateInfoLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 0).isActive = true
+//        updateInfoLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func dictionary2GeneralActivity(dictionary: NSDictionary) -> GeneralActivity? {
@@ -139,7 +141,7 @@ class CircleTableViewController: UITableViewController {
         let releasingUserName = dictionary["releasingUserName"] as? String ?? ""
         let releasingUserId = dictionary["releasingUserID"] as? String ?? ""
         let actName = dictionary["name"] as? String ?? ""
-        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: .Text, content: actDescription)], userReleasing: PersonalUserForView(userName: releasingUserName, userId: releasingUserId, gender: Gender.Female, age: 18), identity: "not set")
+        return GeneralActivity(name: actName, tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: ContentType.Text.rawValue, content: actDescription)], userReleasing: PersonalUserForView(userName: releasingUserName, userId: releasingUserId, gender: Gender.Female, age: 18), identity: "not set")
         
     }
     
@@ -185,7 +187,8 @@ class CircleTableViewController: UITableViewController {
             var title = "refreshing"
             self.refreshControl?.attributedTitle = NSAttributedString(string: title)
             updateInfoLabel.text = "已更新\(newActivities.count)条活动"
-            view.bringSubview(toFront: updateInfoLabel)
+            view.bringSubview(toFront: updateInfoLabel
+            )
             let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(hideUpdateInfoLabel), userInfo: nil, repeats: false)
             if newActivities.count == 0 {
                 self.refreshControl?.endRefreshing()

@@ -26,6 +26,8 @@ class NewActivityController: UIViewController {
     let descriptionViewController = NewActivityDescriptionViewController()
     
     var pages = [UIViewController]()
+    let dbRef = FIRDatabase.database().reference()
+    let currUser = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,26 +42,25 @@ class NewActivityController: UIViewController {
     
     private func setupReleaseButton() {
         let releaseButton = UIButton(type: .system)
-        releaseButton.frame = CGRect(x: 8.0, y: 8.0, width: 60, height: 28)
-        releaseButton.setTitle("发布", for: .normal)
+        releaseButton.frame = CGRect(x: 0.0, y: 8.0, width: 60, height: 28)
+        releaseButton.setTitle("预览", for: .normal)
+        releaseButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         releaseButton.addTarget(self, action: #selector(touchRelease), for: .touchUpInside)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: releaseButton)
     }
     
     func touchRelease() {
-        guard let name = nameViewController.getName(), let auth = authViewController.getAuth(), let description = descriptionViewController.getDescription(), let currUser = FIRAuth.auth()?.currentUser, let location = timeLocationTagViewController.getLocation()
+        guard let name = nameViewController.getName(), let auth = authViewController.getAuth(), let location = timeLocationTagViewController.getLocation()
             else {
                 return
         }
         
-        let dbRef = FIRDatabase.database().reference()
         let activityId = dbRef.child("newActivities").childByAutoId().key
         var activity = ["name": name,
-                        "description": description,
                         "authorization": auth,
-                        "releasingUserID": currUser.uid,
-                        "releasingUserName": currUser.displayName ?? "unknown",
+                        "releasingUserID": currUser?.uid ?? "unkonwn",
+                        "releasingUserName": currUser?.displayName ?? "unknown",
                         "locationName": location,
                         "numberOfParticipants": 0] as [String : Any]
         
@@ -91,14 +92,97 @@ class NewActivityController: UIViewController {
             activity["timeEndStamp"] = end.timeIntervalSince1970
         }
         
-        let briefActivity = ["name": name,
-                             "description": description]
+        let description = descriptionViewController.getDescription()
+        formatDescription(activityId: activityId, description: description)
+        //        var descriptionDic = [String: [String: String]]()
+        //        var index: Int = 0
+        //        for unit in description {
+        //            descriptionDic[String(index)] = ["type": unit.type,
+        //                                             "content": unit.content]
+        //            index += 1
+        //        }
+        //        activity["description"] = descriptionDic
+
+        
+        let briefActivity = ["name": name] as [String : Any]
         let updates = ["newActivities/\(activityId)": activity,
-                       "users/\(currUser.uid)/activities/\(activityId)": briefActivity]
-        dbRef.updateChildValues(updates)
+                       "users/\(currUser?.uid)/activities/\(activityId)": briefActivity]
+//        dbRef.updateChildValues(updates)
+        dbRef.updateChildValues(updates) { (error, dbRef) in
+            if error != nil {
+                print(error ?? "Error!")
+                return
+            }
+            self.formatDescription(activityId: activityId, description: description)
+        }
 //        dbRef.updateChildValues(["newActivities/\(activityId)/assignedParticipants": assignedParticipants])
         let _ = navigationController?.popViewController(animated: true)
     }
+    
+    func formatDescription(activityId: String, description: NSAttributedString) {
+//        formattedDescription = [DescriptionUnit]()
+        if description == NSAttributedString(string: "") {
+            return
+        } else {
+            let range = NSMakeRange(0, description.length)
+            var index: Int = 0
+            description.enumerateAttributes(in: range, options: [], using: { (attributesDic, range, pointer) in
+                if let attachments = attributesDic as? NSDictionary {
+                    let pureString = description.attributedSubstring(from: range).string
+                    var isImage = false
+                    for (key, obj) in attachments {
+                        if let type = key as? NSString {
+//                            print(type)
+                            if type == "NSAttachment" {
+                                let att = obj as! NSTextAttachment
+                                if att.image != nil {
+                                    isImage = true
+                                    uploadImageToFirebase(activityId: activityId, image: att.image!, index: index)
+                                }
+                            }
+                        }
+                    }
+                    if isImage == false {
+                        let descriptionUnit = ["type": ContentType.Text.rawValue,
+                                               "content": pureString]
+                        let updates = ["newActivities/\(activityId)/description/\(index)": descriptionUnit,
+                                       "users/\(currUser!.uid)/activities/\(activityId)/description/\(index)": descriptionUnit]
+                        dbRef.updateChildValues(updates)
+                    }
+                }
+                index += 1
+            })
+        }
+    }
+    
+    private func uploadImageToFirebase(activityId: String, image: UIImage, index: Int) {
+        var downloadUrlString: String?
+        //        let data: Data = UIImagePNGRepresentation(image)!
+        let data = UIImageJPEGRepresentation(image, 0.7)!
+        let metaData = FIRStorageMetadata()
+        metaData.contentType = "image/jpeg"
+        let imageName = NSUUID().uuidString
+        let storageRef = FIRStorage.storage().reference().child("activity-images").child("\(imageName).png")
+        storageRef.put(data as Data, metadata: metaData) { (storageMetadata, error) in
+            if error != nil {
+                print(error ?? "Error!")
+                return
+            }
+            downloadUrlString = storageMetadata?.downloadURL()?.absoluteString
+            if downloadUrlString != nil {
+                self.updateFormattedDescription(activityId: activityId, type: ContentType.Image, downloadUrl: downloadUrlString!, index: index)
+            }
+        }
+    }
+    
+    private func updateFormattedDescription(activityId: String, type: ContentType, downloadUrl: String, index: Int) {
+        let descriptionUnit = ["type": type.rawValue,
+                               "content": downloadUrl]
+        let updates = ["newActivities/\(activityId)/description/\(index)": descriptionUnit,
+                       "users/\(currUser!.uid)/activities/\(activityId)/description/\(index)": descriptionUnit]
+        dbRef.updateChildValues(updates)
+    }
+
 
     private func setupViewControllers() {
         self.addChildViewController(pageViewController)
@@ -106,7 +190,7 @@ class NewActivityController: UIViewController {
         
         let pcAppearance = UIPageControl.appearance()
         pcAppearance.pageIndicatorTintColor = .lightGray
-        pcAppearance.backgroundColor = .red
+        pcAppearance.backgroundColor = .white
         
         pageViewController.setViewControllers([nameViewController], direction: .forward, animated: true) { (flag) in
         }

@@ -27,16 +27,16 @@ enum Authority: String {
 
 ///Content type for description
 enum ContentType: String {
-    case Image
-    case Text
-    case Voice
-    case Video
-    case Hyperlink
+    case Image = "Image"
+    case Text = "Text"
+    case Voice = "Voice"
+    case Video = "Video"
+    case Hyperlink = "Hyperlink"
 }
 
 ///struct to define the description unit of an activity, which contains two members: type and content. Type is a data type of ContentType defined above in this file and content is String type. When it's used, user might first need to check the type of a description unit and then based on the type, use the content.
 struct DescriptionUnit {
-    var type: ContentType
+    var type: String
     var content: String
 }
 
