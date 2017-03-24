@@ -58,6 +58,8 @@ class NewActivityAuthorizationViewController: NewActivityContentViewController {
                 return "OnlyFriends"
             case "联系人可见":
                 return "OnlyContacts"
+            case "好友和联系人可见":
+                return "FriendsAndContacts"
             case "公开":
                 return "Public"
             default: break

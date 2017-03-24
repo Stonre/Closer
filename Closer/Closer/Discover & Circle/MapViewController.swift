@@ -130,9 +130,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     annotation.coordinate.latitude = latitude
                     annotation.title = name
                     let descriptiont: [DescriptionUnit]
-                    let description4 = DescriptionUnit(type: ContentType.Text, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
-                    let description5 = DescriptionUnit(type: ContentType.Image, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
-                    let description6 = DescriptionUnit(type: ContentType.Hyperlink, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
+                    let description4 = DescriptionUnit(type: ContentType.Text.rawValue, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
+                    let description5 = DescriptionUnit(type: ContentType.Image.rawValue, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
+                    let description6 = DescriptionUnit(type: ContentType.Hyperlink.rawValue, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
                     descriptiont = [description4, description5, description6]
                     let user = PersonalUserForView(userName: "丁磊", userId: "4", gender: Gender.Female, age: 22)
                     user.userProfileImageUrl = "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/sampleHeaderPortrait2.png?alt=media&token=fc65090f-fd7a-47f3-8a6a-bb4def659c32"
@@ -243,7 +243,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for i in 1...15 {
             let ref = FIRDatabase.database().reference().child("geo-activities")
             let key = ref.childByAutoId().key
-            let description = DescriptionUnit(type: .Text, content: "This is Activity \(i) ")
+            let description = DescriptionUnit(type: ContentType.Text.rawValue, content: "This is Activity \(i) ")
             let generalActivity = GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [description], userReleasing: PersonalUserForView(userName: "User \(i)", userId: currUserId, gender: Gender.Female, age: 18), identity: key)
             var randomDistance = (Double(arc4random()) / Double(UINT32_MAX) - 0.5) / 50.0
             let longitude = selfLocation.coordinate.longitude.advanced(by: randomDistance)

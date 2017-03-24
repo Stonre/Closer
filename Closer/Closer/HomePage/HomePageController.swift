@@ -455,9 +455,9 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         contacts.append(user2)
         
         let description: [DescriptionUnit]
-        let description1 = DescriptionUnit(type: ContentType.Text, content: "真是太兴奋了，真的是掩饰不了自己的期待，Closer就快要上线了！")
-        let description2 = DescriptionUnit(type: ContentType.Image, content: "https://pic3.zhimg.com/v2-897dde8d58d235a211c3774f3a7648ea_b.png")
-        let description3 = DescriptionUnit(type: ContentType.Hyperlink, content: "Amazon::::::https://www.amazon.com/")
+        let description1 = DescriptionUnit(type: ContentType.Text.rawValue, content: "真是太兴奋了，真的是掩饰不了自己的期待，Closer就快要上线了！")
+        let description2 = DescriptionUnit(type: ContentType.Image.rawValue, content: "https://pic3.zhimg.com/v2-897dde8d58d235a211c3774f3a7648ea_b.png")
+        let description3 = DescriptionUnit(type: ContentType.Hyperlink.rawValue, content: "Amazon::::::https://www.amazon.com/")
         description = [description1, description2, description3]
         let activity1 = GeneralActivity(name: "去改变世界吧", tags: ["热情", "活力"], authority: Authority.Public, description: description, userReleasing: user1, identity: "7feuf289f89s89f8f")
         activity1.timeStart = Date()
@@ -465,9 +465,9 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         activity1.location = CLLocation(latitude: 37, longitude: 122)
         
         let descriptiont: [DescriptionUnit]
-        let description4 = DescriptionUnit(type: ContentType.Text, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
-        let description5 = DescriptionUnit(type: ContentType.Image, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
-        let description6 = DescriptionUnit(type: ContentType.Hyperlink, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
+        let description4 = DescriptionUnit(type: ContentType.Text.rawValue, content: "让我们加入明天的Closer的活动吧，我认为这太兴奋了。任何人如果想加入，不要犹豫，我们欢迎你！具体的活动内容如下：\n1.跟大神王凯铭学长讨论学（duan）术（zi）问题。2.跟Closer创始团队讨论创业经历")
+        let description5 = DescriptionUnit(type: ContentType.Image.rawValue, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
+        let description6 = DescriptionUnit(type: ContentType.Hyperlink.rawValue, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
         descriptiont = [description4, description5, description6]
         let activity2 = GeneralActivity(name: "去看看上海交大吧！", tags: ["Closer", "活动"], authority: Authority.Public, description: descriptiont, userReleasing: user2, identity: "fjaioef2308f90w2")
         activity2.timeStart = Date()
@@ -475,9 +475,9 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         activity2.location = CLLocation(latitude: 37, longitude: 122)
         
         let descriptiontt: [DescriptionUnit]
-        let description7 = DescriptionUnit(type: ContentType.Text, content: "明天有谁想一起来吃饭的？新开的新疆餐厅很不错，就在拖鞋门口，时间是晚上6点半，地点在拖鞋门口直走左拐100米处，欢迎大家一起来参加啊~")
-        let description8 = DescriptionUnit(type: ContentType.Image, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
-        let description9 = DescriptionUnit(type: ContentType.Hyperlink, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
+        let description7 = DescriptionUnit(type: ContentType.Text.rawValue, content: "明天有谁想一起来吃饭的？新开的新疆餐厅很不错，就在拖鞋门口，时间是晚上6点半，地点在拖鞋门口直走左拐100米处，欢迎大家一起来参加啊~")
+        let description8 = DescriptionUnit(type: ContentType.Image.rawValue, content: "https://firebasestorage.googleapis.com/v0/b/closer-17ee2.appspot.com/o/mybackground2.jpg?alt=media&token=cd9368de-5ea1-43e0-b783-e05ea3a0c53b")
+        let description9 = DescriptionUnit(type: ContentType.Hyperlink.rawValue, content: "上海交通大学::::::http://vol.sjtu.edu.cn/newalpha/")
         descriptiontt = [description7, description8, description9]
         let activity3 = GeneralActivity(name: "聚餐，一起来尝尝新开的新疆餐厅吧！", tags: ["聚餐", "活动"], authority: Authority.Public, description: descriptiontt, userReleasing: user3, identity: "fjaioef2308f90w2")
         activity3.timeStart = Date()

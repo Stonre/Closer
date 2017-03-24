@@ -34,15 +34,15 @@ class ActivityReviewViewController: UIViewController {
         
         description.forEach {
             switch $0.type {
-            case ContentType.Image:
+            case ContentType.Image.rawValue:
                 print($0)
                 body += "<p><img class=\"content-image\" src=\($0.content) alt=\"\" /></p>"
                 break
-            case ContentType.Hyperlink:
+            case ContentType.Hyperlink.rawValue:
                 var contents: [String] = $0.content.components(separatedBy: "::::::")
                 body += "<a href=\"\(contents[1])\">\(contents[0])</a>"
                 break
-            case ContentType.Text:
+            case ContentType.Text.rawValue:
                 body += "<p>\($0.content)</p>"
                 break
             default: break

@@ -94,7 +94,7 @@ class FetchData {
             let descripUniteDict = descriptUnit as! NSDictionary
             let type = ContentType(rawValue: descripUniteDict["type"] as! String)
             let content = descripUniteDict["content"] as! String
-            descriptionUnits.append(DescriptionUnit(type: type!, content: content))
+            descriptionUnits.append(DescriptionUnit(type: type!.rawValue, content: content))
         }
         var releaser = PersonalUserForView(userName: "Closer", userId: "Closer", gender: Gender.Male, age: 0)
         fetchPersonalUserForView(userid: activityDict["userReleasing"] as! String) { (user) in
