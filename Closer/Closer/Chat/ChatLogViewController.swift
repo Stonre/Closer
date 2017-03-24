@@ -17,16 +17,16 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     
     var containerHeightAnchor: NSLayoutConstraint?
     
-    var personalUser: PersonalChatProfile? {
+    var personalUser: PersonalUserForView? {
         didSet {
-            self.navigationItem.title = personalUser?.displayName
+            self.navigationItem.title = personalUser?.userName
             observeMessages()
         }
     }
     
-    var eventChat: EventChat? {
+    var eventChat: ActivityChatProfile? {
         didSet {
-            self.navigationItem.title = eventChat?.eventName
+            self.navigationItem.title = eventChat?.activityName
         }
     }
     
@@ -182,7 +182,7 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     
     func handleSend() {
         let messageRef = FIRDatabase.database().reference().child("messages").childByAutoId()
-        let toId = personalUser!.userId!
+        let toId = personalUser!.userId
         let fromId = FIRAuth.auth()!.currentUser!.uid
         let timeStamp = Date().timeIntervalSince1970
         let values = ["text": inputTextField.text!, "to": toId, "from": fromId, "time": timeStamp] as [String : Any]

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0B074E4A1C33013192FA6887 /* Pods_Closer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E927C55C04856FB382CC1BB1 /* Pods_Closer.framework */; };
-		194BE4AC1E2AD2C8004DF108 /* EventChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BE4A81E2AD2C8004DF108 /* EventChat.swift */; };
 		194BE4AD1E2AD2C8004DF108 /* PersonalChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BE4A91E2AD2C8004DF108 /* PersonalChat.swift */; };
 		194BE4AE1E2AD2C8004DF108 /* PersonalChatProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BE4AA1E2AD2C8004DF108 /* PersonalChatProfile.swift */; };
 		194BE4AF1E2AD2C8004DF108 /* UnitChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194BE4AB1E2AD2C8004DF108 /* UnitChat.swift */; };
@@ -18,6 +17,7 @@
 		199E87E91E501A26003F85B6 /* ChatLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E87E41E501A26003F85B6 /* ChatLogViewController.swift */; };
 		199E87EA1E501A26003F85B6 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E87E51E501A26003F85B6 /* MessageCell.swift */; };
 		199E87EC1E501A43003F85B6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E87EB1E501A43003F85B6 /* Message.swift */; };
+		19DD28531E74C72000B4479D /* ActivityChatProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DD28521E74C72000B4479D /* ActivityChatProfile.swift */; };
 		3E24EE4D1E2AC10F00A4FFDD /* DCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */; };
 		3E24EE511E36A01200A4FFDD /* OwnActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE501E36A01200A4FFDD /* OwnActivityCell.swift */; };
 		3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E24EE521E36A04700A4FFDD /* ActivityCell.swift */; };
@@ -67,7 +67,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		194BE4A81E2AD2C8004DF108 /* EventChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventChat.swift; path = Models/EventChat.swift; sourceTree = "<group>"; };
 		194BE4A91E2AD2C8004DF108 /* PersonalChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalChat.swift; path = Models/PersonalChat.swift; sourceTree = "<group>"; };
 		194BE4AA1E2AD2C8004DF108 /* PersonalChatProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalChatProfile.swift; path = Models/PersonalChatProfile.swift; sourceTree = "<group>"; };
 		194BE4AB1E2AD2C8004DF108 /* UnitChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitChat.swift; path = Models/UnitChat.swift; sourceTree = "<group>"; };
@@ -77,6 +76,7 @@
 		199E87E41E501A26003F85B6 /* ChatLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogViewController.swift; path = Chat/ChatLogViewController.swift; sourceTree = "<group>"; };
 		199E87E51E501A26003F85B6 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Chat/MessageCell.swift; sourceTree = "<group>"; };
 		199E87EB1E501A43003F85B6 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
+		19DD28521E74C72000B4479D /* ActivityChatProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityChatProfile.swift; path = Models/ActivityChatProfile.swift; sourceTree = "<group>"; };
 		3E24EE4C1E2AC10F00A4FFDD /* DCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DCTabBarController.swift; path = "Discover & Circle/DCTabBarController.swift"; sourceTree = "<group>"; };
 		3E24EE501E36A01200A4FFDD /* OwnActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OwnActivityCell.swift; path = "Discover & Circle/OwnActivityCell.swift"; sourceTree = "<group>"; };
 		3E24EE521E36A04700A4FFDD /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivityCell.swift; path = "Discover & Circle/ActivityCell.swift"; sourceTree = "<group>"; };
@@ -252,8 +252,8 @@
 		D72F7EF11E29EE36005C6293 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				19DD28521E74C72000B4479D /* ActivityChatProfile.swift */,
 				199E87EB1E501A43003F85B6 /* Message.swift */,
-				194BE4A81E2AD2C8004DF108 /* EventChat.swift */,
 				D72F7EF61E29EE4C005C6293 /* Reward.swift */,
 				194BE4A91E2AD2C8004DF108 /* PersonalChat.swift */,
 				194BE4AA1E2AD2C8004DF108 /* PersonalChatProfile.swift */,
@@ -362,7 +362,7 @@
 				TargetAttributes = {
 					D7CE21861E0D80D7006325EB = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 569484JFLC;
+						DevelopmentTeam = CBAYGW38K9;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -462,7 +462,6 @@
 				D7532CCA1E6AAEFD0019B580 /* SettingsController.swift in Sources */,
 				3E3562F61E73BC070023C917 /* ActivityReviewViewController.swift in Sources */,
 				194BE4AD1E2AD2C8004DF108 /* PersonalChat.swift in Sources */,
-				194BE4AC1E2AD2C8004DF108 /* EventChat.swift in Sources */,
 				3E3562F41E73BB990023C917 /* BriefActivityReviewViewController.swift in Sources */,
 				D7D568611E45CE1B00CC68ED /* OtherUserHomePageController.swift in Sources */,
 				3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */,
@@ -488,6 +487,7 @@
 				3E78FFBF1E5C17B400507F97 /* NewActivityContentViewController.swift in Sources */,
 				D72F7EF81E29EE4C005C6293 /* AchievementReward.swift in Sources */,
 				D72F7F201E29EF11005C6293 /* OtherUserTableViewCell.swift in Sources */,
+				19DD28531E74C72000B4479D /* ActivityChatProfile.swift in Sources */,
 				3E24EE531E36A04700A4FFDD /* ActivityCell.swift in Sources */,
 				3E78FFB91E5C026700507F97 /* NewActivityNameViewController.swift in Sources */,
 				D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */,
@@ -621,7 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 569484JFLC;
+				DEVELOPMENT_TEAM = CBAYGW38K9;
 				INFOPLIST_FILE = Closer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Closer.Development.Group;
@@ -638,7 +638,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 569484JFLC;
+				DEVELOPMENT_TEAM = CBAYGW38K9;
 				INFOPLIST_FILE = Closer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Closer.Development.Group;
