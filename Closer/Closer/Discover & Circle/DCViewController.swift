@@ -14,6 +14,7 @@ class DCViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        navigationBar.isTranslucent = true
         if FIRAuth.auth()?.currentUser != nil {
             pushViewController(DCTabBarController(), animated: true)
         } else {

@@ -156,6 +156,7 @@ class CircleTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.navigationController?.navigationBar.isTranslucent = true
         currUser = FIRAuth.auth()?.currentUser
         tableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         setupNavigationBarTitle()
