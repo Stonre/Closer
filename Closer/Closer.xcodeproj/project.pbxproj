@@ -64,6 +64,8 @@
 		D7D568671E464FCF00CC68ED /* BusinessUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D568661E464FCF00CC68ED /* BusinessUser.swift */; };
 		D7D5686B1E4652A800CC68ED /* VirtualFortune.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5686A1E4652A800CC68ED /* VirtualFortune.swift */; };
 		D7D5686D1E4652C000CC68ED /* UserActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D5686C1E4652C000CC68ED /* UserActionType.swift */; };
+		D7E2DA561E87AB73005123F8 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E2DA551E87AB73005123F8 /* PersonalInfoViewController.swift */; };
+		D7E2DA581E87AC6A005123F8 /* PersonalInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E2DA571E87AC6A005123F8 /* PersonalInfoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +128,8 @@
 		D7D568661E464FCF00CC68ED /* BusinessUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BusinessUser.swift; path = Models/BusinessUser.swift; sourceTree = "<group>"; };
 		D7D5686A1E4652A800CC68ED /* VirtualFortune.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VirtualFortune.swift; path = Models/VirtualFortune.swift; sourceTree = "<group>"; };
 		D7D5686C1E4652C000CC68ED /* UserActionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserActionType.swift; path = Models/UserActionType.swift; sourceTree = "<group>"; };
+		D7E2DA551E87AB73005123F8 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalInfoViewController.swift; path = HomePage/PersonalInfoViewController.swift; sourceTree = "<group>"; };
+		D7E2DA571E87AC6A005123F8 /* PersonalInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalInfoCell.swift; path = HomePage/PersonalInfoCell.swift; sourceTree = "<group>"; };
 		E927C55C04856FB382CC1BB1 /* Pods_Closer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Closer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -218,6 +222,8 @@
 				D7BB71061E4324150071219C /* HomePageController.swift */,
 				D7D568601E45CE1B00CC68ED /* OtherUserHomePageController.swift */,
 				D7532CC91E6AAEFD0019B580 /* SettingsController.swift */,
+				D7E2DA551E87AB73005123F8 /* PersonalInfoViewController.swift */,
+				D7E2DA571E87AC6A005123F8 /* PersonalInfoCell.swift */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -464,6 +470,7 @@
 				194BE4AD1E2AD2C8004DF108 /* PersonalChat.swift in Sources */,
 				3E3562F41E73BB990023C917 /* BriefActivityReviewViewController.swift in Sources */,
 				D7D568611E45CE1B00CC68ED /* OtherUserHomePageController.swift in Sources */,
+				D7E2DA581E87AC6A005123F8 /* PersonalInfoCell.swift in Sources */,
 				3E6549E61E50139D00D41BAA /* TestLoginViewController.swift in Sources */,
 				199E87E81E501A26003F85B6 /* ChatListViewController.swift in Sources */,
 				D72F7EFB1E29EE4C005C6293 /* RecommenderContext.swift in Sources */,
@@ -503,6 +510,7 @@
 				3E6549E21E46749400D41BAA /* ActivityMKAnnotationView.swift in Sources */,
 				199E87EC1E501A43003F85B6 /* Message.swift in Sources */,
 				D72F7EFC1E29EE4C005C6293 /* Reward.swift in Sources */,
+				D7E2DA561E87AB73005123F8 /* PersonalInfoViewController.swift in Sources */,
 				3E78FFC11E5C1F5300507F97 /* NewActivityAuthorizationViewController.swift in Sources */,
 				D7D5686B1E4652A800CC68ED /* VirtualFortune.swift in Sources */,
 			);
