@@ -56,7 +56,7 @@ class NewActivityController: UIViewController {
                 return
         }
         
-        let activityId = dbRef.child("newActivities").childByAutoId().key
+        let activityId = dbRef.child("activities").childByAutoId().key
         var activity = ["name": name,
                         "authorization": auth,
                         "releasingUserID": currUser?.uid ?? "unkonwn",
@@ -105,7 +105,7 @@ class NewActivityController: UIViewController {
 
         
         let briefActivity = ["name": name] as [String : Any]
-        let updates = ["newActivities/\(activityId)": activity,
+        let updates = ["activities/\(activityId)": activity,
                        "users/\(currUser?.uid)/activities/\(activityId)": briefActivity]
 //        dbRef.updateChildValues(updates)
         dbRef.updateChildValues(updates) { (error, dbRef) in
@@ -145,7 +145,7 @@ class NewActivityController: UIViewController {
                     if isImage == false {
                         let descriptionUnit = ["type": ContentType.Text.rawValue,
                                                "content": pureString]
-                        let updates = ["newActivities/\(activityId)/description/\(index)": descriptionUnit,
+                        let updates = ["activities/\(activityId)/description/\(index)": descriptionUnit,
                                        "users/\(currUser!.uid)/activities/\(activityId)/description/\(index)": descriptionUnit]
                         dbRef.updateChildValues(updates)
                     }
@@ -178,7 +178,7 @@ class NewActivityController: UIViewController {
     private func updateFormattedDescription(activityId: String, type: ContentType, downloadUrl: String, index: Int) {
         let descriptionUnit = ["type": type.rawValue,
                                "content": downloadUrl]
-        let updates = ["newActivities/\(activityId)/description/\(index)": descriptionUnit,
+        let updates = ["activities/\(activityId)/description/\(index)": descriptionUnit,
                        "users/\(currUser!.uid)/activities/\(activityId)/description/\(index)": descriptionUnit]
         dbRef.updateChildValues(updates)
     }
