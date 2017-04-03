@@ -89,7 +89,7 @@ class CircleTableViewController: UITableViewController {
             for (_, activity) in value {
                 if let act = activity as? NSDictionary {
                     let actName = act["name"] as? String ?? ""
-                    if actName.lowercased().contains(self.searchText!) {
+                    if self.searchText == "" || actName.lowercased().contains(self.searchText!) {
                         activitiesSection.append(self.dictionary2GeneralActivity(dictionary: act)!)
                     }
                 }
@@ -162,7 +162,8 @@ class CircleTableViewController: UITableViewController {
         setupNavigationBarTitle()
         tableView.register(ActivityCell.self, forCellReuseIdentifier: CloserUtility.ActivityCellReuseId)
         tableView.tableFooterView?.isHidden = false
-        searchText = currUser?.displayName!.lowercased()
+//        searchText = currUser?.displayName!.lowercased()
+        searchText = ""
         setupRefreshControl()
         keepUpdatingActivities()
         setupUpdateInfoLabel()
