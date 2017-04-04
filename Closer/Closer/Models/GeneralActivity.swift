@@ -23,11 +23,12 @@ class GeneralActivity: Activity {
     var numberOfParticipants: Int = 0
     var authority: Authority
     var description: [DescriptionUnit]
-    var participants: [String:User] = [:]
+    var participantIDs = [String]()
+    var participants = [String: User]()
     ///the user that releases the activity
     var userReleasing: User
     ///a list of users that are assigned by the user releasing this activity to take part in it
-    var assignedParticipants: [String:PersonalUserForView] = [:]
+    var assignedParticipants = [String]()
     var categories = [String]()
     
     init(name: String, tags: [String], authority: Authority, description: [DescriptionUnit], userReleasing: PersonalUserForView, identity: String) {

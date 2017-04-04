@@ -28,7 +28,7 @@ class FetchData {
         })
     }
     
-    func fetchPersonalUserForAdmin(userid: String, completion: @escaping (User) -> ()) {
+    func fetchPersonalUserForAdmin(userid: String, completion: @escaping (User) -> ()){
         firedb.child("usersforadmin/\(userid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? NSDictionary {
                 let user = self.generatePersonalUserForAdminByDict(userDict: dict)
