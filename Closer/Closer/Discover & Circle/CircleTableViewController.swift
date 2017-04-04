@@ -84,17 +84,17 @@ class CircleTableViewController: UITableViewController {
     
     private func fetchActivities() {
         dbRef.child("activities").observeSingleEvent(of: .value, with: { (snapshot) in
-            var activitiesSection = [Activity]()
+//            var activitiesSection = [Activity]()
             let value = snapshot.value as? NSDictionary ?? NSDictionary()
-            for (_, activity) in value {
-                if let act = activity as? NSDictionary {
-                    let actName = act["name"] as? String ?? ""
-                    if self.searchText == "" || actName.lowercased().contains(self.searchText!) {
-                        activitiesSection.append(self.dictionary2GeneralActivity(dictionary: act)!)
-                    }
+            for (activityId, _) in value {
+                let fetchs = FetchData.sharedInstance
+                fetchs.fetchGeneralActivtiy(activityid: activityId as! String) { (activity) in
+                    var activitiesSection = [Activity]()
+                    activitiesSection.append(activity)
+                    self.activities.append(activitiesSection)
                 }
             }
-            self.activities.append(activitiesSection)
+//            self.activities.append(activitiesSection)
         }){ (error) in
             print(error.localizedDescription)
         }

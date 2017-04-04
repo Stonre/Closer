@@ -82,8 +82,14 @@ class FetchData {
     private func generateGeneralActivity(activityDict: NSDictionary) -> Activity {
         let activityName = activityDict["name"] as? String ?? ""
         let identity = activityDict["id"] as? String ?? ""
-        let timeStart = Date(timeIntervalSince1970: Double(activityDict["timeStartStamp"] as! NSDecimalNumber))
-        let timeEnd = Date(timeIntervalSince1970: Double(activityDict["timeEndStamp"] as! NSDecimalNumber))
+        var timeStart: Date? = nil
+        if let ts = activityDict["timeStartStamp"] {
+            timeStart = Date(timeIntervalSince1970: Double(ts as! NSDecimalNumber))
+        }
+        var timeEnd: Date? = nil
+        if let te = activityDict["timeEndStamp"] {
+            timeEnd = Date(timeIntervalSince1970: Double(te as! NSDecimalNumber))
+        }
         let isOnline = activityDict["isOnline"] as? Bool ?? true
         let isActive = activityDict["isActive"] as? Bool ?? true
         let tags = (activityDict["tags"] as? String ?? "").components(separatedBy: ",")
