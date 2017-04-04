@@ -33,6 +33,16 @@ class PersonalUserForView: PersonalUser {
      */
     private var activitiesReleased: Dictionary<String, Activity> = [String:Activity]()
     
+    init(userDict: NSDictionary) {
+        self.userName = userDict["name"] as? String ?? ""
+        self.userId = userDict["id"] as? String ?? ""
+        self.gender = Gender(rawValue: userDict["gender"] as? String ?? "Male")!
+        self.age = userDict["age"] as? Int ?? 0
+        self.signature = userDict["signature"] as? String ?? ""
+        self.backgroundImageUrl = userDict["background"] as? String ?? FetchData.defaultBackgroundImageURL
+        self.userProfileImageUrl = userDict["headPortrait"] as? String ?? FetchData.defaultProfileImageURL
+    }
+    
     init(userName: String, userId: String, gender: Gender, age: Int) {
         self.userName = userName
         self.userId = userId
@@ -128,6 +138,17 @@ class PersonalUserAdmin: PersonalUser {
      - Value: user: Award
      */
     private var awards = [String:Reward]()
+    
+    init(userDict: NSDictionary) {
+        self.userName = userDict["name"] as? String ?? ""
+        self.userId = userDict["id"] as? String ?? ""
+        self.gender = Gender(rawValue: userDict["gender"] as? String ?? "Male")!
+        self.age = userDict["age"] as? Int ?? 0
+        self.signature = userDict["signature"] as? String ?? ""
+        self.backgroundImageUrl = userDict["background"] as? String ?? FetchData.defaultBackgroundImageURL
+        self.userProfileImageUrl = userDict["headPortrait"] as? String ?? FetchData.defaultProfileImageURL
+        //we should add virtual fortune, phone number and third-party links here
+    }
     
     init(userName: String, userId: String, gender: Gender, age: Int) {
         self.userName = userName

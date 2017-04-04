@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import Firebase
 
 
 ///Class for a general activity based on Activity protocol
@@ -30,6 +31,40 @@ class GeneralActivity: Activity {
     ///a list of users that are assigned by the user releasing this activity to take part in it
     var assignedParticipants = [String]()
     var categories = [String]()
+    
+    init(activityDict: NSDictionary) {
+        self.name = activityDict["name"] as? String ?? ""
+        self.identity = activityDict["id"] as? String ?? ""
+        if let ts = activityDict["timeStartStamp"] {
+            self.timeStart = Date(timeIntervalSince1970: Double(ts as! NSDecimalNumber))
+        }
+        if let te = activityDict["timeEndStamp"] {
+            self.timeEnd = Date(timeIntervalSince1970: Double(te as! NSDecimalNumber))
+        }
+        self.isOnline = activityDict["isOnline"] as? Bool ?? true
+        self.isActive = activityDict["isActive"] as? Bool ?? true
+        self.tags = (activityDict["tags"] as? String ?? "").components(separatedBy: ",")
+        self.categories = (activityDict["categories"] as? String ?? "others").components(separatedBy: ",")
+        self.numberOfParticipants = activityDict["numberOfParticipants"] as? Int ?? 0
+        self.authority = Authority(rawValue: activityDict["authorization"] as! String)!
+        var descriptionUnits = [DescriptionUnit]()
+        for descriptUnit in (activityDict["description"] as! NSArray) {
+            let descripUniteDict = descriptUnit as! NSDictionary
+            let type = ContentType(rawValue: descripUniteDict["type"] as! String)
+            let content = descripUniteDict["content"] as! String
+            descriptionUnits.append(DescriptionUnit(type: type!.rawValue, content: content))
+        }
+        self.description = descriptionUnits
+        self.userReleasing = PersonalUserForView(userName: "Closer", userId: activityDict["releasingUserID"] as! String, gender: Gender.Male, age: 0)
+        let longitude: CLLocationDegrees
+        let latitude: CLLocationDegrees
+        if !isOnline {
+            let location = activityDict["location"] as? NSDictionary ?? NSDictionary()
+            longitude = CLLocationDegrees(location["longitude"] as! Double)
+            latitude = CLLocationDegrees(location["latitude"] as! Double)
+            self.location = CLLocation(latitude: latitude, longitude: longitude)
+        }
+    }
     
     init(name: String, tags: [String], authority: Authority, description: [DescriptionUnit], userReleasing: PersonalUserForView, identity: String) {
         self.name = name
