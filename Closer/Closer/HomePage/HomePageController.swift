@@ -142,6 +142,10 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let fetchs = FetchData.sharedInstance
+        fetchs.fetchGeneralActivtiy(activityid: "-KglzqTeErlGzRdTkR2a") { (activity) in
+            print(activity)
+        }
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true

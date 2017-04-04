@@ -17,7 +17,7 @@ class FetchData {
     static let sharedInstance = FetchData()
     
     func fetchPersonalUserForView(userid: String, completion: @escaping (User) -> ()) {
-        firedb.child("usersforview/\(userid)").observeSingleEvent(of: .value, with: { (snapshot) in
+        firedb.child("users/\(userid)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let dict = snapshot.value as? NSDictionary {
                 let user = self.generatePersonalUserForViewByDict(userDict: dict)
                 completion(user)
@@ -82,22 +82,23 @@ class FetchData {
     private func generateGeneralActivity(activityDict: NSDictionary) -> Activity {
         let activityName = activityDict["name"] as? String ?? ""
         let identity = activityDict["id"] as? String ?? ""
-        let timeStart = Date(timeIntervalSince1970: Double(activityDict["timeStart"] as! String)!)
-        let timeEnd = Date(timeIntervalSince1970: Double(activityDict["timeEnd"] as! String)!)
+        let timeStart = Date(timeIntervalSince1970: Double(activityDict["timeStartStamp"] as! NSDecimalNumber))
+        let timeEnd = Date(timeIntervalSince1970: Double(activityDict["timeEndStamp"] as! NSDecimalNumber))
         let isOnline = activityDict["isOnline"] as? Bool ?? true
         let isActive = activityDict["isActive"] as? Bool ?? true
         let tags = (activityDict["tags"] as? String ?? "").components(separatedBy: ",")
+        let categories = (activityDict["categories"] as? String ?? "others").components(separatedBy: ",")
         let numberOfParticipants = activityDict["numberOfParticipants"] as? Int ?? 0
-        let authority = Authority(rawValue: activityDict["authority"] as! String)
+        let authority = Authority(rawValue: activityDict["authorization"] as! String)
         var descriptionUnits = [DescriptionUnit]()
-        for descriptUnit in (activityDict["description"] as! NSDictionary).allValues {
+        for descriptUnit in (activityDict["description"] as! NSArray) {
             let descripUniteDict = descriptUnit as! NSDictionary
             let type = ContentType(rawValue: descripUniteDict["type"] as! String)
             let content = descripUniteDict["content"] as! String
             descriptionUnits.append(DescriptionUnit(type: type!.rawValue, content: content))
         }
         var releaser = PersonalUserForView(userName: "Closer", userId: "Closer", gender: Gender.Male, age: 0)
-        fetchPersonalUserForView(userid: activityDict["userReleasing"] as! String) { (user) in
+        fetchPersonalUserForView(userid: activityDict["releasingUserID"] as! String) { (user) in
             releaser = user as! PersonalUserForView
         }
         let activity = GeneralActivity(name: activityName, tags: tags, authority: authority!, description: descriptionUnits, userReleasing: releaser , identity: identity)
@@ -114,6 +115,7 @@ class FetchData {
         activity.isOnline = isOnline
         activity.isActive = isActive
         activity.numberOfParticipants = numberOfParticipants
+        activity.categories = categories
         
         return activity
     }
