@@ -16,7 +16,10 @@ class UpdateData {
     static let sharedInstance = UpdateData()
     
     func addParticipant(participantId pid: String, activityId aid: String) {
-        let participant = ["identity": pid]
+        let user = FIRAuth.auth()?.currentUser
+        let participant = ["identity": pid,
+                           "name": user?.displayName,
+                           "profileImageUrl": user?.photoURL?.absoluteString]
         let activity = [aid: aid]
         let updates = ["activities/\(aid)/participants/\(pid)": participant,
                       "users/\(pid)/participated-activity": activity,
