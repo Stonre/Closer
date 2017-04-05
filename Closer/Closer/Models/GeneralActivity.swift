@@ -48,11 +48,13 @@ class GeneralActivity: Activity {
         self.numberOfParticipants = activityDict["numberOfParticipants"] as? Int ?? 0
         self.authority = Authority(rawValue: activityDict["authorization"] as! String)!
         var descriptionUnits = [DescriptionUnit]()
-        for descriptUnit in (activityDict["description"] as! NSArray) {
-            let descripUniteDict = descriptUnit as! NSDictionary
-            let type = ContentType(rawValue: descripUniteDict["type"] as! String)
-            let content = descripUniteDict["content"] as! String
-            descriptionUnits.append(DescriptionUnit(type: type!.rawValue, content: content))
+        if let ad = activityDict["description"] {
+            for descriptUnit in (ad as! NSArray) {
+                let descripUniteDict = descriptUnit as! NSDictionary
+                let type = ContentType(rawValue: descripUniteDict["type"] as! String)
+                let content = descripUniteDict["content"] as! String
+                descriptionUnits.append(DescriptionUnit(type: type!.rawValue, content: content))
+            }
         }
         self.description = descriptionUnits
         self.userReleasing = PersonalUserForView(userName: "Closer", userId: activityDict["releasingUserID"] as! String, gender: Gender.Male, age: 0)
