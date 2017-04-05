@@ -107,7 +107,7 @@ class NewActivityController: UIViewController {
         
         let briefActivity = ["name": name] as [String : Any]
         let updates = ["activities/\(activityId)": activity,
-                       "users/\(currUser?.uid)/activities/\(activityId)": briefActivity]
+                       "users/\(currUser!.uid)/activities/\(activityId)": briefActivity]
 //        dbRef.updateChildValues(updates)
         dbRef.updateChildValues(updates) { (error, dbRef) in
             if error != nil {
@@ -124,8 +124,11 @@ class NewActivityController: UIViewController {
     }
     
     private func addCategoryInformation(activityId: String, categories: String) {
-        let categoryDeRef = FIRDatabase.database().reference().child("category-activities")
-        
+        let categoryDbRef = FIRDatabase.database().reference().child("category-activities")
+        let categoryArr = categories.characters.split{$0 == ","}.map(String.init)
+        for category in categoryArr {
+            categoryDbRef.updateChildValues(["\(category.lowercased().trimmingCharacters(in: .whitespaces))/\(activityId)": 0])
+        }
     }
     
     func formatDescription(activityId: String, description: NSAttributedString) {

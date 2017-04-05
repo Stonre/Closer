@@ -20,7 +20,7 @@ class CircleTableViewController: UITableViewController {
     }
 
     var newActivities = [Activity]()
-    var activities = [Array<Activity>]() {
+    var activities = [Activity]() {
         didSet {
             tableView.reloadData()
         }
@@ -74,9 +74,9 @@ class CircleTableViewController: UITableViewController {
                 for _ in 1...i{
                     description += "This is Activity \(i) "
                 }
-                defaultSection.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: ContentType.Text.rawValue, content: description)], userReleasing: PersonalUserForView(userName: "User \(i)", userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set"))
+                activities.append(GeneralActivity(name: "Activity \(i)", tags: [], authority: Authority.FriendsAndContacts, description: [DescriptionUnit(type: ContentType.Text.rawValue, content: description)], userReleasing: PersonalUserForView(userName: "User \(i)", userId: (currUser?.uid)!, gender: Gender.Female, age: 18), identity: "not set"))
             }
-            activities.append(defaultSection)
+//            activities.append(defaultSection)
         } else {
             fetchActivities()
         }
@@ -87,12 +87,10 @@ class CircleTableViewController: UITableViewController {
 //            var activitiesSection = [Activity]()
             let value = snapshot.value as? NSDictionary ?? NSDictionary()
             for (activityId, _) in value {
-                let fetchs = FetchData.sharedInstance
-                fetchs.fetchGeneralActivtiy(activityid: activityId as! String) { (activity) in
-                    var activitiesSection = [Activity]()
-                    activitiesSection.append(activity)
-                    self.activities.append(activitiesSection)
-                }
+                let fetcher = FetchData.sharedInstance
+                fetcher.fetchGeneralActivtiy(activityid: activityId as! String, completion: { (activity) in
+                    self.activities.append(activity)
+                })
             }
 //            self.activities.append(activitiesSection)
         }){ (error) in
@@ -103,15 +101,13 @@ class CircleTableViewController: UITableViewController {
     
     private func keepUpdatingActivities() {
         dbRef.child("activities").observe(.childChanged, with: { (snapshot) in
-            var activitiesSection = [Activity]()
+//            var activitiesSection = [Activity]()
             let value = snapshot.value as? NSDictionary ?? NSDictionary()
-            for (_, activity) in value {
-                if let act = activity as? NSDictionary {
-                    let actName = act["name"] as? String ?? ""
-                    if actName.lowercased().contains(self.searchText!) {
-                        self.newActivities.append(self.dictionary2GeneralActivity(dictionary: act)!)
-                    }
-                }
+            for (activityId, _) in value {
+                let fetcher = FetchData.sharedInstance
+                fetcher.fetchGeneralActivtiy(activityid: activityId as! String, completion: { (activity) in
+                    self.activities.append(activity)
+                })
             }
         }) { (error) in
             print(error.localizedDescription)
@@ -156,7 +152,7 @@ class CircleTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.isTranslucent = true
         currUser = FIRAuth.auth()?.currentUser
         tableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         setupNavigationBarTitle()
@@ -197,7 +193,9 @@ class CircleTableViewController: UITableViewController {
                 updateInfoLabel.isHidden = false
                 return
             }
-            activities.insert(newActivities, at: 0)
+            for activity in newActivities {
+                activities.insert(activity, at: 0)
+            }
             newActivities.removeAll()
             self.refreshControl?.endRefreshing()
             updateInfoLabel.isHidden = false
@@ -216,17 +214,17 @@ class CircleTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-            return activities.count
+            return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activities[section].count
+        return activities.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CloserUtility.ActivityCellReuseId, for: indexPath)
 
-        let currAcvitity = activities[indexPath.section][indexPath.row]
+        let currAcvitity = activities[indexPath.row]
         if let activityCell = cell as? ActivityCell {
             activityCell.userProfileImage = #imageLiteral(resourceName: "sampleHeaderPortrait2")
             activityCell.activity = currAcvitity
@@ -241,7 +239,7 @@ class CircleTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let currAcvitity = activities[indexPath.section][indexPath.row]
+        let currAcvitity = activities[indexPath.row]
 
         if let act = currAcvitity as? GeneralActivity{
             let size = CGSize(width: tableView.bounds.width - 90, height: 1000)
@@ -267,7 +265,7 @@ class CircleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let activityReviewViewController = FullActivityReviewViewController()
-        activityReviewViewController.activity = activities[indexPath.section][indexPath.row]
+        activityReviewViewController.activity = activities[indexPath.row]
         navigationController?.pushViewController(activityReviewViewController, animated: true)
         return
     }

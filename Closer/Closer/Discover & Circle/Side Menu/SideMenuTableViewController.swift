@@ -24,8 +24,7 @@ class SideMenuTableViewController: UITableViewController {
     
     func fetchCategory() {
         let dbRef = FIRDatabase.database().reference().child("categories")
-        
-        dbRef.observe(.value, with: { (snapshot) in
+        dbRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary ?? NSDictionary()
             var categorySection = [String]()
             categorySection.append("All")
