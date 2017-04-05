@@ -40,7 +40,7 @@ class PersonalUserForView: PersonalUser {
         self.age = userDict["age"] as? Int ?? 0
         self.signature = userDict["signature"] as? String ?? ""
         self.backgroundImageUrl = userDict["background"] as? String ?? FetchData.defaultBackgroundImageURL
-        self.userProfileImageUrl = userDict["headPortrait"] as? String ?? FetchData.defaultProfileImageURL
+        self.userProfileImageUrl = userDict["profileImageUrl"] as? String ?? FetchData.defaultProfileImageURL
     }
     
     init(userName: String, userId: String, gender: Gender, age: Int) {

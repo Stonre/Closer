@@ -23,6 +23,19 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         return label
     }()
     
+    var userProfileImageUrl: NSURL? {
+        didSet {
+            DispatchQueue.global(qos: .userInteractive).async {
+                if let imageData = NSData(contentsOf: self.userProfileImageUrl as! URL) {
+                    DispatchQueue.main.async {
+                        self.userPortrait.image = UIImage(data: imageData as Data)
+                    }
+                }
+            }
+        }
+    }
+
+    
     let infoView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "mybackground")!)
@@ -170,7 +183,6 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target: nil, action: nil)
-        loadData()
         setupInfoView()
         setupActivityName()
         setupReleaserView()
@@ -181,6 +193,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         setupReleaserInfo()
         setupBottomStack()
         setupTimeLabel()
+        loadData()
     }
     
     func setupInfoView() {
@@ -210,18 +223,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
             activityName.text = activity.name
             userName.text = activity.userReleasing.userName
             if let portraitUrl = activity.userReleasing.userProfileImageUrl {
-                if let url = URL(string: portraitUrl) {
-                    URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                        if error != nil {
-                            print(error!)
-                            return
-                        }
-                        DispatchQueue.main.async {
-                            self.userPortrait.image = UIImage(data: data!)
-                        }
-                        
-                    }).resume()
-                }
+                userProfileImageUrl = NSURL(string: portraitUrl)
             }
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"

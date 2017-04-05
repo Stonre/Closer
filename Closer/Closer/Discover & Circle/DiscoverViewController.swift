@@ -31,16 +31,24 @@ class DiscoverViewController: CircleTableViewController {
                 searchForActivities()
             } else {
                 for category in categoryFilters {
-                    dbRef.child("category-activities/\(category)").observeSingleEvent(of: .value, with: { (snapshot) in
-                        let activitySection = [Activity]()
-                        self.activities.append(activitySection)
+                    dbRef.child("category-activities/\(category.lowercased())").observeSingleEvent(of: .value, with: { (snapshot) in
+//                        let activitySection = [Activity]()
+//                        self.activities.append(activitySection)
                         let value = snapshot.value as? NSDictionary ?? NSDictionary()
                         for (activityId, _) in value {
-                            self.dbRef.child("activities/\(activityId as! String)").observeSingleEvent(of: .value, with: { (snapshot) in
-                                let act = snapshot.value as? NSDictionary ?? NSDictionary()
-                                self.activities[self.activities.count - 1].append(self.dictionary2GeneralActivity(dictionary: act)!)
-//                                activitySection.append(self.dictionary2GeneralActivity(dictionary: act)!)
-                            })
+                            let fetchs = FetchData.sharedInstance
+                            fetchs.fetchGeneralActivtiy(activityid: activityId as! String) { (activity) in
+                                if !self.activities.contains(where: { (existingActivity) -> Bool in
+                                    if existingActivity is GeneralActivity {
+                                        if existingActivity.name == activity.name {
+                                            return true
+                                        }
+                                    }
+                                    return false
+                                }) {
+                                    self.activities.append(activity)
+                                }
+                            }
                         }
 //                        self.activities.append(activitySection)
                     })
