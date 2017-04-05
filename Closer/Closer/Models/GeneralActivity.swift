@@ -36,10 +36,10 @@ class GeneralActivity: Activity {
         self.name = activityDict["name"] as? String ?? ""
         self.identity = activityDict["id"] as? String ?? ""
         if let ts = activityDict["timeStartStamp"] {
-            self.timeStart = Date(timeIntervalSince1970: Double(ts as! NSDecimalNumber))
+            self.timeStart = Date(timeIntervalSince1970: Double(ts as! Int64))
         }
         if let te = activityDict["timeEndStamp"] {
-            self.timeEnd = Date(timeIntervalSince1970: Double(te as! NSDecimalNumber))
+            self.timeEnd = Date(timeIntervalSince1970: Double(te as! Int64))
         }
         self.isOnline = activityDict["isOnline"] as? Bool ?? true
         self.isActive = activityDict["isActive"] as? Bool ?? true
