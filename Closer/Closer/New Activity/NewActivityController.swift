@@ -43,7 +43,7 @@ class NewActivityController: UIViewController {
     private func setupReleaseButton() {
         let releaseButton = UIButton(type: .system)
         releaseButton.frame = CGRect(x: 0.0, y: 8.0, width: 60, height: 28)
-        releaseButton.setTitle("预览", for: .normal)
+        releaseButton.setTitle("发布", for: .normal)
         releaseButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         releaseButton.addTarget(self, action: #selector(touchRelease), for: .touchUpInside)
         
@@ -76,8 +76,9 @@ class NewActivityController: UIViewController {
             activity["assignedParticipants"] = assignedParticipants
         }
         
-        if let categories = timeLocationTagViewController.getCategories() {
-            activity["catrgories"] = categories
+        let categories = timeLocationTagViewController.getCategories()
+        if categories != nil {
+            activity["categories"] = categories
         }
         
         if let tags = timeLocationTagViewController.getTags() {
@@ -113,10 +114,18 @@ class NewActivityController: UIViewController {
                 print(error ?? "Error!")
                 return
             }
+            if categories != nil {
+                self.addCategoryInformation(activityId: activityId, categories: categories!)
+            }
             self.formatDescription(activityId: activityId, description: description)
         }
 //        dbRef.updateChildValues(["newActivities/\(activityId)/assignedParticipants": assignedParticipants])
         let _ = navigationController?.popViewController(animated: true)
+    }
+    
+    private func addCategoryInformation(activityId: String, categories: String) {
+        let categoryDeRef = FIRDatabase.database().reference().child("category-activities")
+        
     }
     
     func formatDescription(activityId: String, description: NSAttributedString) {

@@ -35,11 +35,11 @@ class GeneralActivity: Activity {
     init(activityDict: NSDictionary) {
         self.name = activityDict["name"] as? String ?? ""
         self.identity = activityDict["id"] as? String ?? ""
-        if let ts = activityDict["timeStartStamp"] {
-            self.timeStart = Date(timeIntervalSince1970: Double(ts as! NSDecimalNumber))
+        if let ts = activityDict["timeStartStamp"] as? NSNumber {
+            self.timeStart = Date(timeIntervalSince1970: Double(ts))
         }
-        if let te = activityDict["timeEndStamp"] {
-            self.timeEnd = Date(timeIntervalSince1970: Double(te as! NSDecimalNumber))
+        if let te = activityDict["timeEndStamp"] as? NSNumber {
+            self.timeEnd = Date(timeIntervalSince1970: Double(te))
         }
         self.isOnline = activityDict["isOnline"] as? Bool ?? true
         self.isActive = activityDict["isActive"] as? Bool ?? true
