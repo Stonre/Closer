@@ -55,6 +55,7 @@
 		D72F7F271E29EF32005C6293 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */; };
 		D72F7F281E29EF32005C6293 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F251E29EF32005C6293 /* Info.plist */; };
 		D72F7F2D1E29F82B005C6293 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F7F2B1E29F82B005C6293 /* Login.storyboard */; };
+		D73714D21E94AC1B000407C8 /* UpdateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73714D11E94AC1B000407C8 /* UpdateData.swift */; };
 		D7532CCA1E6AAEFD0019B580 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7532CC91E6AAEFD0019B580 /* SettingsController.swift */; };
 		D7532CCC1E6AB0F80019B580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7532CCB1E6AB0F80019B580 /* Assets.xcassets */; };
 		D7BB71071E4324150071219C /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BB71061E4324150071219C /* HomePageController.swift */; };
@@ -118,6 +119,7 @@
 		D72F7F241E29EF32005C6293 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D72F7F251E29EF32005C6293 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D72F7F2C1E29F82B005C6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		D73714D11E94AC1B000407C8 /* UpdateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateData.swift; path = Service/UpdateData.swift; sourceTree = "<group>"; };
 		D7532CC91E6AAEFD0019B580 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D7532CCB1E6AB0F80019B580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7BB71061E4324150071219C /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePageController.swift; path = HomePage/HomePageController.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				D70A32F91E59107200C023B4 /* FetchData.swift */,
+				D73714D11E94AC1B000407C8 /* UpdateData.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				3E78FFB91E5C026700507F97 /* NewActivityNameViewController.swift in Sources */,
 				D72F7F261E29EF32005C6293 /* AppDelegate.swift in Sources */,
 				D7D5686D1E4652C000CC68ED /* UserActionType.swift in Sources */,
+				D73714D21E94AC1B000407C8 /* UpdateData.swift in Sources */,
 				D7D568671E464FCF00CC68ED /* BusinessUser.swift in Sources */,
 				D72F7EFA1E29EE4C005C6293 /* Recommender.swift in Sources */,
 				D7BB71071E4324150071219C /* HomePageController.swift in Sources */,

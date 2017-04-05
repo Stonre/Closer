@@ -50,6 +50,7 @@ class FetchData {
                 let activity = GeneralActivity(activityDict: dict)
                 self.fetchPersonalUserForView(userid: activity.userReleasing.userId) { (user) in
                     let userId = activity.userReleasing.userId
+                    activity.identity = activityid
                     activity.userReleasing = user
                     activity.userReleasing.userId = userId
                     completion(activity)

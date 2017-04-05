@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 class FullActivityReviewViewController: ActivityReviewViewController {
+    
+    let updateData = UpdateData.sharedInstance
     
     let activityName: UILabel = {
         let label = UILabel()
@@ -148,7 +151,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
     let goParticipateInButton: UIButton = {
         let button = UIButton()
         button.setAttributedTitle(NSAttributedString(string: "加入活动Go!"), for: .normal)
-//        button.addTarget(self, action: #selector(selectContactsButton(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(setParticipate), for: .touchUpInside)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 14)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -186,6 +189,20 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         infoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         infoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         infoView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+    }
+    
+    func setParticipate() {
+        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
+            print("Error: no current user id")
+            return
+        }
+        
+        guard let activityId = activity?.identity else {
+            print("Error: no activity id exists")
+            return
+        }
+        
+        updateData.addParticipant(participantId: userId, activityId: activityId)
     }
     
     override func loadData() {
