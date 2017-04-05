@@ -210,12 +210,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
             return
         }
         
-        guard let activityId = activity?.identity else {
-            print("Error: no activity id exists")
-            return
-        }
-        
-        updateData.addParticipant(participantId: userId, activityId: activityId)
+        updateData.addParticipant(participantId: userId, activity: activity!)
     }
     
     override func loadData() {
