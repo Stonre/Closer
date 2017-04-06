@@ -79,8 +79,8 @@ class DiscoverViewController: CircleTableViewController {
         tableHeaderView.addSubview(mapButton)
         
         searchButton = UIButton()
-        searchButton.frame = CGRect(origin: CGPoint(x: windowWidth - 44, y: 8), size: DiscoverViewController.buttomSize)
-        searchButton.setImage(#imageLiteral(resourceName: "search-icon"), for: .normal)
+        searchButton.frame = CGRect(origin: CGPoint(x: windowWidth - 270, y: 8), size: CGSize(width: 240, height: 28))
+        searchButton.setImage(#imageLiteral(resourceName: "search"), for: .normal)
         searchButton.addTarget(self, action: #selector(touchSearch(_:)), for: .touchUpInside)
         tableHeaderView.addSubview(searchButton)
         
@@ -127,7 +127,9 @@ class DiscoverViewController: CircleTableViewController {
     }
     
     func touchSearch(_ sender: UIButton) {
-        self.navigationController?.pushViewController(ActivitySearchController(), animated: true)
+        let navig = UINavigationController(rootViewController: ActivitySearchController())
+        self.present(navig, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(ActivitySearchController(), animated: true)
     }
     
     var discoverTableViewController = CircleTableViewController()

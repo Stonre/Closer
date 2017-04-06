@@ -43,6 +43,7 @@ class ActivitySearchController: CircleTableViewController {
         searchController.searchBar.frame = CGRect(x: 0, y: 0, width: windowWidth, height: 44)
         searchController.searchBar.placeholder = "活动搜索"
         tableView.tableHeaderView = searchController.searchBar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ActivitySearchController.exitSearchMode))
     }
     
 //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,6 +88,10 @@ extension ActivitySearchController: UISearchResultsUpdating, UISearchControllerD
     
     func didDismissSearchController(_ searchController: UISearchController) {
         searchText = "default"
+    }
+    
+    func exitSearchMode() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

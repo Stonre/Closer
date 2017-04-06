@@ -178,17 +178,18 @@ class FullActivityReviewViewController: ActivityReviewViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red:0.91, green:0.93, blue:0.95, alpha:1.0)
+        view.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.backItem?.backBarButtonItem?.title = ""
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         setupInfoView()
         setupActivityName()
         setupReleaserView()
         setupTimeAndLocationView()
         setupLocationInfo()
-        setupTagView()
+        //setupTagView()
         setupDescriptionView()
         setupReleaserInfo()
         setupBottomStack()
@@ -294,7 +295,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         timeLabel.bottomAnchor.constraint(equalTo: timeView.bottomAnchor, constant: 2).isActive = true
     }
     
-    func setupTagView() {
+    /*func setupTagView() {
         infoView.addSubview(tagView)
         tagView.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
         tagView.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
@@ -306,7 +307,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         tag.rightAnchor.constraint(equalTo: tagView.rightAnchor, constant: 4).isActive = true
         tag.topAnchor.constraint(equalTo: tagView.topAnchor, constant: 2).isActive = true
         tag.bottomAnchor.constraint(equalTo: tagView.bottomAnchor, constant: 2).isActive = true
-    }
+    }*/
     
     func setupDescriptionView() {
         view.addSubview(descriptionView)
