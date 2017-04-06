@@ -152,7 +152,11 @@ class CircleTableViewController: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = nil
+//        self.navigationController?.navigationBar.isTranslucent = false
+//        self.extendedLayoutIncludesOpaqueBars = false
+//        self.navigationController?.view.backgroundColor = .clear
         currUser = FIRAuth.auth()?.currentUser
         tableView.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         setupNavigationBarTitle()
@@ -182,7 +186,7 @@ class CircleTableViewController: UITableViewController {
     
     func getLatestActivities() {
         if (self.refreshControl != nil) {
-            var title = "refreshing"
+            let title = "refreshing"
             self.refreshControl?.attributedTitle = NSAttributedString(string: title)
             updateInfoLabel.text = "已更新\(newActivities.count)条活动"
             view.bringSubview(toFront: updateInfoLabel
@@ -242,7 +246,7 @@ class CircleTableViewController: UITableViewController {
         let currAcvitity = activities[indexPath.row]
 
         if let act = currAcvitity as? GeneralActivity{
-            let size = CGSize(width: tableView.bounds.width - 90, height: 1000)
+            let size = CGSize(width: tableView.bounds.width - 80, height: 1000)
             
             let estimatedUserNameFrame = NSString(string: act.userReleasing.userName).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .subheadline)], context: nil)
             
@@ -255,7 +259,13 @@ class CircleTableViewController: UITableViewController {
             
             let estimatedActivityDescriptionFrameHeight = min(130, estimatedActivityDescriptionFrame.height + 10)
             
-            let estimatedHeight = max(80, estimatedUserNameFrame.height + estimatedActivityNameFrame.height + estimatedActivityDescriptionFrameHeight)
+            var estimatedActivityTagsFrameHeight: CGFloat = 0
+            if act.tags[0] != "" {
+                estimatedActivityTagsFrameHeight += 30
+            }
+            
+            let estimatedHeight = max(80 + estimatedActivityTagsFrameHeight, estimatedUserNameFrame.height + estimatedActivityNameFrame.height
+                                        + estimatedActivityDescriptionFrameHeight + estimatedActivityTagsFrameHeight)
             
             return estimatedHeight
         }

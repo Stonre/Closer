@@ -17,6 +17,7 @@ class GeneralActivity: Activity {
     var identity: String
     var timeStart: Date?
     var timeEnd: Date?
+    var timeRelease: Date?
     var location: CLLocation?
     var isOnline: Bool = true
     var isActive: Bool = true
@@ -41,6 +42,10 @@ class GeneralActivity: Activity {
         if let te = activityDict["timeEndStamp"] as? NSNumber {
             self.timeEnd = Date(timeIntervalSince1970: Double(te))
         }
+        if let ts = activityDict["timeReleaseStamp"] as? NSNumber {
+            self.timeRelease = Date(timeIntervalSince1970: Double(ts))
+        }
+        
         self.isOnline = activityDict["isOnline"] as? Bool ?? true
         self.isActive = activityDict["isActive"] as? Bool ?? true
         self.tags = (activityDict["tags"] as? String ?? "").components(separatedBy: ",")

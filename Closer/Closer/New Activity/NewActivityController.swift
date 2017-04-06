@@ -93,6 +93,8 @@ class NewActivityController: UIViewController {
             activity["timeEndStamp"] = end.timeIntervalSince1970
         }
         
+        activity["timeReleaseStamp"] = Date().timeIntervalSince1970
+        
         let description = descriptionViewController.getDescription()
         formatDescription(activityId: activityId, description: description)
         //        var descriptionDic = [String: [String: String]]()

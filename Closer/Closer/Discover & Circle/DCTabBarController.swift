@@ -43,7 +43,7 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
         newActivityButton.translatesAutoresizingMaskIntoConstraints = false
         
         newActivityButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newActivityButton.centerYAnchor.constraint(equalTo: tabBar.topAnchor).isActive = true
+        newActivityButton.centerYAnchor.constraint(equalTo: tabBar.centerYAnchor).isActive = true
         
         newActivityButton.addTarget(self, action: #selector(touchNewActivity), for: .touchUpInside)
     }
