@@ -9,17 +9,17 @@
 import Foundation
 
 class ActivityChatProfile {
-    var participants = [String?]()
+    var participants = [String: [String: String]]()
     var groupImage: String?
     var activityName: String
     var activityId: String?
-    var userReleasing: PersonalUserForView
+    var userReleasing: String?
     
     init(activityId: String,
          activityName: String,
-         participants: [String?],
+         participants: [String: [String: String]],
          groupImage: String,
-         userReleasing: PersonalUserForView
+         userReleasing: String
         ){
         self.activityId = activityId
         self.activityName = activityName

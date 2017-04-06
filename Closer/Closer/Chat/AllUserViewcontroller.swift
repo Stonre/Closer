@@ -114,16 +114,25 @@ class AllUserViewcontroller: UITableViewController, UINavigationControllerDelega
                 if let dictionary = snapshot.value as? [String: Any] {
                     
                     let name = dictionary["name"] as! String
-                    var participants = [String]()
+                    var participants = [String: [String: String]]()
                     //let participants = dictionary["participants"] as! [String]
                     let userReleasingId = dictionary["releasingUserID"] as! String
                     
                     activityRef.child("participants").observe(.childAdded, with: { (snapshot) in
                         
-                        participants.append(snapshot.key)
+                        participants[snapshot.key] = snapshot.value as! [String : String]?
                         
                     }, withCancel: nil)
-                    FIRDatabase.database().reference().child("users").child(userReleasingId).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let activity = ActivityChatProfile(activityId: activityId, activityName: name, participants: participants, groupImage: "", userReleasing: userReleasingId)
+                    
+                    self.activities.append(activity)
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                    /*FIRDatabase.database().reference().child("users").child(userReleasingId).observeSingleEvent(of: .value, with: { (snapshot) in
                         
                         if let dictionary = snapshot.value as? [String: Any] {
                             let userName = dictionary["name"] as! String
@@ -143,7 +152,7 @@ class AllUserViewcontroller: UITableViewController, UINavigationControllerDelega
                             
                         }
                         
-                        }, withCancel: nil)
+                    }, withCancel: nil)*/
                 }
                 
             }, withCancel: nil)
