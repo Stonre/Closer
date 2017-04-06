@@ -16,6 +16,8 @@ import Firebase
 
 class ChatListViewController: UITableViewController, UISearchResultsUpdating, UINavigationControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
+    let ref = FIRDatabase.database().reference()
+    
     var cellId = "cellId"
     
     var messages = [Message]()
@@ -42,7 +44,9 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
         
         tableView.register(ChatCell.self, forCellReuseIdentifier: cellId)
         
+        observeGroupMessages()
         observeUserMessages()
+        
     }
     
     /*func filterContentForSearchText(searchText: String, scope: String = "AllChats") {
@@ -56,6 +60,39 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
         searchScopeController.searchText = searchController.searchBar.text!
         //self.navigationController?.pushViewController(searchScopeController, animated: true)
         //filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
+    func observeGroupMessages() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        
+        ref.child("users").child(uid).child("active-activities").observe(.childAdded, with: { (snapshot) in
+            
+            let groupId = snapshot.key
+            
+            self.ref.child("group-messages").child(groupId).observe(.childAdded, with: { (snapshot) in
+                
+                let messageId = snapshot.key
+                    
+                self.ref.child("messages").child(messageId).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if let dictionary = snapshot.value as? [String: Any] {
+                        let message = Message()
+                        message.setValuesForKeys(dictionary)
+                        message.type = "group"
+                        self.messagesDictionary[groupId] = message
+                        self.messages = Array(self.messagesDictionary.values)
+                        self.messages.sort(by: { (message1, message2) -> Bool in
+                            return (message1.time?.intValue)! > (message2.time?.intValue)!
+                        })
+                    }
+                    
+                }, withCancel: nil)
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
     }
     
     func observeUserMessages() {
@@ -74,7 +111,7 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
                     
                     let message = Message()
                     message.setValuesForKeys(dictionary)
-                    
+                    message.type = "personal"
                     if let partnerId = message.chatPartnerId() {
                         self.messagesDictionary[partnerId] = message
                         self.messages = Array(self.messagesDictionary.values)
@@ -101,31 +138,6 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
             self.tableView.reloadData()
         }
     }
-    
-    func observeMessages() {
-        let messagesRef = FIRDatabase.database().reference().child("messages")
-        messagesRef.observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: Any] {
-                
-                let message = Message()
-                //message.time = dictionary["time"] as! Date? as NSDate?
-                message.setValuesForKeys(dictionary)
-                //self.messages.append(message)
-                if let toId = message.to {
-                    self.messagesDictionary[toId] = message
-                    self.messages = Array(self.messagesDictionary.values)
-                    self.messages.sort(by: { (message1, message2) -> Bool in
-                        return (message1.time?.intValue)! > (message2.time?.intValue)!
-                    })
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            }
-        }, withCancel: nil)
-    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -151,23 +163,53 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
         return cell
     }
     
+    private func pushGroupChat(groupId: String, completion: @escaping (ActivityChatProfile) -> ()) {
+        ref.child("activities").child(groupId).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: Any] {
+                let activityName = dictionary["name"] as? String
+                let activityId = snapshot.key
+                let participants = dictionary["participants"] as? [String: [String: String]]
+                let userReleasingId = dictionary["releasingUserID"] as? String
+                let activity = ActivityChatProfile(activityId: activityId, activityName: activityName!, participants: participants!, groupImage: "", userReleasing: userReleasingId!)
+                completion(activity)
+            }
+            
+        }, withCancel: nil)
+    }
+    
+    private func pushPersonalChat(userId: String, completion: @escaping (PersonalUserForView) -> ()) {
+        ref.child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: Any] {
+                let userName = dictionary["name"] as! String
+                //let user = PersonalChatProfile(userId: snapshot.key, userName: userName, userNickname: nil, userProfileImage: "")
+                let user = PersonalUserForView(userName: userName, userId: snapshot.key, gender: Gender.Female, age: 22)
+                completion(user)
+            }
+        }, withCancel: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatView = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
         if tableView === self.tableView {
             let message = messages[indexPath.row]
-            guard let partnerId = message.chatPartnerId() else {
-                return
-            }
-            let userRef = FIRDatabase.database().reference().child("users").child(partnerId)
-            userRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                if let dictionary = snapshot.value as? [String: Any] {
-                    let userName = dictionary["name"] as! String
-                    //let user = PersonalChatProfile(userId: snapshot.key, userName: userName, userNickname: nil, userProfileImage: "")
-                    let user = PersonalUserForView(userName: userName, userId: snapshot.key, gender: Gender.Female, age: 22)
+            let toId = (message.to)!
+            switch (message.type)! {
+            case "group":
+                pushGroupChat(groupId: toId) {activity in
+                    chatView.eventChat = activity
+                    self.navigationController?.pushViewController(chatView, animated: true)
+                }
+            default:
+                guard let partnerId = message.chatPartnerId() else {
+                    return
+                }
+                pushPersonalChat(userId: partnerId) {user in
                     chatView.personalUser = user
                     self.navigationController?.pushViewController(chatView, animated: true)
                 }
-            }, withCancel: nil)
+            }
+            
         }
         
         else {

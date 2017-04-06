@@ -64,9 +64,9 @@ class OtherUserTableViewCell: UITableViewCell {
         profileImageView.image = nil
         userName.text = nil
         if let activity = self.activity {
-            if let profileImageUrlString = activity.userReleasing.userProfileImageUrl {
+            /*if let profileImageUrlString = activity.userReleasing.userProfileImageUrl {
                 setupProfileImage(imageUrl: profileImageUrlString)
-            }
+            }*/
             userName.text = activity.activityName
         }
     }

@@ -27,6 +27,7 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     var eventChat: ActivityChatProfile? {
         didSet {
             self.navigationItem.title = eventChat?.activityName
+            observeGroupMessages()
         }
     }
     
@@ -60,6 +61,31 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
         }, withCancel: nil)
     }
 
+    func observeGroupMessages() {
+        let activityId = eventChat?.activityId
+        let groupMessageRef = FIRDatabase.database().reference().child("group-messages").child(activityId!)
+        groupMessageRef.observe(.childAdded, with: { (snapshot) in
+            let messageKey = snapshot.key
+            
+            let messageRef = FIRDatabase.database().reference().child("messages").child(messageKey)
+            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? [String: Any] else {
+                    return
+                }
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+                self.messages.append(message)
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                    let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
+                    self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                }
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -182,10 +208,12 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     
     func handleSend() {
         let messageRef = FIRDatabase.database().reference().child("messages").childByAutoId()
-        let toId = personalUser!.userId
+        let toId = (personalUser != nil) ? personalUser!.userId : eventChat!.activityId!
+        let directory = (personalUser != nil) ? "user-messages" : "group-messages"
+        let type = (personalUser != nil) ? "personal" : "group"
         let fromId = FIRAuth.auth()!.currentUser!.uid
         let timeStamp = Date().timeIntervalSince1970
-        let values = ["text": inputTextField.text!, "to": toId, "from": fromId, "time": timeStamp] as [String : Any]
+        let values = ["text": inputTextField.text!, "to": toId, "from": fromId, "time": timeStamp, "type": type] as [String : Any]
         messageRef.updateChildValues(values) { (error, reference) in
             if error != nil {
                 print(error!)
@@ -193,10 +221,13 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
             }
             
             let messageId = messageRef.key
-            let senderMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId)
-            senderMessagesRef.updateChildValues([messageId: 1])
             
-            let receiverMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toId)
+            if self.personalUser != nil {
+                let senderMessagesRef = FIRDatabase.database().reference().child(directory).child(fromId)
+                senderMessagesRef.updateChildValues([messageId: 1])
+            }
+            
+            let receiverMessagesRef = FIRDatabase.database().reference().child(directory).child(toId)
             receiverMessagesRef.updateChildValues([messageId: 1])
         }
         self.inputTextField.text = nil

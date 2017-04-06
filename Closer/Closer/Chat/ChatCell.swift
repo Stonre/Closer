@@ -13,12 +13,30 @@ class ChatCell: UITableViewCell {
     
     var message: Message? {
         didSet {
-            
-            setupNameAndImage()
-            self.detailTextLabel?.text = self.message?.text
-            setupChatTime()
+            let type = (self.message?.type)!
+            switch type {
+            case "group":
+                setupGroupNameAndImage()
+                self.detailTextLabel?.text = self.message?.text
+                setupChatTime()
+            default:
+                setupNameAndImage()
+                self.detailTextLabel?.text = self.message?.text
+                setupChatTime()
+            }
 
         }
+    }
+    
+    private func setupGroupNameAndImage() {
+        let ref = FIRDatabase.database().reference().child("activities").child((self.message?.to)!)
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: Any] {
+                self.textLabel?.text = "\((dictionary["name"] as? String)!)(\((dictionary["numberOfParticipants"])!))"
+            }
+            
+        }, withCancel: nil)
     }
     
     private func setupNameAndImage() {
