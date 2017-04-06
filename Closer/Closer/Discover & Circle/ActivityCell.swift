@@ -204,9 +204,14 @@ class ActivityCell: UITableViewCell {
 //        tagLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
 //        tagLabel.heightAnchor.constraint(equalTo: userNameLabel.heightAnchor, constant: 0).isActive = true
         
-        
-        var tagText = String(describing: activityDescriptionLabel.text)
-        tagText += "\ntags: "
+        var tagText = ""
+        if activityDescriptionLabel.text != nil {
+            tagText = (activityDescriptionLabel.text)!
+        }
+        if tagText.characters.last != "\n" {
+            tagText += "\n"
+        }
+        tagText += "tags: "
         for tag in tags {
             tagText += "\(tag); "
         }
