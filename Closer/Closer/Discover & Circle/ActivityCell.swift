@@ -74,12 +74,12 @@ class ActivityCell: UITableViewCell {
         }
         setupActivityNameLabel()
         setupActivityDescriptionLabel()
-        if (generalActivity != nil) {
-            let tags = generalActivity!.tags
-            if tags[0] != "" {
-                setupTagLabel(tags: tags)
-            }
-        }
+//        if (generalActivity != nil) {
+//            let tags = generalActivity!.tags
+//            if tags[0] != "" {
+//                setupTagLabel(tags: tags)
+//            }
+//        }
     }
     
     private func getUserProfileImageUrl(){

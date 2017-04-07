@@ -13,6 +13,8 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
     let newActivityButton = UIButton(type: .contactAdd)
     let homeButton = UIButton()
     let chatButton = UIButton()
+    
+    let tabBarItemImageSize = CGSize(width: 24, height: 24)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +23,24 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
     }
     
+    private func resizeImage(image: UIImage, newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(newSize)
+        image.draw(in: CGRect(origin: .zero, size: newSize))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let discoverViewController = DiscoverViewController()
-        discoverViewController.tabBarItem = UITabBarItem(title: "发现", image: nil, selectedImage: nil)
+        let discoverIcon = resizeImage(image: #imageLiteral(resourceName: "discover-icon"), newSize: tabBarItemImageSize)
+//        di = CGSize(width: 24, height: 24)
+        discoverViewController.tabBarItem = UITabBarItem(title: "发现", image: discoverIcon, selectedImage: nil)
         
+        let circleIcon = resizeImage(image: #imageLiteral(resourceName: "circle-icon"), newSize: tabBarItemImageSize)
         let circleViewController = CircleTableViewController()
-        circleViewController.tabBarItem = UITabBarItem(title: "圈子", image: nil, selectedImage: nil)
+        circleViewController.tabBarItem = UITabBarItem(title: "圈子", image: circleIcon, selectedImage: nil)
         viewControllers = [discoverViewController, circleViewController]
     }
     
