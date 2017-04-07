@@ -262,9 +262,9 @@ class CircleTableViewController: UITableViewController {
             let estimatedActivityDescriptionFrameHeight = min(130, estimatedActivityDescriptionFrame.height + 10)
             
             var estimatedActivityTagsFrameHeight: CGFloat = 0
-            if act.tags[0] != "" {
-                estimatedActivityTagsFrameHeight += 30
-            }
+//            if act.tags[0] != "" {
+//                estimatedActivityTagsFrameHeight += 30
+//            }
             
             let estimatedHeight = max(80 + estimatedActivityTagsFrameHeight, estimatedUserNameFrame.height + estimatedActivityNameFrame.height
                                         + estimatedActivityDescriptionFrameHeight + estimatedActivityTagsFrameHeight)
