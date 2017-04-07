@@ -16,6 +16,7 @@ class NewActivityAuthorizationViewController: NewActivityContentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentIndex = 1
+        view.backgroundColor = NewActivityController.bgColor
         setupTitleLabel()
         setupAuthorizationRadioButtons()
         // Do any additional setup after loading the view.
@@ -23,7 +24,7 @@ class NewActivityAuthorizationViewController: NewActivityContentViewController {
     
     private func setupTitleLabel() {
         view.addSubview(titleLabel)
-        titleLabel.backgroundColor = .white
+        titleLabel.backgroundColor = NewActivityController.bgColorTransparent
         titleLabel.text = "任务权限："
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

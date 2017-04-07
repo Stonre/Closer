@@ -16,7 +16,7 @@ class NewActivityNameViewController: NewActivityContentViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentIndex = 0
-        view.backgroundColor = .white
+        view.backgroundColor = NewActivityController.bgColor
         setupTitleLabel()
         setupNameTextField()
         // Do any additional setup after loading the view.
@@ -24,7 +24,7 @@ class NewActivityNameViewController: NewActivityContentViewController  {
     
     private func setupTitleLabel() {
         view.addSubview(titleLabel)
-        titleLabel.backgroundColor = .white
+        titleLabel.backgroundColor = NewActivityController.bgColorTransparent
         titleLabel.text = "任务名称："
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ class NewActivityNameViewController: NewActivityContentViewController  {
     
     private func setupNameTextField() {
         view.addSubview(nameTextField)
-        nameTextField.backgroundColor = .white
+        nameTextField.backgroundColor = NewActivityController.bgColorTransparent
         nameTextField.placeholder = "请输入任务名称"
         nameTextField.font = UIFont.preferredFont(forTextStyle: .body)
         nameTextField.delegate = self

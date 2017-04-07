@@ -60,7 +60,7 @@ class DiscoverViewController: CircleTableViewController {
     
     private func setupTableHeaderView() {
         tableHeaderView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
-        tableHeaderView.backgroundColor = .white
+        tableHeaderView.backgroundColor = UIColor(red:0.97, green:0.95, blue:0.95, alpha:1.0)
         
         filterButton = UIButton()
         filterButton.frame = CGRect(origin: CGPoint(x: 8, y: 8), size: CGSize(width: 32, height: 32))

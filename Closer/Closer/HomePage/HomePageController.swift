@@ -11,6 +11,8 @@ import CoreLocation
 
 class HomePageController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    let selectedBlue = UIColor(red:0.40, green:0.63, blue:0.88, alpha:0.36)
+    
     var tarBarSelect = 0 {
         didSet{
             tableView.reloadData()
@@ -79,6 +81,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         button.setAttributedTitle(NSAttributedString(string: "好友"), for: .normal)
         button.addTarget(self, action: #selector(selectFriendsButton(_:)), for: .touchUpInside)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 14)
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -88,6 +91,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         button.setAttributedTitle(NSAttributedString(string: "联系人"), for: .normal)
         button.addTarget(self, action: #selector(selectContactsButton(_:)), for: .touchUpInside)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 14)
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -97,6 +101,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         button.setAttributedTitle(NSAttributedString(string: "我参与的"), for: .normal)
         button.addTarget(self, action: #selector(selectActivitiesParticipatedIn(_:)), for: .touchUpInside)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 14)
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -106,6 +111,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         button.setAttributedTitle(NSAttributedString(string: "我发布的"), for: .normal)
         button.addTarget(self, action: #selector(selectActivitiesReleased(_:)), for: .touchUpInside)
         button.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 14)
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -126,18 +132,34 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func selectActivitiesParticipatedIn(_ sender: UIButton) {
         tarBarSelect = 0
+        activityParticipatedInButton.backgroundColor = selectedBlue
+        activityReleasedButton.backgroundColor = NewActivityController.bgColorTransparent
+        friendsButton.backgroundColor = NewActivityController.bgColorTransparent
+        contactsButton.backgroundColor = NewActivityController.bgColorTransparent
     }
     
     func selectActivitiesReleased(_ sender: UIButton) {
         tarBarSelect = 1
+        activityParticipatedInButton.backgroundColor = NewActivityController.bgColorTransparent
+        activityReleasedButton.backgroundColor = selectedBlue
+        friendsButton.backgroundColor = NewActivityController.bgColorTransparent
+        contactsButton.backgroundColor = NewActivityController.bgColorTransparent
     }
     
     func selectFriendsButton(_ sender: UIButton) {
         tarBarSelect = 2
+        activityParticipatedInButton.backgroundColor = NewActivityController.bgColorTransparent
+        activityReleasedButton.backgroundColor = NewActivityController.bgColorTransparent
+        friendsButton.backgroundColor = selectedBlue
+        contactsButton.backgroundColor = NewActivityController.bgColorTransparent
     }
     
     func selectContactsButton(_ sender: UIButton) {
         tarBarSelect = 3
+        activityParticipatedInButton.backgroundColor = NewActivityController.bgColorTransparent
+        activityReleasedButton.backgroundColor = NewActivityController.bgColorTransparent
+        friendsButton.backgroundColor = NewActivityController.bgColorTransparent
+        contactsButton.backgroundColor = selectedBlue
     }
     
     override func viewDidLoad() {
@@ -154,6 +176,7 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target: nil, action: nil)
+        activityParticipatedInButton.backgroundColor = selectedBlue
         setupSettingsIcon()
         setupBasicInfoView()
         setupTarStackView()
@@ -306,9 +329,10 @@ class HomePageController: UIViewController, UITableViewDataSource, UITableViewDe
         switch tarBarSelect {
         case 0:
             cell = tableView.dequeueReusableCell(withIdentifier: CloserUtility.ActivityCellReuseId, for: indexPath)
-            let activity = activitiesParticipatedIn[indexPath.row]
+            let activity = activitiesParticipatedIn[indexPath.row] as! GeneralActivity
             if let activityCell = cell as? ActivityCell {
                 activityCell.activity = activity
+                activityCell.userProfileImageUrl = NSURL(string: activity.userReleasing.userProfileImageUrl!)
             }
 //            break
         case 1:

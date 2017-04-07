@@ -73,7 +73,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentIndex = 2
-        view.backgroundColor = .white
+        view.backgroundColor = NewActivityController.bgColor
 //        endEditingTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapElseWhere))
 //        endEditingTapGestureRecognizer?.cancelsTouchesInView = false
 //        view.addGestureRecognizer(endEditingTapGestureRecognizer!)
@@ -102,7 +102,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     
     private func setupTimeTitleLabel() {
         view.addSubview(timeTitleLabel)
-        timeTitleLabel.backgroundColor = .white
+        timeTitleLabel.backgroundColor = NewActivityController.bgColorTransparent
         timeTitleLabel.text = "任务周期："
         timeTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         timeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +112,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     
     private func setupStartTime() {
         view.addSubview(startTimeLabel)
-        startTimeLabel.backgroundColor = .white
+        startTimeLabel.backgroundColor = NewActivityController.bgColorTransparent
         startTimeLabel.text = "起始时间"
         startTimeLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         startTimeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -136,7 +136,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     
     private func setupEndTime() {
         view.addSubview(endTimeLabel)
-        endTimeLabel.backgroundColor = .white
+        endTimeLabel.backgroundColor = NewActivityController.bgColorTransparent
         endTimeLabel.text = "结束时间"
         endTimeLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         endTimeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -169,7 +169,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     
     private func setupLocationTitleLabel() {
         view.addSubview(locationTitleLabel)
-        locationTitleLabel.backgroundColor = .white
+        locationTitleLabel.backgroundColor = NewActivityController.bgColorTransparent
         locationTitleLabel.text = "任务地点："
         locationTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         locationTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -180,7 +180,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     private func setupLocationTextField() {
         view.addSubview(locationTextField)
         locationTextField.delegate = self
-        locationTextField.backgroundColor = .white
+        locationTextField.backgroundColor = NewActivityController.bgColorTransparent
         locationTextField.placeholder = "请输入任务地点"
         locationTextField.addTarget(self, action: #selector(locationUpdated), for: .editingChanged)
         locationTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -198,7 +198,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     
     private func setupCategoryTitleLabel() {
         view.addSubview(categoryTitleLabel)
-        categoryTitleLabel.backgroundColor = .white
+        categoryTitleLabel.backgroundColor = NewActivityController.bgColorTransparent
         categoryTitleLabel.text = "任务类别："
         categoryTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         categoryTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -209,7 +209,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     private func setupCategoryTextField() {
         view.addSubview(categoryTextField)
         categoryTextField.delegate = self
-        categoryTextField.backgroundColor = .white
+        categoryTextField.backgroundColor = NewActivityController.bgColorTransparent
         categoryTextField.placeholder = "请输入任务类别"
         categoryTextField.translatesAutoresizingMaskIntoConstraints = false
         categoryTextField.topAnchor.constraint(equalTo: categoryTitleLabel.bottomAnchor, constant: 8).isActive = true
@@ -220,7 +220,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     
     private func setupTagTitleLabel() {
         view.addSubview(tagTitleLabel)
-        tagTitleLabel.backgroundColor = .white
+        tagTitleLabel.backgroundColor = NewActivityController.bgColorTransparent
         tagTitleLabel.text = "任务标签："
         tagTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         tagTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -231,7 +231,7 @@ class NewActivityTimeLocationViewController: NewActivityContentViewController {
     private func setupTagTextField() {
         view.addSubview(tagTextField)
         tagTextField.delegate = self
-        tagTextField.backgroundColor = .white
+        tagTextField.backgroundColor = NewActivityController.bgColorTransparent
         tagTextField.placeholder = "请输入任务标签"
         tagTextField.translatesAutoresizingMaskIntoConstraints = false
         tagTextField.topAnchor.constraint(equalTo: tagTitleLabel.bottomAnchor, constant: 8).isActive = true

@@ -26,7 +26,7 @@ class NewActivityDescriptionViewController: NewActivityContentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = NewActivityController.bgColor
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(quitEditing)))
 
         NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillHide, object: nil, queue: .main) { (notification) in
@@ -60,7 +60,7 @@ class NewActivityDescriptionViewController: NewActivityContentViewController {
     
     private func setupTitleLabel() {
         view.addSubview(titleLabel)
-        titleLabel.backgroundColor = .white
+        titleLabel.backgroundColor = NewActivityController.bgColorTransparent
         titleLabel.text = "任务描述："
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +70,7 @@ class NewActivityDescriptionViewController: NewActivityContentViewController {
     
     private func setupDescriptionView() {
         view.addSubview(descriptionView)
-        descriptionView.backgroundColor = .white
+        descriptionView.backgroundColor = NewActivityController.bgColorTransparent
         descriptionView.delegate = self
         descriptionView.isEditable = true
         descriptionView.font = UIFont.preferredFont(forTextStyle: .body)
@@ -88,12 +88,12 @@ class NewActivityDescriptionViewController: NewActivityContentViewController {
     private func setupContainerView() {
         view.addSubview(containerView)
 //        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = NewActivityController.bgColorTransparent
         containerView.frame = CGRect(x: view.bounds.minX, y: view.bounds.maxY - 76, width: view.bounds.width, height: 36)
         
         
         containerView.addSubview(addImageButton)
-        addImageButton.frame = CGRect(x: containerView.bounds.maxX - 32, y: containerView.bounds.minY + 4, width: 24, height: 24)
+        addImageButton.frame = CGRect(x: containerView.bounds.maxX - 48, y: containerView.bounds.minY + 4, width: 36, height: 30)
         addImageButton.setImage(#imageLiteral(resourceName: "add-image-icon"), for: .normal)
         addImageButton.clipsToBounds = true
         addImageButton.addTarget(self, action: #selector(touchAddImageButton), for: .touchUpInside)

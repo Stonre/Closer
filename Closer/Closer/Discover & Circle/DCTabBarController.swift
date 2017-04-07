@@ -57,16 +57,16 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
         newActivityButton.translatesAutoresizingMaskIntoConstraints = false
         
         newActivityButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newActivityButton.centerYAnchor.constraint(equalTo: tabBar.centerYAnchor).isActive = true
-        newActivityButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        newActivityButton.centerYAnchor.constraint(equalTo: tabBar.centerYAnchor, constant: -20).isActive = true
+        newActivityButton.heightAnchor.constraint(equalToConstant: 72).isActive = true
         newActivityButton.widthAnchor.constraint(equalTo: newActivityButton.heightAnchor, constant: 0).isActive = true
         
         newActivityButton.addTarget(self, action: #selector(touchNewActivity), for: .touchUpInside)
     }
     
     func touchNewActivity() {
-        
-        navigationController?.pushViewController(NewActivityController(), animated: true)
+        let navig = UINavigationController(rootViewController: NewActivityController())
+        self.present(navig, animated: true, completion: nil)
         
     }
     

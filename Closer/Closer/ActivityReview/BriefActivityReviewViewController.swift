@@ -35,10 +35,10 @@ class BriefActivityReviewViewController: ActivityReviewViewController {
 //        activityNameLabel.backgroundColor = .blue
         activityNameLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         activityNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        activityNameLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        activityNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        activityNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5).isActive = true
+        activityNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5).isActive = true
         activityNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityNameLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        activityNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     private func setupReleaserProfileImageView() {
@@ -53,14 +53,14 @@ class BriefActivityReviewViewController: ActivityReviewViewController {
         releaserProfileImageView.translatesAutoresizingMaskIntoConstraints = false
         releaserProfileImageView.topAnchor.constraint(equalTo: activityNameLabel.bottomAnchor, constant: 8).isActive = true
         releaserProfileImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
-        releaserProfileImageView.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        releaserProfileImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         releaserProfileImageView.widthAnchor.constraint(equalTo: releaserProfileImageView.heightAnchor, constant: 0).isActive = true
     }
     
     private func setupReleaserNameLabel() {
         view.addSubview(releaserNameLabel)
 //        releaserNameLabel.backgroundColor = .yellow
-        releaserNameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        releaserNameLabel.font = UIFont.systemFont(ofSize: 14)
         
         releaserNameLabel.translatesAutoresizingMaskIntoConstraints = false
         releaserNameLabel.centerYAnchor.constraint(equalTo: releaserProfileImageView.centerYAnchor, constant: 0).isActive = true
@@ -72,13 +72,13 @@ class BriefActivityReviewViewController: ActivityReviewViewController {
     private func setupTimeLabel() {
         view.addSubview(timeLabel)
 //        timeLabel.backgroundColor = .blue
-        timeLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        timeLabel.font = UIFont.italicSystemFont(ofSize: 14)
         timeLabel.textAlignment = .right
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.topAnchor.constraint(equalTo: releaserNameLabel.topAnchor, constant: 0).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: releaserNameLabel.centerYAnchor, constant: 0).isActive = true
-        timeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        timeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         timeLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
     
@@ -99,7 +99,7 @@ class BriefActivityReviewViewController: ActivityReviewViewController {
         moreButton.setTitle("查看详情", for: .normal)
         moreButton.isHidden = true
         
-        moreButton.backgroundColor = UIColor(red:0.94, green:0.55, blue:0.28, alpha:1.0)
+        moreButton.backgroundColor = UIColor(red:0.96, green:0.65, blue:0.14, alpha:1.0)
         moreButton.addTarget(self, action: #selector(touchMoreButton), for: .touchUpInside)
         
         moreButton.translatesAutoresizingMaskIntoConstraints = false

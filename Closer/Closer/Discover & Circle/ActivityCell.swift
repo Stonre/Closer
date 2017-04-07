@@ -142,13 +142,14 @@ class ActivityCell: UITableViewCell {
     private func setupTimeLabel(dateTime: Date) {
         addSubview(timeLabel)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+        timeLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         timeLabel.centerYAnchor.constraint(equalTo: userNameLabel.centerYAnchor, constant: 0).isActive = true
         timeLabel.heightAnchor.constraint(equalTo: userNameLabel.heightAnchor, constant: 0).isActive = true
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy hh:mm:ss"
         timeLabel.text = dateFormatter.string(from: dateTime)
+        timeLabel.font = UIFont.italicSystemFont(ofSize: 12)
     }
     
     private func setupActivityNameLabel() {

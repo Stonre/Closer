@@ -54,7 +54,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
         view.layer.shouldRasterize = true
         view.layer.masksToBounds = false
-        view.backgroundColor = UIColor(red:0.96, green:0.44, blue:0.21, alpha:0.8)
+        view.backgroundColor = UIColor(red:0.96, green:0.65, blue:0.14, alpha:0.72)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

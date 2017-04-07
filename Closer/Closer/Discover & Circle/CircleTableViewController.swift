@@ -119,7 +119,7 @@ class CircleTableViewController: UITableViewController {
         view.addSubview(updateInfoLabel)
         updateInfoLabel.font = UIFont.preferredFont(forTextStyle: .body)
         updateInfoLabel.textAlignment = .center
-        updateInfoLabel.backgroundColor = .green
+        updateInfoLabel.backgroundColor = UIColor(red:0.96, green:0.65, blue:0.14, alpha:0.5)
         updateInfoLabel.isHidden = true
         
         updateInfoLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 24)
@@ -147,6 +147,7 @@ class CircleTableViewController: UITableViewController {
         } else {
             tabBarController?.navigationItem.title = "圈子"
         }
+        //tabBarController?.tabBar.barTintColor = UIColor(red:0.84, green:0.88, blue:0.87, alpha:1.0)
 //        tabBarController?.navigationItem.title = CircleTableViewController.viewTitle
     }
         
@@ -154,8 +155,9 @@ class CircleTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.tintColor = UIColor(red:0.35, green:0.34, blue:0.34, alpha:1.0)
         self.navigationController?.navigationBar.backItem?.backBarButtonItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = UIColor(red:0.35, green:0.34, blue:0.34, alpha:1.0)
+        //self.navigationController?.navigationBar.backgroundColor = UIColor(red:0.60, green:0.67, blue:0.73, alpha:0.5)
 //        self.navigationController?.navigationBar.isTranslucent = false
 //        self.extendedLayoutIncludesOpaqueBars = false
 //        self.navigationController?.view.backgroundColor = .clear
@@ -182,7 +184,7 @@ class CircleTableViewController: UITableViewController {
     
     private func setupRefreshControl() {
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.backgroundColor = .red
+        self.refreshControl?.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1.0)
         self.refreshControl?.addTarget(self, action: #selector(getLatestActivities), for: .valueChanged)
     }
     
@@ -215,6 +217,7 @@ class CircleTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBarTitle()
+        //self.navigationController?.navigationBar.barTintColor = UIColor(red:0.84, green:0.88, blue:0.87, alpha:1.0)
     }
 
     // MARK: - Table view data source

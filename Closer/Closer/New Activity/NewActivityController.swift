@@ -11,6 +11,10 @@ import Firebase
 
 class NewActivityController: UIViewController {
     
+    static let bgColor = UIColor(red:0.96, green:0.65, blue:0.14, alpha:0.2)
+    
+    static let bgColorTransparent = UIColor(red:0.96, green:0.65, blue:0.14, alpha:0)
+    
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 // = {
 //        let pc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -37,13 +41,15 @@ class NewActivityController: UIViewController {
         view.backgroundColor = .white
         setupViewControllers()
         setupReleaseButton()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewActivityController.exitSearchMode))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(red:0.35, green:0.34, blue:0.34, alpha:1.0)
         // Do any additional setup after loading the view.
     }
     
     private func setupReleaseButton() {
         let releaseButton = UIButton(type: .system)
-        releaseButton.frame = CGRect(x: 0.0, y: 8.0, width: 60, height: 28)
-        releaseButton.setTitle("发布", for: .normal)
+        releaseButton.frame = CGRect(x: 0.0, y: 8.0, width: 30, height: 30)
+        releaseButton.setImage(#imageLiteral(resourceName: "release-icon"), for: .normal)
         releaseButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         releaseButton.addTarget(self, action: #selector(touchRelease), for: .touchUpInside)
         
@@ -213,6 +219,10 @@ class NewActivityController: UIViewController {
         pages.append(timeLocationTagViewController)
         pages.append(descriptionViewController)
 //        pageViewController.didMove(toParentViewController: self)
+    }
+    
+    @objc private func exitSearchMode() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
