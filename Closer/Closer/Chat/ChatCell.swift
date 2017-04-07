@@ -34,6 +34,12 @@ class ChatCell: UITableViewCell {
             
             if let dictionary = snapshot.value as? [String: Any] {
                 self.textLabel?.text = "\((dictionary["name"] as? String)!)(\((dictionary["numberOfParticipants"])!))"
+                let participantsDict = dictionary["participants"] as! [String: [String: String]]
+                let participants = Array(participantsDict.values)
+                // TODO:
+                // revise number of participants every time a participant is added
+                let numOfParticipants = participants.count
+                setGroupImageProfile(participants: participants, numOfParticipants: numOfParticipants, profileImageView: self.profileImageView)
             }
             
         }, withCancel: nil)
@@ -48,7 +54,7 @@ class ChatCell: UITableViewCell {
                 if let dictionary = snapshot.value as? [String: Any] {
                     self.textLabel?.text = dictionary["name"] as? String
                     if let imageUrl = dictionary["profileImageUrl"] as? String {
-                        self.setupProfileImage(imageUrl: imageUrl)
+                        setupProfileImage(imageUrl: imageUrl, imageView: self.profileImageView)
                     }
                 }
                 
@@ -92,21 +98,6 @@ class ChatCell: UITableViewCell {
         return timeView
     }()
     
-    private func setupProfileImage(imageUrl: String) {
-        if let url = URL(string: imageUrl) {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(data: data!)
-                }
-                
-            }).resume()
-        }
-    }
-    
     var personalChat: PersonalChat? {
         didSet {
             updatePersonalChatUI()
@@ -124,7 +115,7 @@ class ChatCell: UITableViewCell {
         detailTextLabel?.text = personalChat?.lastMessage
         textLabel?.text = personalChat?.person.displayName
         if let profileImageUrl = personalChat?.person.userProfileImage {
-            setupProfileImage(imageUrl: profileImageUrl)
+            setupProfileImage(imageUrl: profileImageUrl, imageView: self.profileImageView)
         }
     }
     

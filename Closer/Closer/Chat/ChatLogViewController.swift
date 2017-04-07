@@ -13,6 +13,8 @@ private let reuseIdentifier = "Cell"
 
 class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     
+    let uid = (FIRAuth.auth()?.currentUser?.uid)!
+    
     var messages = [Message]()
     
     var containerHeightAnchor: NSLayoutConstraint?
@@ -32,9 +34,6 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     }
     
     func observeMessages() {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else{
-            return
-        }
         
         let userMessageRef = FIRDatabase.database().reference().child("user-messages").child(uid)
         userMessageRef.observe(.childAdded, with: { (snapshot) in
@@ -48,6 +47,7 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
                 }
                 let message = Message()
                 message.setValuesForKeys(dictionary)
+                message.type = "personal"
                 if message.chatPartnerId() == self.personalUser?.userId {
                     self.messages.append(message)
                     DispatchQueue.main.async {
@@ -74,6 +74,7 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
                 }
                 let message = Message()
                 message.setValuesForKeys(dictionary)
+                message.type = "group"
                 self.messages.append(message)
                 DispatchQueue.main.async {
                     self.collectionView?.reloadData()
@@ -248,9 +249,15 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var height: CGFloat = 80
+        let message = messages[indexPath.item]
         
-        if let text = messages[indexPath.item].text {
+        if let text = message.text {
             height = estimateFrameForText(text: text).height + 20
+        }
+        if let fromId = message.from {
+            if fromId != uid {
+                height = height + 15    //???how to get height for name label
+            }
         }
         let width = UIScreen.main.bounds.width
         return CGSize(width: width, height: height)
@@ -269,6 +276,7 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
             return cell
         }
         cell.messageText.text = messageText
+        
         setupCell(cell: cell, message: message)
         
         cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: messageText).width + 20
@@ -276,17 +284,67 @@ class ChatLogViewController: UICollectionViewController, UITextFieldDelegate, UI
         return cell
     }
     
-    private func setupCell(cell: MessageCell, message: Message) {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else{
-            return
+    private func setupProfileImage(imageUrl: String, cell: MessageCell) {
+        if let url = URL(string: imageUrl) {
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                DispatchQueue.main.async {
+                    cell.senderImage.image = UIImage(data: data!)
+                }
+                
+            }).resume()
         }
+    }
+    
+    private func setupCellNameAndImage(cell: MessageCell, message: Message) {
+        let type = (message.type)!
+        let senderId = (message.from)!
+        switch type {
+        case "group":
+            cell.senderName.text = eventChat?.participants[senderId]?["name"]
+            let imageUrl = eventChat?.participants[senderId]?["profileImageUrl"]
+            setupProfileImage(imageUrl: imageUrl!, cell: cell)
+        default:
+            if senderId == uid {
+                let myName = FIRAuth.auth()?.currentUser?.displayName
+                let myImageUrl = FIRAuth.auth()?.currentUser?.photoURL?.absoluteString
+                cell.senderName.text = myName
+                setupProfileImage(imageUrl: myImageUrl!, cell: cell)
+            } else {
+                cell.senderName.text = personalUser?.userName
+                let imageUrl = (personalUser?.userProfileImageUrl)!
+                setupProfileImage(imageUrl: imageUrl, cell: cell)
+            }
+        }
+    }
+    
+    private func setupCell(cell: MessageCell, message: Message) {
+        
+        setupCellNameAndImage(cell: cell, message: message)
         if message.from == uid {
+            cell.senderName.isHidden = true
+            cell.imageRightAnchor?.isActive = true
+            cell.imageLeftAnchor?.isActive = false
             cell.bubbleRightAnchor?.isActive = true
             cell.bubbleLeftAnchor?.isActive = false
+            cell.bubbleTopAnchorForOthers?.isActive = false
+            cell.bubbleTopAnchorForSelf?.isActive = true
+            cell.bubbleHeightForOthers?.isActive = false
+            cell.bubbleHeightForSelf?.isActive = true
             cell.textBubble.backgroundColor = MessageCell.lightBlueColor
         } else {
+            cell.senderName.isHidden = false
+            cell.imageRightAnchor?.isActive = false
+            cell.imageLeftAnchor?.isActive = true
             cell.bubbleRightAnchor?.isActive = false
             cell.bubbleLeftAnchor?.isActive = true
+            cell.bubbleTopAnchorForOthers?.isActive = true
+            cell.bubbleTopAnchorForSelf?.isActive = false
+            cell.bubbleHeightForOthers?.isActive = true
+            cell.bubbleHeightForSelf?.isActive = false
             cell.textBubble.backgroundColor = MessageCell.lightGrayColor
         }
     }
