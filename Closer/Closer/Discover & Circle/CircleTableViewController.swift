@@ -154,6 +154,8 @@ class CircleTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.tintColor = UIColor(red:0.35, green:0.34, blue:0.34, alpha:1.0)
+        self.navigationController?.navigationBar.backItem?.backBarButtonItem?.title = ""
 //        self.navigationController?.navigationBar.isTranslucent = false
 //        self.extendedLayoutIncludesOpaqueBars = false
 //        self.navigationController?.view.backgroundColor = .clear

@@ -14,6 +14,8 @@ class FullActivityReviewViewController: ActivityReviewViewController {
     
     let updateData = UpdateData.sharedInstance
     
+    var state: Int = 0 // 0 - all included, 1 - time Start and timeEnd excluded
+    
     let activityName: UILabel = {
         let label = UILabel()
         label.text = "任务名称"
@@ -38,25 +40,28 @@ class FullActivityReviewViewController: ActivityReviewViewController {
     
     let infoView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "mybackground")!)
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //view.backgroundColor = UIColor(patternImage: UIImage(named: "mybackground")!)
+        //let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        //let blurEffectView = UIVisualEffectView(effect: blurEffect)
         //always fill the view
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(blurEffectView)
+        //blurEffectView.frame = view.bounds
+        //blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //view.addSubview(blurEffectView)
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 1
+        view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = CGSize.zero
         view.layer.shadowRadius = 10
         view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
         view.layer.shouldRasterize = true
+        view.layer.masksToBounds = false
+        view.backgroundColor = UIColor(red:0.96, green:0.44, blue:0.21, alpha:0.8)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let releaserView: UIView = {
         let view = UIView()
+        view.sizeToFit()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -119,7 +124,8 @@ class FullActivityReviewViewController: ActivityReviewViewController {
     
     let userName: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .center
+        label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -134,9 +140,18 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         return imageView
     }()
     
-    let timeLabel: UILabel = {
+    let timeStartLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
+        label.font = UIFont.italicSystemFont(ofSize: 14)
+        label.textColor = UIColor(red: 0.149, green: 0.1176, blue: 0.0902, alpha: 1.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let timeEndLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
         label.font = UIFont.italicSystemFont(ofSize: 14)
         label.textColor = UIColor(red: 0.149, green: 0.1176, blue: 0.0902, alpha: 1.0)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -175,6 +190,26 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    let startLabel: UILabel = {
+        let label = UILabel()
+        label.text = "开始"
+        label.textAlignment = .left
+        label.sizeToFit()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let endLabel: UILabel = {
+        let label = UILabel()
+        label.text = "结束"
+        label.textAlignment = .left
+        label.sizeToFit()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,8 +217,6 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.backItem?.backBarButtonItem?.title = ""
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         setupInfoView()
         setupActivityName()
         setupReleaserView()
@@ -193,7 +226,9 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         setupDescriptionView()
         setupReleaserInfo()
         setupBottomStack()
-        setupTimeLabel()
+        if state == 0 {
+            setupTimeLabel()
+        }
         loadData()
     }
     
@@ -202,7 +237,12 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         infoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         infoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         infoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        infoView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        if state == 0 {
+            infoView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        } else {
+            infoView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        }
+        
     }
     
     func setParticipate() {
@@ -224,7 +264,16 @@ class FullActivityReviewViewController: ActivityReviewViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
             if let timeStart = activity.timeStart {
-                timeLabel.text = dateFormatter.string(from: timeStart)
+                timeStartLabel.text = dateFormatter.string(from: timeStart)
+                if let timeEnd = activity.timeEnd {
+                    timeEndLabel.text = dateFormatter.string(from: timeEnd)
+                }
+                else {
+                    timeEndLabel.text = "不限"
+                }
+            }
+            else {
+                state = 1
             }
             if activity.isOnline {
                 locationIconView.image = #imageLiteral(resourceName: "online")
@@ -262,7 +311,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         activityName.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 40).isActive = true
         activityName.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
         activityName.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
-        activityName.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        activityName.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func setupReleaserView() {
@@ -275,24 +324,48 @@ class FullActivityReviewViewController: ActivityReviewViewController {
     
     func setupTimeAndLocationView() {
         infoView.addSubview(timeView)
-        timeView.leftAnchor.constraint(equalTo: infoView.leftAnchor).isActive = true
-        timeView.topAnchor.constraint(equalTo: releaserView.bottomAnchor).isActive = true
+        timeView.centerXAnchor.constraint(equalTo: infoView.centerXAnchor).isActive = true
+        timeView.topAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 10).isActive = true
         timeView.widthAnchor.constraint(equalTo: infoView.widthAnchor, multiplier: 0.5).isActive = true
-        timeView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
+        timeView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.8).isActive = true
         
         infoView.addSubview(locationView)
-        locationView.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
-        locationView.topAnchor.constraint(equalTo: releaserView.bottomAnchor).isActive = true
-        locationView.widthAnchor.constraint(equalTo: infoView.widthAnchor, multiplier: 0.5).isActive = true
-        locationView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
+        if state == 0 {
+            locationView.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
+            locationView.topAnchor.constraint(equalTo: timeView.bottomAnchor).isActive = true
+            locationView.widthAnchor.constraint(equalTo: infoView.widthAnchor, multiplier: 1).isActive = true
+            locationView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
+        } else {
+            locationView.rightAnchor.constraint(equalTo: infoView.rightAnchor).isActive = true
+            locationView.topAnchor.constraint(equalTo: releaserView.bottomAnchor).isActive = true
+            locationView.widthAnchor.constraint(equalTo: infoView.widthAnchor, multiplier: 1).isActive = true
+            locationView.heightAnchor.constraint(equalTo: activityName.heightAnchor, multiplier: 0.7).isActive = true
+
+        }
+        
     }
     
     func setupTimeLabel() {
-        timeView.addSubview(timeLabel)
-        timeLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor).isActive = true
-        timeLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor).isActive = true
-        timeLabel.topAnchor.constraint(equalTo: timeView.topAnchor, constant: 2).isActive = true
-        timeLabel.bottomAnchor.constraint(equalTo: timeView.bottomAnchor, constant: 2).isActive = true
+        timeView.addSubview(startLabel)
+        startLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor).isActive = true
+        startLabel.topAnchor.constraint(equalTo: timeView.topAnchor, constant: 2).isActive = true
+        startLabel.bottomAnchor.constraint(equalTo: timeView.centerYAnchor).isActive = true
+        //startLabel.widthAnchor.constraint(equalTo: startLabel.heightAnchor).isActive = true
+        timeView.addSubview(timeStartLabel)
+        timeStartLabel.leftAnchor.constraint(equalTo: startLabel.leftAnchor, constant: 40).isActive = true
+        timeStartLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor).isActive = true
+        timeStartLabel.topAnchor.constraint(equalTo: timeView.topAnchor, constant: 2).isActive = true
+        timeStartLabel.bottomAnchor.constraint(equalTo: timeView.centerYAnchor, constant: -1).isActive = true
+        timeView.addSubview(endLabel)
+        endLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor).isActive = true
+        endLabel.topAnchor.constraint(equalTo: timeView.centerYAnchor, constant: 2).isActive = true
+        endLabel.bottomAnchor.constraint(equalTo: timeView.bottomAnchor).isActive = true
+        //endLabel.widthAnchor.constraint(equalTo: endLabel.heightAnchor).isActive = true
+        timeView.addSubview(timeEndLabel)
+        timeEndLabel.topAnchor.constraint(equalTo: timeView.centerYAnchor, constant: 2).isActive = true
+        timeEndLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor).isActive = true
+        timeEndLabel.leftAnchor.constraint(equalTo: endLabel.leftAnchor, constant: 40).isActive = true
+        timeEndLabel.bottomAnchor.constraint(equalTo: timeView.bottomAnchor).isActive = true
     }
     
     /*func setupTagView() {
@@ -321,24 +394,24 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         releaserView.addSubview(userPortrait)
         userPortrait.topAnchor.constraint(equalTo: releaserView.topAnchor, constant: 0).isActive = true
         userPortrait.bottomAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 0).isActive = true
-        userPortrait.rightAnchor.constraint(equalTo: releaserView.centerXAnchor, constant: -10).isActive = true
+        userPortrait.rightAnchor.constraint(equalTo: releaserView.centerXAnchor, constant: -20).isActive = true
         userPortrait.widthAnchor.constraint(equalTo: releaserView.heightAnchor, multiplier: 1).isActive = true
         releaserView.addSubview(userName)
         userName.topAnchor.constraint(equalTo: releaserView.topAnchor, constant: 0).isActive = true
         userName.bottomAnchor.constraint(equalTo: releaserView.bottomAnchor, constant: 0).isActive = true
-        userName.rightAnchor.constraint(equalTo: releaserView.rightAnchor, constant: 0).isActive = true
-        userName.leftAnchor.constraint(equalTo: releaserView.centerXAnchor, constant: 5).isActive = true
+        userName.rightAnchor.constraint(equalTo: releaserView.rightAnchor, constant: -5).isActive = true
+        userName.leftAnchor.constraint(equalTo: userPortrait.rightAnchor, constant: 5).isActive = true
     }
     
     func setupLocationInfo() {
         locationView.addSubview(locationIconView)
-        locationIconView.leftAnchor.constraint(equalTo: locationView.leftAnchor, constant: 10).isActive = true
+        locationIconView.rightAnchor.constraint(equalTo: locationView.centerXAnchor, constant: -20).isActive = true
         locationIconView.centerYAnchor.constraint(equalTo: locationView.centerYAnchor).isActive = true
         locationIconView.heightAnchor.constraint(equalToConstant: 15).isActive = true
         locationIconView.widthAnchor.constraint(equalTo: locationIconView.heightAnchor).isActive = true
         
         locationView.addSubview(locationText)
-        locationText.leftAnchor.constraint(equalTo: locationIconView.rightAnchor, constant: 6).isActive = true
+        locationText.leftAnchor.constraint(equalTo: locationIconView.centerXAnchor, constant: 20).isActive = true
         locationText.rightAnchor.constraint(equalTo: locationView.rightAnchor, constant: 2).isActive = true
         locationText.topAnchor.constraint(equalTo: locationView.topAnchor, constant: 2).isActive = true
         locationText.bottomAnchor.constraint(equalTo: locationView.bottomAnchor, constant: 2).isActive = true

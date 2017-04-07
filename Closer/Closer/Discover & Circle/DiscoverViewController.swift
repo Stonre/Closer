@@ -63,10 +63,10 @@ class DiscoverViewController: CircleTableViewController {
         tableHeaderView.backgroundColor = .white
         
         filterButton = UIButton()
-        filterButton.frame = CGRect(origin: CGPoint(x: 8, y: 8), size: DiscoverViewController.buttomSize)
+        filterButton.frame = CGRect(origin: CGPoint(x: 8, y: 8), size: CGSize(width: 32, height: 32))
 //        filterButton.setTitle("filter", for: .normal)
 //        filterButton.setTitleColor(.blue, for: .normal)
-        filterButton.setImage(#imageLiteral(resourceName: "filter-icon"), for: .normal)
+        filterButton.setImage(#imageLiteral(resourceName: "categoryiocn"), for: .normal)
         filterButton.addTarget(self, action: #selector(touchFilter(_:)), for: .touchUpInside)
         tableHeaderView.addSubview(filterButton)
         

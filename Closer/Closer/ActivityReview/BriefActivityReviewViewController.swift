@@ -99,7 +99,7 @@ class BriefActivityReviewViewController: ActivityReviewViewController {
         moreButton.setTitle("查看详情", for: .normal)
         moreButton.isHidden = true
         
-        moreButton.backgroundColor = .blue
+        moreButton.backgroundColor = UIColor(red:0.94, green:0.55, blue:0.28, alpha:1.0)
         moreButton.addTarget(self, action: #selector(touchMoreButton), for: .touchUpInside)
         
         moreButton.translatesAutoresizingMaskIntoConstraints = false
