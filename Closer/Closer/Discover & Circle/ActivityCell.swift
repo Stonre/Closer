@@ -20,13 +20,8 @@ class ActivityCell: UITableViewCell {
     }
     var userProfileImageUrl: NSURL? {
         didSet {
-            DispatchQueue.global(qos: .userInteractive).async {
-                if let imageData = NSData(contentsOf: self.userProfileImageUrl as! URL) {
-                    DispatchQueue.main.async {
-                        self.userProfileImage = UIImage(data: imageData as Data)
-                    }
-                }
-            }
+            let fetcher = FetchData.sharedInstance
+            fetcher.fetchImage(imageUrl: userProfileImageUrl!, imageView: profileImageView)
         }
     }
     

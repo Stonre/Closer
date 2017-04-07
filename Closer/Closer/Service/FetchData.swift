@@ -58,7 +58,51 @@ class FetchData {
             } else {
                 print("error: fail to fetch user from firebase")
             }
-            
         })
+    }
+    
+    func fetchImage(imageUrl: NSURL, imageView: UIImageView) {
+        guard let directory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first,
+            var fileName = imageUrl.absoluteString?.hashValue.description
+            else {
+                return
+        }
+        fileName += ".jpg"
+        let targetPath = directory.appendingPathComponent(fileName)
+        let imageData = NSData(contentsOf: targetPath)
+        if (imageData != nil) {
+            imageView.image = UIImage(data: imageData as! Data)
+        } else {
+            fetchImageFromFirebase(imageUrl: imageUrl, imageView: imageView, completion: { (fetchedImageUrl, fetchedImage) in
+                self.writeImageToFile(imageUrl: fetchedImageUrl, image: fetchedImage)
+            })
+        }
+    }
+    
+    func fetchImageFromFirebase(imageUrl: NSURL, imageView: UIImageView, completion: @escaping (NSURL, UIImage) -> ()) {
+        if let imageData = NSData(contentsOf: imageUrl as URL) {
+            DispatchQueue.main.async {
+                let fetchedImage = UIImage(data: imageData as Data)
+                imageView.image = fetchedImage
+                completion(imageUrl, fetchedImage!)
+            }
+        }
+    }
+    
+    private func writeImageToFile(imageUrl: NSURL, image: UIImage) {
+        guard let directory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first,
+            var fileName = imageUrl.absoluteString?.hashValue.description
+            else {
+                return
+        }
+        fileName += ".jpg"
+        let targetPath = directory.appendingPathComponent(fileName)
+        let imageData = UIImageJPEGRepresentation(image, 0.6)
+        do {
+            let success = try imageData?.write(to: targetPath,
+                                               options: Data.WritingOptions.atomic)
+        } catch  {
+            print(error.localizedDescription)
+        }
     }
 }
