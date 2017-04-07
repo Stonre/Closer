@@ -169,7 +169,7 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
             if let dictionary = snapshot.value as? [String: Any] {
                 let activityName = dictionary["name"] as? String
                 let activityId = snapshot.key
-                let participants = dictionary["participants"] as? [String: [String: String]]
+                var participants = dictionary["participants"] as? [String: [String: String]]
                 let userReleasingId = dictionary["releasingUserID"] as? String
                 let activity = ActivityChatProfile(activityId: activityId, activityName: activityName!, participants: participants!, groupImage: "", userReleasing: userReleasingId!)
                 completion(activity)
@@ -185,6 +185,9 @@ class ChatListViewController: UITableViewController, UISearchResultsUpdating, UI
                 //let user = PersonalChatProfile(userId: snapshot.key, userName: userName, userNickname: nil, userProfileImage: "")
                 let user = PersonalUserForView(userName: userName, userId: snapshot.key, gender: Gender.Female, age: 22)
                 completion(user)
+                if let url = dictionary["profileImageUrl"] as? String {
+                    user.userProfileImageUrl = url
+                }
             }
         }, withCancel: nil)
     }

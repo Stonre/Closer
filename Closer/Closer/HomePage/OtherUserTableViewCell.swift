@@ -54,7 +54,7 @@ class OtherUserTableViewCell: UITableViewCell {
         userName.text = nil
         if let user = self.user {
             if let profileImageUrlString = user.userProfileImageUrl {
-                setupProfileImage(imageUrl: profileImageUrlString)
+                setupProfileImage(imageUrl: profileImageUrlString, imageView: self.profileImageView)
             }
             userName.text = user.userName
         }
@@ -64,25 +64,9 @@ class OtherUserTableViewCell: UITableViewCell {
         profileImageView.image = nil
         userName.text = nil
         if let activity = self.activity {
-            /*if let profileImageUrlString = activity.userReleasing.userProfileImageUrl {
-                setupProfileImage(imageUrl: profileImageUrlString)
-            }*/
             userName.text = activity.activityName
-        }
-    }
-    
-    func setupProfileImage(imageUrl: String) {
-        if let url = URL(string: imageUrl) {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                if error != nil {
-                    print(error!)
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.profileImageView.image = UIImage(data: data!)
-                }
-                
-            }).resume()
+            let participants = Array(activity.participants.values)
+            setGroupImageProfile(participants: participants, numOfParticipants: participants.count, profileImageView: self.profileImageView)
         }
     }
     

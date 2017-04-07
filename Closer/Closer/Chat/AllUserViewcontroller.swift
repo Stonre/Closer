@@ -114,23 +114,34 @@ class AllUserViewcontroller: UITableViewController, UINavigationControllerDelega
                 if let dictionary = snapshot.value as? [String: Any] {
                     
                     let name = dictionary["name"] as! String
-                    var participants = [String: [String: String]]()
-                    //let participants = dictionary["participants"] as! [String]
                     let userReleasingId = dictionary["releasingUserID"] as! String
+                    var participants = [String: [String: String]]()
+                    
+                    let activity = ActivityChatProfile(activityId: activityId, activityName: name, participants: participants, groupImage: "", userReleasing: userReleasingId)
+                    self.activities.append(activity)
                     
                     activityRef.child("participants").observe(.childAdded, with: { (snapshot) in
                         
                         participants[snapshot.key] = snapshot.value as! [String : String]?
                         
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        
                     }, withCancel: nil)
                     
-                    let activity = ActivityChatProfile(activityId: activityId, activityName: name, participants: participants, groupImage: "", userReleasing: userReleasingId)
+                    // TO DO:
+                    // use numOfParticipants
+                    /*if participants.count >= 2 {
+                        let activity = ActivityChatProfile(activityId: activityId, activityName: name, participants: participants, groupImage: "", userReleasing: userReleasingId)
+                        
+                        self.activities.append(activity)
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }*/
                     
-                    self.activities.append(activity)
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
                     
                     /*FIRDatabase.database().reference().child("users").child(userReleasingId).observeSingleEvent(of: .value, with: { (snapshot) in
                         

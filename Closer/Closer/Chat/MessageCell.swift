@@ -9,6 +9,23 @@
 import UIKit
 
 class MessageCell: UICollectionViewCell {
+    
+    /*var message: Message? {
+        didSet {
+            self.messageText.text = self.message?.text
+            let type = (self.message?.type)!
+            switch type {
+            case "group":
+                setupGroupNameAndImage()
+                setupChatTime()
+            default:
+                setupNameAndImage()
+                setupChatTime()
+            }
+            
+        }
+    }*/
+    
     var messageText: UILabel = {
         var textView = UILabel()
         textView.backgroundColor = UIColor.clear
@@ -30,12 +47,54 @@ class MessageCell: UICollectionViewCell {
         return bubble
     }()
     
+    var senderImage: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(named: "sampleHeaderPortrait2")
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    var senderName: UILabel = {
+        var nameText = UILabel()
+        nameText.backgroundColor = UIColor.clear
+        nameText.font = UIFont.systemFont(ofSize: 10)
+        nameText.numberOfLines = 1
+        nameText.translatesAutoresizingMaskIntoConstraints = false
+        return nameText
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(textBubble)
+        self.addSubview(senderImage)
+        self.addSubview(senderName)
         textBubble.addSubview(messageText)
         setupTextBubble()
         setupMessageText()
+        setupSenderName()
+        setupSenderImage()
+    }
+    
+    func setupSenderName() {
+        senderName.leftAnchor.constraint(equalTo: senderImage.rightAnchor, constant: 8).isActive = true
+        senderName.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        //senderName.heightAnchor.constraint
+    }
+    
+    var imageLeftAnchor: NSLayoutConstraint?
+    var imageRightAnchor: NSLayoutConstraint?
+    
+    func setupSenderImage() {
+        imageLeftAnchor = senderImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8)
+        imageLeftAnchor?.isActive = true
+        imageRightAnchor = senderImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+        imageRightAnchor?.isActive = false
+        senderImage.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        senderImage.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        senderImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func setupMessageText() {
@@ -48,16 +107,26 @@ class MessageCell: UICollectionViewCell {
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleLeftAnchor: NSLayoutConstraint?
     var bubbleRightAnchor: NSLayoutConstraint?
+    var bubbleTopAnchorForSelf: NSLayoutConstraint?
+    var bubbleTopAnchorForOthers: NSLayoutConstraint?
+    var bubbleHeightForOthers: NSLayoutConstraint?
+    var bubbleHeightForSelf: NSLayoutConstraint?
     
     func setupTextBubble() {
-        bubbleRightAnchor = textBubble.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+        bubbleRightAnchor = textBubble.rightAnchor.constraint(equalTo: senderImage.leftAnchor, constant: -8)
         bubbleRightAnchor?.isActive = true
-        bubbleLeftAnchor = textBubble.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8)
+        bubbleLeftAnchor = textBubble.leftAnchor.constraint(equalTo: senderImage.rightAnchor, constant: 8)
         bubbleLeftAnchor?.isActive = false
-        textBubble.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        bubbleTopAnchorForOthers = textBubble.topAnchor.constraint(equalTo: senderName.bottomAnchor, constant: 4)
+        bubbleTopAnchorForOthers?.isActive = true
+        bubbleTopAnchorForSelf = textBubble.topAnchor.constraint(equalTo: self.topAnchor)
+        bubbleTopAnchorForSelf?.isActive = false
         bubbleWidthAnchor = textBubble.widthAnchor.constraint(equalToConstant: 200)
         bubbleWidthAnchor?.isActive = true
-        textBubble.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        bubbleHeightForSelf = textBubble.heightAnchor.constraint(equalTo: self.heightAnchor)
+        bubbleHeightForSelf?.isActive = false
+        bubbleHeightForOthers = textBubble.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -15)
+        bubbleHeightForOthers?.isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
