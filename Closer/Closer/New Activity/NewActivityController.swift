@@ -41,7 +41,7 @@ class NewActivityController: UIViewController {
         view.backgroundColor = .white
         setupViewControllers()
         setupReleaseButton()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewActivityController.exitSearchMode))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(NewActivityController.exitRelease))
         navigationItem.leftBarButtonItem?.tintColor = UIColor(red:0.35, green:0.34, blue:0.34, alpha:1.0)
         // Do any additional setup after loading the view.
     }
@@ -128,7 +128,7 @@ class NewActivityController: UIViewController {
             self.formatDescription(activityId: activityId, description: description)
         }
 //        dbRef.updateChildValues(["newActivities/\(activityId)/assignedParticipants": assignedParticipants])
-        let _ = navigationController?.popViewController(animated: true)
+        self.exitRelease()
     }
     
     private func addCategoryInformation(activityId: String, categories: String) {
@@ -221,7 +221,7 @@ class NewActivityController: UIViewController {
 //        pageViewController.didMove(toParentViewController: self)
     }
     
-    @objc private func exitSearchMode() {
+    @objc private func exitRelease() {
         self.dismiss(animated: true, completion: nil)
     }
     

@@ -252,6 +252,7 @@ class FullActivityReviewViewController: ActivityReviewViewController {
         }
         
         updateData.addParticipant(participantId: userId, activity: activity!)
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func loadData() {
