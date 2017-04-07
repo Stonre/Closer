@@ -10,7 +10,7 @@ import UIKit
 
 class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
     
-    let newActivityButton = UIButton(type: .contactAdd)
+    let newActivityButton = UIButton()
     let homeButton = UIButton()
     let chatButton = UIButton()
     
@@ -52,11 +52,14 @@ class DCTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private func setupNewActivityButton() {
         view.addSubview(newActivityButton)
-        newActivityButton.backgroundColor = .white
+        newActivityButton.setBackgroundImage(#imageLiteral(resourceName: "new-activity-button"), for: .normal)
+//        newActivityButton.backgroundColor = .white
         newActivityButton.translatesAutoresizingMaskIntoConstraints = false
         
         newActivityButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         newActivityButton.centerYAnchor.constraint(equalTo: tabBar.centerYAnchor).isActive = true
+        newActivityButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        newActivityButton.widthAnchor.constraint(equalTo: newActivityButton.heightAnchor, constant: 0).isActive = true
         
         newActivityButton.addTarget(self, action: #selector(touchNewActivity), for: .touchUpInside)
     }
